@@ -50,7 +50,7 @@ Plantangenet lets you model **privacy**, **trust**, **negotiation**, and **econo
 ## Features Overview
 
 * **Bounded Sessions**: Explicit lifecycle boundaries with enforced policy contexts.
-* **Multi-Axis Coordination**: Compositors generate views over multiple semantic axes. [compositing](docs/COMPOSITORS_AND_AXES.md)
+* **Multi-Axis Coordination**: Compositors generate views over multiple semantic axes. [compositing](docs/technical/COMPOSITORS_AND_AXES.md)
 * **Pluggable Policy Engine**: Supports custom evaluators. [vanilla](python/plantangenet/policy/vanilla.py)
 * **Integrated Storage & Transport**: Extensible backends for persistence and messaging. [storage](python/plantangenet/ocean/mixins/storage.py) [transport](python/plantangenet/ocean/mixins/transport.py)
 * **Attention-Shaped Memory**: Membry stores degraded, ephemeral data based on Dust budgeting.
