@@ -2,9 +2,9 @@
 
 ## 🪐 Build Tiny Universes with Negotiated Trust
 
-**Plantangenet** is a framework for creating **bounded, policy-enforced worlds** where sharing is *negotiated*, *partial*, *auditable*, and *ephemeral*—with *economic memory* as a core feature.
+**Plantangenet** is a framework for creating **bounded, policy-enforced worlds** where sharing is *negotiated*, *partial*, *auditable*, and *ephemeral* as core features.
 
-It gives developers, system architects, and world-builders the tools to model **trust**, **privacy**, and **economic memory** as first-class system features.
+It gives developers, system architects, and world-builders the tools to model **trust**, and **privacy** as first-class system features.
 
 ---
 
