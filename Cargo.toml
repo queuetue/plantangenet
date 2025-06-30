@@ -1,0 +1,25 @@
+# Copyright (c) 1998-2025 Scott Russell
+# SPDX-License-Identifier: MIT
+
+[package]
+name = "plantangenet"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-nats = "0.32"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+futures-util = "0.3"
+bevy = { version = "0.13" }
+pollster = "0.4.0"
+
+[lib]
+name = "plantangenet"
+path = "rust/plantangenet/src/lib.rs"
+
+[[bin]]
+name = "plantangenet"
+path = "rust/plantangenet/src/main.rs"

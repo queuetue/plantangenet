@@ -1,0 +1,58 @@
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"  # client port
+      - "8222:8222"  # monitoring
+      - "6222:6222"  # cluster port
+    volumes:
+      - ./nats-server.conf:/etc/nats/nats-server.conf:ro
+      - nats-data:/data
+    restart: unless-stopped
+
+  clock:
+    build:
+      context: ..
+      dockerfile: clock/Dockerfile
+    command: python clock/clock.py
+    environment:
+      - NATS_URL=nats://nats:4222
+      - NAMESPACE=clock
+    depends_on:
+      - nats
+    volumes:
+      - ..:/app
+      - /app/plantangenet
+    working_dir: /app
+
+  # conductor:
+  #   build:
+  #     context: ..
+  #     dockerfile: docker/Dockerfile
+  #   command: python conductor/conductor.py
+  #   environment:
+  #     - NATS_URL=nats://nats:4222
+  #     - NAMESPACE=conductor
+  #   depends_on:
+  #     - nats
+  #   volumes:
+  #     - ..:/app
+  #   working_dir: /app
+
+volumes:
+  redis-data:
+    driver: local
+  nats-data:
+    driver: local
+
+networks:
+  default:
+    driver: bridge

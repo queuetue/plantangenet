@@ -1,0 +1,15 @@
+asyncio
+anyio
+pydantic
+pytest
+redis
+nats-py
+rich
+python-ulid
+aiohttp==3.11.10
+thorpy
+numpy
+pillow
+coolname
+pandas
+pytest-cov
