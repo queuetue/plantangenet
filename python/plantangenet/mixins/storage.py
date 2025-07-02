@@ -26,6 +26,19 @@ class StorageMixin(OceanMixinBase):
             self._storage_prefix = prefix
 
     @property
+    def message_types(self):
+        """Return the peer's message types."""
+        result = super().message_types
+        result.update([
+            "storage.get",
+            "storage.set",
+            "storage.delete",
+            "storage.keys",
+            "storage.exists",
+        ])
+        return result
+
+    @property
     def storage_prefix(self) -> str:
         """
         Get the storage prefix for the peer.

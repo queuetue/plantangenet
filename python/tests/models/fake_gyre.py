@@ -1,11 +1,15 @@
-from plantangenet import Buoy
-from plantangenet.mixins.status import watch
+from typing import Annotated
+from plantangenet import Gyre
+from plantangenet.mixins.status import watch, StatusMeta
 from typing import Any, Callable, Coroutine, Optional, Union
 
 
-class DummyBuoy(Buoy):
+class FakeGyre(Gyre):
 
-    health: int = watch(default=100)  # type: ignore
+    health: Annotated[
+        int,
+        StatusMeta(description="Health points")
+    ] = watch(default=100)  # type: ignore
 
     async def update_transport(self):
         pass

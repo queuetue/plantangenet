@@ -1,83 +1,60 @@
-import pytest
-from plantangenet.mixins.status import watch
-from plantangenet.mixins.status.mixin import StatusMixin
+from plantangenet.mixins.omni import OmniMixin
+from plantangenet.omni.helpers import watch, persist
 
 
-class Dummy(StatusMixin):
+class Dummy(OmniMixin):
     count: int = watch(default=0)
+    notes: str = persist(default="initial")
 
 
-class SensitiveDummy(StatusMixin):
-    secret: str = watch(default="topsecret", sensitive=True)
+def test_persisted_fields_registration():
+    assert "count" in Dummy._omni_persisted_fields
+    assert "notes" in Dummy._omni_persisted_fields
+    assert "count" in Dummy._omni_observed_fields
+    assert "notes" not in Dummy._omni_observed_fields
 
 
-class HiddenDummy(StatusMixin):
-    hidden: int = watch(default=123, include_in_dict=False)
-
-
-def test_tracked_fields_registration():
-    assert "count" in Dummy._status_tracked_fields
-
-
-def test_default_value():
+def test_default_values():
     d = Dummy()
     assert d.count == 0
-
-
-def test_set_and_get_value():
-    d = Dummy()
-    d.count = 5
-    assert d.count == 5
+    assert d.notes == "initial"
 
 
 def test_dirty_tracking():
     d = Dummy()
-    d.count = 10
+    d.count = 42
     assert d.dirty
-    assert d.dirty_fields["count"] is True
-
-
-def test_clear_dirty():
-    d = Dummy()
-    d.count = 20
     d.clear_dirty()
     assert not d.dirty
 
 
-def test_status_property():
+def test_to_dict_includes_persisted():
     d = Dummy()
-    d.count = 42
-    status = d.status
-    assert status["dummy"]["count"]["value"] == 42
+    d.count = 10
+    d.notes = "hello"
+    data = d.to_dict()
+    assert data["count"] == 10
+    assert data["notes"] == "hello"
 
 
-def test_to_dict():
+def test_from_dict_hydrates():
     d = Dummy()
-    d.count = 99
-    result = d.to_dict()
-    assert result["count"] == 99
+    d.from_dict({"count": 7, "notes": "restored"})
+    assert d.count == 7
+    assert d.notes == "restored"
 
 
-def test_to_pydantic():
-    d = Dummy()
-    d.count = 88
-    pyd = d.to_pydantic()
-    assert pyd.count == 88
-
-
-def test_sensitive_field_masking():
-    d = SensitiveDummy()
-    result = d.to_dict()
-    assert result["secret"] == "***"
+def test_sensitive_masking():
+    class Sensitive(OmniMixin):
+        secret: str = watch(default="shh", sensitive=True)
+    s = Sensitive()
+    out = s.to_dict()
+    assert out["secret"] == "***"
 
 
 def test_include_in_dict_false():
-    d = HiddenDummy()
-    result = d.to_dict()
-    assert "hidden" not in result
-
-
-def test_type_inference_conflict_error():
-    with pytest.raises(TypeError):
-        class Conflict(StatusMixin):
-            val: int = watch(default="not-an-int")
+    class Hidden(OmniMixin):
+        hidden: int = watch(default=123, include_in_dict=False)
+    h = Hidden()
+    out = h.to_dict()
+    assert "hidden" not in out

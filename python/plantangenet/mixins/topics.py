@@ -1,10 +1,20 @@
 import inspect
-from .helpers import on_topic
+from typing import Any, Callable, Coroutine
+from ..topics.helpers import on_topic
 from plantangenet.mixins.base import OceanMixinBase
 
 
 class TopicsMixin(OceanMixinBase):
     """Mixin for managing topic subscriptions and handlers."""
+
+    # async def publish(self, topic: str,
+    #                   data: Union[str, bytes, dict]) -> Optional[list]: ...
+
+    async def subscribe(
+        self, topic: str, callback: Callable[..., Coroutine[Any, Any, Any]]): ...
+
+    @property
+    def logger(self) -> Any: ...
 
     def __init__(self, keep=False):
         self._topic_subscriptions = []
@@ -49,3 +59,16 @@ class TopicsMixin(OceanMixinBase):
         status = super().status
         status["topic_subscriptions"] = self._topic_subscriptions
         return status
+
+    @property
+    def message_types(self):
+        """Return the peer's message types."""
+        message_types = super().message_types
+
+        for _topic, handler in self._topic_subscriptions:
+            if hasattr(handler, "__topic__"):
+                message_type = getattr(handler, "__topic__")
+                if isinstance(message_type, str):
+                    message_types.add(message_type)
+
+        return message_types

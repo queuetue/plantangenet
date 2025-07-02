@@ -1,22 +1,22 @@
-# import pytest
-# from plantangenet.policy.vanilla import Vanilla
-# from plantangenet.policy.identity import Identity
-# from plantangenet.policy.role import Role
+import pytest
+from plantangenet.policy.vanilla import Vanilla
+from plantangenet.policy.identity import Identity
+from plantangenet.policy.role import Role
 
 
-# @pytest.fixture
-# def vanilla():
-#     return Vanilla(peer=MockPeer())  # type: ignore
+@pytest.fixture
+def vanilla():
+    return Vanilla()  # type: ignore
 
 
-# async def test_role_assignment(anyio_backend, vanilla):
-#     identity = Identity(id="user1", nickname="U1", metadata={})
-#     role = Role(id="r1", name="admin", description="Admin", members=["user1"])
+async def test_role_assignment(anyio_backend, vanilla):
+    identity = Identity(id="user1", nickname="U1", metadata={})
+    role = Role(id="r1", name="admin", description="Admin", members=["user1"])
 
-#     await vanilla.add_identity(identity)
-#     await vanilla.add_role(role)
+    await vanilla.add_identity(identity)
+    await vanilla.add_role(role)
 
-#     assert vanilla.has_role("user1", "admin")
+    assert vanilla.has_role("user1", "admin")
 
 
 # async def test_policy_permission_granted(anyio_backend, vanilla):

@@ -1,16 +1,16 @@
-from plantangenet.gyre.server import GyreServer
-from plantangenet import GLOBAL_LOGGER
+from plantangenet import Buoy
+from plantangenet.omni import watch
 from typing import Any, Callable, Coroutine, Optional, Union
 
 
-class DummyServer(GyreServer):
+class FakeBuoy(Buoy):
+
+    health: int = watch(default=100)  # type: ignore
+
     async def update_transport(self):
         pass
 
     async def setup_transport(self, urls: list[str]) -> None:
-        pass
-
-    async def teardown_transport(self):
         pass
 
     async def publish(self, topic: str, data: Union[str, bytes, dict]) -> None:
@@ -23,9 +23,6 @@ class DummyServer(GyreServer):
         pass
 
     async def setup_storage(self, urls: list[str]) -> None:
-        pass
-
-    async def teardown_storage(self) -> None:
         pass
 
     async def get(self, key: str, actor=None) -> Optional[str]:
@@ -42,9 +39,6 @@ class DummyServer(GyreServer):
 
     async def exists(self, key: str, actor=None) -> bool:
         return True
-
-    async def handle_heartbeat(self, message: dict):
-        pass
 
     @property
     def connected(self) -> bool:

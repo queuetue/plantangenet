@@ -5,7 +5,8 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from enum import Enum
 from random import randint
-from plantangenet.mixins.topics import on_topic
+from typing import Any
+from plantangenet.topics import on_topic
 from .base import OceanMixinBase
 
 CHOICES = ['🪨 ', '🧻', '✂️ ', '🦎', '🖖']
@@ -36,6 +37,9 @@ def a_vs_b(a: str, b: str) -> WinLoseDraw:
 
 class RoxMixin(OceanMixinBase):
 
+    @property
+    def logger(self) -> Any: ...
+
     def __init__(self):
         OceanMixinBase.__init__(self)
         self._rox__index = randint(0, len(CHOICES) - 1)
@@ -54,6 +58,15 @@ class RoxMixin(OceanMixinBase):
             "index": self._rox__index,
         }
         return status
+
+    @property
+    def message_types(self):
+        """Return the peer's message types."""
+        result = super().message_types
+        result.update([
+            "rox.choose",
+        ])
+        return result
 
     @property
     def rox_choice(self) -> str:

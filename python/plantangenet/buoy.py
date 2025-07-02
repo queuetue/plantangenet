@@ -5,13 +5,13 @@ from .logger import Logger
 from .shard import Shard
 from .mixins.timebase import TimebaseMixin
 from .mixins.heartbeat import HeartbeatMixin
-from .mixins.topics.mixin import TopicsMixin
-from .mixins.status.mixin import StatusMixin
+from .mixins.topics import TopicsMixin
+from .mixins.omni import OmniMixin
 
 __all__ = ["Buoy", "__version__"]
 
 
-class Buoy(Shard, TimebaseMixin, HeartbeatMixin, StatusMixin, TopicsMixin):
+class Buoy(Shard, TimebaseMixin, HeartbeatMixin, OmniMixin, TopicsMixin):
 
     async def on_heartbeat(self, message: dict): ...
 

@@ -12,7 +12,7 @@ those opinions with subscribers.
 import json
 from abc import abstractmethod
 from typing import Any, Callable, Coroutine, Optional, Union
-from plantangenet.mixins.topics.topic_registry import on_topic
+from plantangenet.topics import on_topic
 
 
 class AxisCoordinator():

@@ -14,15 +14,9 @@ from .multi_axis import MultiAxisCoordinator
 from .temporal import TemporalCoordinator
 from .temporal_multiaxis import TemporalMultiAxisCoordinator
 
-
-from ..collector.core import TimeSeriesCollector
-from ..collector.axis_frame import AxisFrame
-from ..collector.multi_axis_frame import MultiAxisFrame
-from ..compositor.basic import BasicCompositor
-# from ..compositor.advanced import AdvancedCompositor
-
-__all__ = ["AxisCoordinator", "MultiAxisCoordinator",
-           "TemporalCoordinator", "TemporalMultiAxisCoordinator",
-           "TimeSeriesCollector", "BasicCompositor",
-           #    "AdvancedCompositor",
-           "AxisFrame", "MultiAxisFrame"]
+__all__ = [
+    "AxisCoordinator",
+    "MultiAxisCoordinator",
+    "TemporalCoordinator",
+    "TemporalMultiAxisCoordinator",
+]

@@ -3,7 +3,7 @@
 
 from abc import abstractmethod
 from time import monotonic
-from plantangenet.mixins.topics import on_topic
+from plantangenet.topics import on_topic
 from .base import OceanMixinBase
 
 

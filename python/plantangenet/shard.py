@@ -6,7 +6,7 @@ from plantangenet.logger import Logger
 from plantangenet.agent import Agent
 from plantangenet.mixins.storage import StorageMixin
 from plantangenet.mixins.transport import TransportMixin
-from plantangenet.mixins.topics.mixin import TopicsMixin
+from plantangenet.mixins.topics import TopicsMixin
 
 __all__ = ["Shard", "__version__"]
 
@@ -55,6 +55,15 @@ class Shard(Agent, StorageMixin, TransportMixin, TopicsMixin):
             "status": "HEALTHY",
         }
         return status
+
+    @property
+    def message_types(self):
+        """Return the peer's message types."""
+        result = super().message_types
+        result.update([
+            "shard.handle_message",
+        ])
+        return result
 
     async def setup(self,  *args, **kwargs) -> None:
         transport_urls = kwargs.get('transport_urls', [])

@@ -1,6 +1,6 @@
 import pytest
 import time
-from plantangenet.mixins.topics.wrapper import TopicsWrapper
+from plantangenet.topics.wrapper import TopicsWrapper
 
 
 @pytest.mark.asyncio

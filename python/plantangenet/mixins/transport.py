@@ -16,6 +16,17 @@ class TransportMixin(OceanMixinBase):
     and unsubscribing from topics.
     """
 
+    @property
+    def message_types(self):
+        """Return the peer's message types."""
+        result = super().message_types
+        result.update([
+            "transport.publish",
+            "transport.subscribe",
+            "transport.unsubscribe",
+        ])
+        return result
+
     @abstractmethod
     async def update_transport(self):
         """

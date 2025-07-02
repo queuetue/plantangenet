@@ -2,16 +2,17 @@
 # SPDX-License-Identifier: MIT
 
 from abc import abstractmethod
+from .topics import TopicsMixin
+from .omni import OmniMixin
 from typing import Annotated
-from .topics.mixin import on_topic, TopicsMixin
-from .status.mixin import StatusMixin, StatusMeta
-from .status.watch import watch
+from ..topics import on_topic
+from ..omni import OmniMeta, watch
 
 
-class FramesMixin(TopicsMixin, StatusMixin):
+class FramesMixin(TopicsMixin, OmniMixin):
     frame_count: Annotated[
         int,
-        StatusMeta(description="Frame count")
+        OmniMeta(description="Frame count")
     ] = watch(default=100)  # type: ignore
 
     @abstractmethod

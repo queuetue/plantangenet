@@ -4,7 +4,7 @@
 from abc import abstractmethod
 from random import randint
 from typing import Any
-from plantangenet.mixins.topics import on_topic
+from plantangenet.topics import on_topic
 from .base import OceanMixinBase
 
 SYMBOLS = ["🌙", "🌝", "⭐", "🌟", "🌀",  "🔥", "💧", "🌊", "🎲"]

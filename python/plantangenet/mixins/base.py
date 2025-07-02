@@ -2,30 +2,13 @@
 # SPDX-License-Identifier: MIT
 
 from abc import ABC
-from typing import Callable, Coroutine, Optional, Any, Union
+from typing import Any
 
 
 class OceanMixinBase(ABC):
     _ocean__namespace: str = "plantangenet"
-
-    async def publish(self, topic: str,
-                      data: Union[str, bytes, dict]) -> Optional[list]: ...
-
-    async def on_pulse(self, data: dict) -> None: ...
-
-    async def subscribe(
-        self, topic: str, callback: Callable[..., Coroutine[Any, Any, Any]]): ...
-
-    async def setup(self, *args, **kwargs) -> None: ...
-
-    async def teardown(self) -> None: ...
-
-    async def update(self) -> bool: ...
-
-    def get_axis_data(self) -> dict[str, Any]: ...
-
-    @property
-    def logger(self) -> Any: ...
+    _ocean__id: str = ""
+    _ocean__nickname: str = ""
 
     @property
     def name(self) -> str: ...
@@ -34,8 +17,23 @@ class OceanMixinBase(ABC):
     def disposition(self) -> str: ...
 
     @property
-    def ttl(self) -> int: ...
+    def status(self) -> dict:
+        return {
+            "id": self._ocean__id,
+            "nickname": self._ocean__nickname,
+            "message_types": self.message_types,
+            "namespace": self._ocean__namespace,
+            "name": self.name,
+            "disposition": self.disposition,
+
+        }
 
     @property
-    def status(self) -> dict:
-        return {}
+    def message_types(self):
+        """Return the peer's message types."""
+        message_types = set([
+            "ocean.setup",
+            "ocean.teardown",
+            "ocean.update",
+        ])
+        return message_types

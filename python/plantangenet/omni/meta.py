@@ -1,7 +1,7 @@
 from typing import Optional, Callable
 
 
-class StatusMeta:
+class OmniMeta:
     def __init__(
         self,
         description: str = "",

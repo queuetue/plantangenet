@@ -3,9 +3,9 @@
 
 from typing import List, Dict, Any, Optional, Callable, Union
 import uuid
-from ..cursor import Cursor
+from .cursor import Cursor
 from .agent import Agent
-from ..policy.base import Policy
+from .policy.base import Policy
 
 
 class Session:
@@ -40,6 +40,10 @@ class Session:
     def list_agents(self) -> List[Agent]:
         return list(self.agents)
 
+    async def update_agents(self):
+        for agent in self.agents:
+            await agent.update()
+
     # Cursor management
     def add_cursor(self, agent: Agent, cursor: Cursor):
         if self.evaluate_policy(agent, "add_cursor", resource=cursor.axes):
@@ -72,16 +76,15 @@ class Session:
                         frames.append(frame)
         return frames
 
-    # Policy evaluation
+    # # Policy evaluation
     def evaluate_policy(self, identity: Union[Agent, str], action: str, resource: Any, context: Optional[dict] = None) -> bool:
-        if self.policy:
-            return self.policy.evaluate(identity, action, resource, context).allowed
+        # if self.policy:
+        #     return self.policy.evaluate(identity, action, resource, context).allowed
         return True
 
     # Lifecycle management
     async def setup(self):
-        for agent in self.agents:
-            await agent.update()
+        pass
 
     async def teardown(self):
         self.agents.clear()

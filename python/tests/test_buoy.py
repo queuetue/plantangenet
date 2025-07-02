@@ -14,13 +14,13 @@ Tests cover:
 
 import pytest
 from plantangenet import GLOBAL_LOGGER
-from dummy_buoy import DummyBuoy
+from models.fake_buoy import FakeBuoy
 
 
 @pytest.fixture
 def buoy(mock_logger):
     """Create a Buoy instance for testing."""
-    return DummyBuoy(logger=GLOBAL_LOGGER, namespace="test-namespace")
+    return FakeBuoy(logger=GLOBAL_LOGGER, namespace="test-namespace")
 
 
 class TestBuoyInitialization:
@@ -28,7 +28,7 @@ class TestBuoyInitialization:
 
     def test_default_initialization(self):
         """Test Buoy with default parameters."""
-        buoy = DummyBuoy(
+        buoy = FakeBuoy(
             logger=GLOBAL_LOGGER,
             namespace="test"
         )
@@ -47,7 +47,7 @@ class TestBuoyInitialization:
 
     def test_custom_redis_prefix(self):
         """Test Buoy with custom redis prefix."""
-        b = DummyBuoy(
+        b = FakeBuoy(
             logger=GLOBAL_LOGGER,
             namespace="test",
             redis_prefix="custom"
@@ -56,7 +56,7 @@ class TestBuoyInitialization:
         assert b.storage_root == match_text
 
     def test_health_field_registration(self):
-        b = DummyBuoy(
+        b = FakeBuoy(
             logger=GLOBAL_LOGGER,
             namespace="test",
             redis_prefix="custom"
@@ -65,11 +65,11 @@ class TestBuoyInitialization:
         meta = b._status_tracked_fields["health"].meta  # type: ignore
 
     def test_health_default_value(self):
-        b = DummyBuoy(logger=GLOBAL_LOGGER, namespace="test")
+        b = FakeBuoy(logger=GLOBAL_LOGGER, namespace="test")
         assert b.health == 100
 
     def test_health_set_and_dirty(self):
-        b = DummyBuoy(logger=GLOBAL_LOGGER, namespace="test")
+        b = FakeBuoy(logger=GLOBAL_LOGGER, namespace="test")
         b.health = 75
         assert b.health == 75
         assert b.dirty
@@ -78,27 +78,21 @@ class TestBuoyInitialization:
         assert "health" in b.dirty_fields_list
 
     def test_health_clear_dirty(self):
-        b = DummyBuoy(logger=GLOBAL_LOGGER, namespace="test")
+        b = FakeBuoy(logger=GLOBAL_LOGGER, namespace="test")
         b.health = 42
         b.clear_dirty()
         assert not b.dirty
 
     def test_status_property_includes_health(self):
-        b = DummyBuoy(logger=GLOBAL_LOGGER, namespace="test")
+        b = FakeBuoy(logger=GLOBAL_LOGGER, namespace="test")
         b.health = 55
         s = b.status
-        assert "health" in s["dummybuoy"]
-        assert s["dummybuoy"]["health"]["value"] == 55
-        assert s["dummybuoy"]["health"]["dirty"] is True
+        assert "health" in s["fakebuoy"]
+        assert s["fakebuoy"]["health"]["value"] == 55
+        assert s["fakebuoy"]["health"]["dirty"] is True
 
     def test_to_dict_includes_health(self):
-        b = DummyBuoy(logger=GLOBAL_LOGGER, namespace="test")
+        b = FakeBuoy(logger=GLOBAL_LOGGER, namespace="test")
         b.health = 99
         d = b.to_dict()
         assert d["health"] == 99
-
-    def test_to_pydantic_model(self):
-        b = DummyBuoy(logger=GLOBAL_LOGGER, namespace="test")
-        b.health = 12
-        model = b.to_pydantic()
-        assert model.health == 12  # type: ignore

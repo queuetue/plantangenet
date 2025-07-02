@@ -15,7 +15,7 @@ Tests cover:
 import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 from plantangenet.logger import Logger
-from dummy_shard import DummyShard
+from models.fake_shard import FakeShard
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ def mock_logger():
 @pytest.fixture
 def shard(mock_logger):
     """Create a Shard instance for testing."""
-    return DummyShard(
+    return FakeShard(
         namespace="test-shard",
         logger=mock_logger
     )
@@ -38,7 +38,7 @@ class TestShardInitialization:
 
     def test_default_initialization(self, mock_logger):
         """Test Shard with default parameters."""
-        shard = DummyShard(
+        shard = FakeShard(
             namespace="test-shard",
             logger=mock_logger
         )

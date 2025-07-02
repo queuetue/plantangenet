@@ -79,6 +79,19 @@ class Agent():
         return self._ocean__nickname
 
     @property
+    def capabilities(self):
+        return {
+            "message_types": self.message_types,
+        }
+
+    @property
+    def message_types(self):
+        """Return the peer's message types."""
+        return set([
+            "agent.update",
+        ])
+
+    @property
     def disposition(self):
         """Return the peer's disposition."""
         return self._ocean__disposition

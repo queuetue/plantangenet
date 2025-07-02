@@ -13,7 +13,7 @@ from abc import abstractmethod
 from collections.abc import Coroutine
 import json
 from typing import Any, Dict, List, Optional, Callable, Union
-from plantangenet.mixins.topics.topic_registry import on_topic
+from plantangenet.topics import on_topic
 from .axis import AxisCoordinator
 
 

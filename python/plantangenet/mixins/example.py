@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 from abc import abstractmethod
-from plantangenet.mixins.topics import on_topic
+from plantangenet.topics import on_topic
 from .base import OceanMixinBase
 
 

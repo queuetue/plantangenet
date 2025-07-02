@@ -14,6 +14,11 @@ class PolicyMixin(OceanMixinBase):
         # Logic to apply a policy
         pass
 
-    def enforce_policy(self, policy):
-        # Logic to enforce a policy
-        pass
+    @property
+    def message_types(self):
+        """Return the peer's message types."""
+        result = super().message_types
+        result.update([
+            "policy.apply",
+        ])
+        return result

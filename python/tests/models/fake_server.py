@@ -1,20 +1,16 @@
-from typing import Annotated
-from plantangenet import Gyre
-from plantangenet.mixins.status import watch, StatusMeta
+from plantangenet.gyre.server import GyreServer
+from plantangenet import GLOBAL_LOGGER
 from typing import Any, Callable, Coroutine, Optional, Union
 
 
-class DummyGyre(Gyre):
-
-    health: Annotated[
-        int,
-        StatusMeta(description="Health points")
-    ] = watch(default=100)  # type: ignore
-
+class FakeServer(GyreServer):
     async def update_transport(self):
         pass
 
     async def setup_transport(self, urls: list[str]) -> None:
+        pass
+
+    async def teardown_transport(self):
         pass
 
     async def publish(self, topic: str, data: Union[str, bytes, dict]) -> None:
@@ -27,6 +23,9 @@ class DummyGyre(Gyre):
         pass
 
     async def setup_storage(self, urls: list[str]) -> None:
+        pass
+
+    async def teardown_storage(self) -> None:
         pass
 
     async def get(self, key: str, actor=None) -> Optional[str]:
@@ -43,6 +42,9 @@ class DummyGyre(Gyre):
 
     async def exists(self, key: str, actor=None) -> bool:
         return True
+
+    async def handle_heartbeat(self, message: dict):
+        pass
 
     @property
     def connected(self) -> bool:

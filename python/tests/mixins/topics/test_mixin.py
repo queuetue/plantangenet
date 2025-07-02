@@ -1,6 +1,6 @@
 import pytest
-from plantangenet.mixins.topics.mixin import TopicsMixin
-from plantangenet.mixins.topics import on_topic
+from plantangenet.mixins.topics import TopicsMixin
+from plantangenet.topics import on_topic
 from plantangenet import GLOBAL_LOGGER
 
 

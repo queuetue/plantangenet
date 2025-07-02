@@ -1,9 +1,8 @@
 # Copyright (c) 1998-2025 Scott Russell
 # SPDX-License-Identifier: MIT
 
-from abc import abstractmethod
 from time import monotonic, perf_counter
-from plantangenet.mixins.topics import on_topic
+from ..topics import on_topic
 from .base import OceanMixinBase
 
 
@@ -62,6 +61,15 @@ class TimebaseMixin(OceanMixinBase):
         }
 
         return status
+
+    @property
+    def message_types(self):
+        """Return the peer's message types."""
+        result = super().message_types
+        result.update([
+            "timebase.set_origin",
+        ])
+        return result
 
     @on_topic("clock.pulse")
     async def handle_pulse(self, message: dict):
