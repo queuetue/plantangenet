@@ -135,7 +135,7 @@ Sessions don't own Compositors but *coordinate* with them securely.
 
 Sessions are the **place where identity negotiation happens**:
 
-* Sessions may carry a **Chem**—a policy-aware, partial disclosure interface.
+* Sessions may carry a **Chem** - a policy-aware, partial disclosure interface.
 * Chems act as *bidirectional compositors*, enforcing asymmetric, negotiated sharing.
 * Agents inherit the Session’s **trust context**, roles, and negotiated permissions.
 

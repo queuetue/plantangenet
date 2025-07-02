@@ -44,7 +44,7 @@ Chems provide the context-sensitive identities for both consumers and producers.
 
 ## Rendering and Interpretation
 
-The compositor deliberately avoids enforcing any specific rendering or interpretation. It maintains the semantic buffer in an abstract form, leaving consumers to interpret it according to their needs—whether that's a user interface, scientific simulation, control system, or artistic visualization. This separation ensures a single coordinated model can support many use cases without architectural changes.
+The compositor deliberately avoids enforcing any specific rendering or interpretation. It maintains the semantic buffer in an abstract form, leaving consumers to interpret it according to their needs - whether that's a user interface, scientific simulation, control system, or artistic visualization. This separation ensures a single coordinated model can support many use cases without architectural changes.
 
 ---
 

@@ -4,7 +4,7 @@
 
 Plantangenet is a framework and event-driven runtime for **building small, bounded, policy-enforced worlds**. It is designed for developers who need **negotiated sharing**, **explicit trust boundaries**, **enforceable policies**, and **ephemeral, attention-shaped memory**.
 
-Plantangenet lets you model **privacy**, **trust**, **negotiation**, and **economic memory** as first-class system features. It is not just an API—it's a system design approach for building "tiny universes" where participants negotiate *what* they reveal, *to whom*, *at what level of detail*, and *for how long*.
+Plantangenet lets you model **privacy**, **trust**, **negotiation**, and **economic memory** as first-class system features. It is not just an API - it's a system design approach for building "tiny universes" where participants negotiate *what* they reveal, *to whom*, *at what level of detail*, and *for how long*.
 
 ---
 

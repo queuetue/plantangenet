@@ -21,7 +21,7 @@ We call it *Dust* because:
 * It’s the substrate from which anything else can be built.
 * It’s designed to be cheap, plentiful, and non-scarce in itself.
 
-Dust is the *stuff* of systems—what you use to mint resources, actions, contracts, or entitlements inside a bounded context (a *timeframe*).
+Dust is the *stuff* of systems - what you use to mint resources, actions, contracts, or entitlements inside a bounded context (a *timeframe*).
 
 ---
 
@@ -92,7 +92,7 @@ Imagine a mining game:
 
 * Coal block costs 200 Dust to mint.
 * Granite block costs 150 Dust.
-* Dust itself may never be visible to players—it’s just the budget the designer used.
+* Dust itself may never be visible to players - it’s just the budget the designer used.
 
 Now imagine a chemistry simulator:
 

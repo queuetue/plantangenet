@@ -2,7 +2,7 @@
 
 ## Why Legal? Why Trust?
 
-Plantangenet is more than a codebase—it's a framework for time-scoped collaboration, value exchange, and permissioned simulation. This document explores how its **frames** function as **computational contracts**, how **Dust** enables accountable value transfer, and how the system avoids exploitation through intentional constraints on visibility, duration, and access.
+Plantangenet is more than a codebase - it's a framework for time-scoped collaboration, value exchange, and permissioned simulation. This document explores how its **frames** function as **computational contracts**, how **Dust** enables accountable value transfer, and how the system avoids exploitation through intentional constraints on visibility, duration, and access.
 
 Whether you're designing a game, hosting a simulation, or operating a trust-limited economy, this is the legal substrate beneath your world.
 
@@ -17,7 +17,7 @@ Each frame in Plantangenet defines a **computational contract**: a bounded envir
 - **Initial Conditions** – Declared state at the start of the frame
 - **Ledgered Output** – A deterministic record of state transitions, contributions, and results
 
-This structure is designed to be **reconcilable in common commercial legal systems**, including arbitration and dispute resolution frameworks used in the U.S. and internationally. Each frame provides **auditable, cryptographic evidence** of who did what, under what policy, and with what result—a form of computational due process.
+This structure is designed to be **reconcilable in common commercial legal systems**, including arbitration and dispute resolution frameworks used in the U.S. and internationally. Each frame provides **auditable, cryptographic evidence** of who did what, under what policy, and with what result - a form of computational due process.
 
 ---
 
@@ -36,9 +36,9 @@ To preserve systemic integrity:
 
 ## Upfront Risk, Not Undefined Risk
 
-Plantangenet doesn’t stop you from gambling. It just asks that you declare how much you expect to lose. The system doesn’t judge your ambitions; it only insists that stakes are made visible, traceable, and contained. Want to run a chaotic experiment or let users mutate freely? Go for it—but define your blast radius. The economy of Dust, the bounds of a Uni, or your own policy envelope can all help signal intent before things go sideways.
+Plantangenet doesn’t stop you from gambling. It just asks that you declare how much you expect to lose. The system doesn’t judge your ambitions; it only insists that stakes are made visible, traceable, and contained. Want to run a chaotic experiment or let users mutate freely? Go for it - but define your blast radius. The economy of Dust, the bounds of a Uni, or your own policy envelope can all help signal intent before things go sideways.
 
-Big, risky gambles might need the community to rally behind you. Collaboration isn’t just possible within Plantangenet’s policies—it’s encouraged.
+Big, risky gambles might need the community to rally behind you. Collaboration isn’t just possible within Plantangenet’s policies - it’s encouraged.
 
 ---
 
@@ -64,7 +64,7 @@ If necessary, **frames can self-destruct** or redirect their remaining Dust to m
 
 ## Ephemeral Justice, Not ACID
 
-Plantangenet’s frames are **not databases** and do not promise ACID guarantees. Instead, they function more like **ephemeral computational covenants**—contracts that may exist only for milliseconds, if that’s what the policy allows.
+Plantangenet’s frames are **not databases** and do not promise ACID guarantees. Instead, they function more like **ephemeral computational covenants** - contracts that may exist only for milliseconds, if that’s what the policy allows.
 
 This is **context-dependent legitimacy**:
 
@@ -72,7 +72,7 @@ This is **context-dependent legitimacy**:
 - In a **financial arbitration frame**, such fleeting contracts would be unacceptable; longer lifespans, high-resolution trails, and durable storage would be required.
 - The system allows for both: the **duration, durability, and resolution of trust** are part of the frame's **declared policy**, not a global expectation.
 
-Plantangenet enables micro-contracts with ephemeral enforcement—justice that’s valid for as long as it needs to be, no longer.
+Plantangenet enables micro-contracts with ephemeral enforcement - justice that’s valid for as long as it needs to be, no longer.
 
 Plantangenet is more like **a Snapchat-based small claims court** than a blockchain ledger. Contracts expire. Frames evaporate. And yet, they may still be legally sound, if you took a snapshot at the right time.
 
@@ -94,7 +94,7 @@ In most frames:
 
 This is intentional.
 
-Just as one cannot see the laws of physics from within a moment of time, **agents operate under constrained visibility**. If they could see across the boundary of the frame—into policy, resolution, or logs—they would be able to rob the system of causality:
+Just as one cannot see the laws of physics from within a moment of time, **agents operate under constrained visibility**. If they could see across the boundary of the frame - into policy, resolution, or logs - they would be able to rob the system of causality:
 
 - Preempt incentives
 - Rehearse timing exploits

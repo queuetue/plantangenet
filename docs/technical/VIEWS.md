@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A **view** in Plantangenet is the final, policy-governed, context-aware representation of shared semantic state delivered to a consumer. Views are dynamic and negotiated—they do not exist in advance but are created on demand by resolving multiple interacting layers:
+A **view** in Plantangenet is the final, policy-governed, context-aware representation of shared semantic state delivered to a consumer. Views are dynamic and negotiated - they do not exist in advance but are created on demand by resolving multiple interacting layers:
 
 * **Chems**: Define who the requester is, their permissions, and what context they reveal.
 * **Policies**: Enforce rules about what data can be accessed, at what resolution, and under which conditions.

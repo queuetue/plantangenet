@@ -8,7 +8,7 @@ In Plantangenet, a *chem* is a structured, negotiable identity used to manage ho
 
 The system distinguishes *what* data is shared (handled by the Semantic Compositor) from *who* can access it and *how* it's transformed (governed by chems and policy). This separation ensures secure, intentional collaboration in distributed systems.
 
-*Chems* are Plantangenet's negotiable, context-sensitive identities. Letx explore their role in enforcing clear, auditable boundaries between private sessions and federated interactions, showing how chems integrate policy enforcement, roles, focus negotiation, and privacy-preserving sharing:
+*Chems* are Plantangenet's negotiable, context-sensitive identities. Let's explore their role in enforcing clear, auditable boundaries between private sessions and federated interactions, showing how chems integrate policy enforcement, roles, focus negotiation, and privacy-preserving sharing:
 
 ## Core Concepts
 
@@ -63,5 +63,6 @@ Consumers use **focus hints** or **cursors** to specify their interests, while p
 * **Focus Negotiation**: Consumers declare interests that policies evaluate, enabling tailored data delivery while respecting privacy.
 
 ---
+
 Copyright (c) 1998-2025 Scott Russell
-SPDX-License-Identifier: MIT 
+SPDX-License-Identifier: MIT
