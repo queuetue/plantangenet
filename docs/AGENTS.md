@@ -6,6 +6,21 @@ Plantangenet's distributed simulation and coordination system is built on a flex
 
 ---
 
+## Ecosystem Features
+
+Plantangenet agents operate within a rich ecosystem of protocols and services. Key features include:
+
+- **Dust (Economics):** The system currency for resource usage, pricing, and rewards. All economic operations are managed by the [Banker agent](BANKER.md), which provides pricing, negotiation, logging, and distribution of Dust.
+- **Transport:** Agents communicate via pub-sub messaging (e.g., NATS, topics) using transport mixins. This enables distributed, event-driven coordination.
+- **Storage:** Agents persist and retrieve state using pluggable storage backends (e.g., Redis, file, in-memory), often via storage mixins.
+- **Sessions:** Sessions provide context boundaries for trust, policy, and economic flows. Agents are grouped and managed within sessions, which delegate all economic operations to their Banker(s).
+- **Policy & Access Control:** Fine-grained permissions and economic policies are enforced via pluggable policy modules, ensuring secure and auditable operations.
+- **Extensibility:** New agent types, mixins, and features can be added to support custom behaviors, protocols, or domains.
+
+For more details, see: [Dust/Economics](DUST.md), [Banker](BANKER.md), [Transport](TRANSPORT_COSTING.md), [Storage](STORAGE.md), [Sessions](SESSION.md), and [Policy](POLICY.md).
+
+---
+
 ## Agent
 
 An **Agent** is the base class for autonomous participants in the Plantangenet system. Agents can represent users, bots, or any entity capable of independent action. They provide:
@@ -56,13 +71,14 @@ A **Gyre** is a higher-level coordinator node. It extends the capabilities of a 
 
 ## Drift
 
-A **Drift** is a lightweight, mobile agent that is always attached to a Gyre (or Gyre-like node). Drifts do not coordinate themselves or others; instead, they delegate most operations to their parent Gyre.
+A **Drift** is a lightweight, mobile agent that is always attached to a Gyre (or Gyre-like node). Drifts do not coordinate themselves or others; instead, they delegate most operations—including financial and economic decisions—to their parent Gyre.
 
-**Drift** is used for dynamic, possibly short-lived or mobile agents that need to interact with a Gyre for communication, data, and coordination.
+**Drift** is used for dynamic, possibly short-lived or mobile agents that need to interact with a Gyre for communication, data, coordination, and all Dust-related (economic) operations.
 
 **Key Features:**
 - Inherits from `Agent` and multiple mixins (e.g., `TimebaseMixin`, `HeartbeatMixin`, `OmniMixin`, `TopicsMixin`)
 - Delegates publish/subscribe/get/set/delete operations to its attached Gyre
+- Delegates all financial and economic operations (pricing, payments, Dust usage) to its Gyre, which interacts with the Banker
 - Reports its own status, including information about its Gyre attachment
 - Not intended as a control/orchestration point
 

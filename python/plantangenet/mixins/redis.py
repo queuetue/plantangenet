@@ -17,13 +17,13 @@ class RedisMixin(StorageMixin):
     It supports setting, getting, deleting keys, checking existence, and listing keys.
     It also provides a TTL (time-to-live) for keys, which defaults to 61 seconds.
     """
-    _ocean__redis_client: Optional[Redis.Redis] = None
     _ocean__redis_ttl: int = 61
     _ocean__id: str
     _storage__ttl = 600
     _storage_prefix: str = "plantangenet"
 
     def __init__(self, ttl: Optional[int] = None, prefix: Optional[str] = None):
+        self._ocean__redis_client: Optional[Redis.Redis] = None
         if self._ocean__id is None:
             raise ValueError("StorageMixin requires an _ocean__id to be set.")
         if ttl is not None and ttl <= 0:
@@ -125,7 +125,13 @@ class RedisMixin(StorageMixin):
             key = f"{self.storage_root}:actors:{actor}:{key}"
         else:
             key = f"{self.storage_root}:peer:{key}"
-        return await self._ocean__redis_client.get(key)
+        value = await self._ocean__redis_client.get(key)
+        self.logger.storage(
+            f"Redis GET {key}",
+            context={"key": key, "operation": "get",
+                     "result": value is not None}
+        )
+        return value
 
     async def set(self, key: str, value: Any, nx: bool = False, ttl: Optional[int] = None, actor=None) -> Optional[list]:
         """
@@ -162,6 +168,10 @@ class RedisMixin(StorageMixin):
             return None
 
         await self._ocean__redis_client.set(full_key, encoded_value, ex=ttl, nx=nx)
+        self.logger.storage(
+            f"Redis SET {full_key}",
+            context={"key": full_key, "operation": "set", "ttl": ttl, "nx": nx}
+        )
         return [
             {
                 "accepted": True,
@@ -183,6 +193,10 @@ class RedisMixin(StorageMixin):
             return None
 
         await self._ocean__redis_client.delete(full_key)
+        self.logger.storage(
+            f"Redis DELETE {full_key}",
+            context={"key": full_key, "operation": "delete"}
+        )
         return [
             {
                 "accepted": True,

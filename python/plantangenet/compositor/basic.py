@@ -12,6 +12,38 @@ from typing import Dict, List, Any, Optional
 from .rule import CompositionRule
 from plantangenet.collector.core import TimeSeriesCollector
 
+# Core opcodes:
+
+# MOV src, dst – Copy data
+
+# LD addr, dst – Load from buffer
+
+# ST src, addr – Store to buffer
+
+# ADD/SUB/MUL/DIV – Math
+
+# AND/OR/XOR/NOT – Bitwise
+
+# CMP/SET – Comparison
+
+# BRA/RET – Control flow
+
+# BARRIER – Synchronization (for compositing parallel transforms)
+
+# MASK – Enforce policy filtering
+
+# Specialized semantic ops:
+
+# FOCUS_CHECK – Evaluate consumer cursor focus
+
+# POLICY_CHECK – Apply chem/policy rules
+
+# MERGE – Composite two semantic regions
+
+# REDUCE – Aggregate data across regions
+
+# MAP – Remap coordinates
+
 
 class BasicCompositor:
     """

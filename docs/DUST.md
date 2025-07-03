@@ -75,6 +75,25 @@ Dispositions are **inheritable**, **auditable**, and **modular**. They express *
 
 ---
 
+## Profit Motive, Fees, and Distribution
+
+Recent updates to Plantangenet's economic system introduce a flexible, auditable distribution mechanism for Dust. This enables:
+
+- **Banker's Cut**: The Banker can automatically take a configurable fee ("cut") from any transaction, based on policy and identity class.
+- **Agent Profit**: Agents can declare their own prices, charge clients, and retain profit (or loss) after paying actual API/system costs.
+- **Custom Distributions**: Any surplus, profit, or unspent Dust can be distributed to multiple accounts, pools, or burned, according to explicit policy.
+
+All distributions are:
+- **Policy-driven**: Who gets what is determined by explicit, auditable rules.
+- **Extensible**: New distribution types (e.g., tithes, DAOs, bonuses) can be added without changing core logic.
+- **Auditable**: Every distribution is logged and can be traced in the transaction history.
+
+This system supports both non-profit and profit-seeking agents, and enables collaborative, sustainable, and transparent economic flows within and across reference frames.
+
+See also: [Banker Agent Integration](BANKER_AGENT_INTEGRATION.md), [Agent vs API Cost Model](AGENT_VS_API_COSTS.md), and [Transport Costing](TRANSPORT_COSTING.md) for technical details and examples.
+
+---
+
 ## Conclusion
 
 Dust is not merely a meter or currency. It is **contextual value** - bounded by frames, distributed by policy, and owned through participation.
@@ -89,4 +108,4 @@ It is:
 By tying economics to **computation, provenance, and declared policy**, Plantangenet offers a foundation for trustable collaboration - not just infrastructure.
 ---
 Copyright (c) 1998-2025 Scott Russell
-SPDX-License-Identifier: MIT 
+SPDX-License-Identifier: MIT

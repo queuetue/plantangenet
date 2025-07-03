@@ -15,9 +15,12 @@ NATS_URLS = os.getenv("NATS_URLS", "nats://localhost:4222").split(",")
 
 class NatsMixin(TransportMixin):
     _ocean_nats__client: Optional[NATS] = None
-    _ocean_nats__subscriptions: dict[str, Any] = {}
     _ocean_nats__connected: bool = False
     _ocean_nats__lock: asyncio.Lock = asyncio.Lock()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._ocean_nats__subscriptions: dict[str, Any] = {}
 
     @property
     def connected(self) -> bool:
@@ -161,6 +164,11 @@ class NatsMixin(TransportMixin):
 
         try:
             await self._ocean_nats__client.publish(topic, data)
+            self.logger.transport(
+                f"NATS publish to {topic}",
+                context={"topic": topic, "size": len(
+                    data), "operation": "publish"}
+            )
         except (ErrNoServers, OSError, ConnectionError) as e:
             self.logger.warning(f"NATS publish failed for topic {topic}: {e}")
             self._ocean_nats__connected = False  # Mark as disconnected
@@ -178,22 +186,19 @@ class NatsMixin(TransportMixin):
             return None  # Return None instead of raising exception
 
         try:
-            sub = await self._ocean_nats__client.subscribe(
-                subject=topic,
-                cb=callback
+            sid = await self._ocean_nats__client.subscribe(subject=topic, cb=callback)
+            self.logger.transport(
+                f"NATS subscribe to {topic}",
+                context={"topic": topic, "operation": "subscribe"}
             )
-            self._ocean_nats__subscriptions[topic] = sub
-            self.logger.debug(f"Successfully subscribed to {topic}")
-            return sub
-        except (ErrNoServers, OSError, ConnectionError) as e:
-            self.logger.warning(
-                f"NATS subscribe failed for topic {topic}: {e}")
-            self._ocean_nats__connected = False
-            return None
+            # Record the subscription object in the subscriptions dict
+            if not hasattr(self, '_ocean_nats__subscriptions'):
+                self._ocean_nats__subscriptions = {}
+            self._ocean_nats__subscriptions[topic] = sid
+            return sid
         except Exception as e:
             self.logger.exception(
-                f"Unexpected error during NATS subscription to {topic}: {e}")
-            self._ocean_nats__connected = False
+                f"NATS subscribe failed for topic {topic}: {e}")
             return None
 
     async def unsubscribe(self, topic):

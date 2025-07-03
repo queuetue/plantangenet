@@ -2,13 +2,30 @@
 # SPDX-License-Identifier: MIT
 
 from abc import ABC
-from typing import Any
+from typing import Any, TYPE_CHECKING
+import logging
+
+if TYPE_CHECKING:
+    from plantangenet.logger import Logger
 
 
 class OceanMixinBase(ABC):
     _ocean__namespace: str = "plantangenet"
     _ocean__id: str = ""
     _ocean__nickname: str = ""
+
+    @property
+    def logger(self) -> 'Logger':
+        """
+        Return a logger instance for this object. Subclasses can override or set _logger.
+        Defaults to a standard Python logger named after the class and namespace.
+        """
+        if hasattr(self, '_logger') and self._logger:
+            return self._logger
+        from plantangenet.logger import Logger
+        logger_name = f"{self._ocean__namespace}.{self.__class__.__name__}"
+        self._logger = Logger()
+        return self._logger
 
     @property
     def name(self) -> str: ...

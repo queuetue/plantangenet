@@ -3,7 +3,7 @@
 
 import os
 import json
-from typing import Any, Dict, Union, Optional
+from typing import Any, Dict, Union, Optional, Callable
 from rich.console import Console
 from rich.syntax import Syntax
 from datetime import datetime
@@ -28,7 +28,10 @@ LEVELS = {
     "INFO": 3,
     "WARNING": 4,
     "ERROR": 5,
-    "EXCEPTION": 6
+    "EXCEPTION": 6,
+    "TRANSPORT": 7,  # Custom level for transport (TXRX) messages
+    "STORAGE": 8,    # Custom level for storage (STOR) messages
+    "ECONOMIC": 9    # Custom level for economic/transaction events
 }
 
 
@@ -39,6 +42,8 @@ class Logger:
             raise ValueError(f"Invalid log level: {LOG_LEVEL}")
         self.needsreturn = False
         self.backpressure = 0
+        # Optional callback: (level, msg, context)
+        self.on_log: Optional[Callable[[str, str, Any], None]] = None
 
     def redact_and_truncate(self, data: Union[Dict, list, str], max_length: int = 300) -> Any:
         try:
@@ -100,6 +105,10 @@ class Logger:
             print(f"[WARN] Unknown log level: {level}")
             return
 
+        # Always call the test/debug hook if set
+        if self.on_log:
+            self.on_log(level, msg, context)
+
         if entry_level < (self.log_level or 0):
             return
 
@@ -128,3 +137,15 @@ class Logger:
 
     def exception(self, msg: str, context: Any = None, *args, **kwargs):
         self._log("EXCEPTION", msg, context)
+
+    def transport(self, msg: str, context: Any = None, *args, **kwargs):
+        """Log a transport (TXRX) event at TRANSPORT level."""
+        self._log("TRANSPORT", msg, context)
+
+    def storage(self, msg: str, context: Any = None, *args, **kwargs):
+        """Log a storage (STOR) event at STORAGE level."""
+        self._log("STORAGE", msg, context)
+
+    def economic(self, msg: str, context: Any = None, *args, **kwargs):
+        """Log an economic/transaction event at ECONOMIC level."""
+        self._log("ECONOMIC", msg, context)

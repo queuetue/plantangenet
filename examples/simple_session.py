@@ -1,7 +1,6 @@
 import asyncio
 import os
 from typing import Dict
-from plantangenet.agent import Agent
 from plantangenet import GLOBAL_LOGGER
 from plantangenet.session import Session
 from plantangenet.vanilla_banker import create_vanilla_banker_agent
@@ -15,9 +14,8 @@ speed = 1.0  # Speed of the popcorn shard movement per tick
 reporting_interval = float(os.getenv("REPORTING_INTERVAL", 1.5))
 
 
-class PopcornShard(Agent):
-    def __init__(self, namespace: str = "popcorn", logger=None):
-        super().__init__(namespace, logger)
+class PopcornShard:
+    def __init__(self):
         self._tick = 0
         self._position = 0.0
 
@@ -39,18 +37,21 @@ class PopcornShard(Agent):
     def __str__(self):
         return f"POP |tick {self._tick}|pos {self._position:.2f}"
 
+    @property
+    def logger(self):
+        return GLOBAL_LOGGER
+
 
 async def main():
     # --- Create session and banker ---
     session = Session(session_id="popcorn_demo_session")
     banker = create_vanilla_banker_agent(
         initial_balance=100, namespace=namespace, logger=GLOBAL_LOGGER)
-    # Set max_runtime to 10 seconds for demo
-    app = SessionApp(session, max_runtime=10)
+    app = SessionApp(session)
     app.add_banker_agent(banker)
 
     # --- Register agent(s) ---
-    shard = PopcornShard(namespace=namespace, logger=GLOBAL_LOGGER)
+    shard = PopcornShard()
     app.add_agent(shard)
 
     # --- Economic/logging demo ---

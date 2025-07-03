@@ -828,7 +828,7 @@ class BankerMixin(OceanMixinBase):
                 allowed = min(distribution_amount, max(
                     0, account_max - current_balance))
                 overflow = distribution_amount - allowed
-
+                
                 if allowed > 0:
                     if distributor.account_id == "banker":
                         balance_before = self._dust_balance

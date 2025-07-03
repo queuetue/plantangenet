@@ -2,7 +2,7 @@
 
 **Declarative, Observable, Persisted State for Agents**
 
-Plantangenet’s **Omni system** enables agents to *declare*, *validate*, *observe*, *persist*, and *introspect* their internal state in a consistent, serialization-friendly way.
+Plantangenet’s **Omni system** enables agents to *declare*, *validate*, *observe*, *persist*, and *introspect* their internal state in a consistent, serialization-friendly way. Omni is the standard for agent state in Plantangenet, and is used by all major agent types (e.g., Buoy, Gyre, Drift, Banker) for robust, introspectable, and persistent state management. It integrates seamlessly with the session, storage, and transport systems.
 
 This document explains the design and use of the **Omni components**:
 
@@ -278,3 +278,15 @@ player = Player()
 player.hp = 80
 print(player.status)
 ```
+
+---
+
+## See Also
+
+- [Agents and Node Types](../AGENTS.md): How agents use Omni for state and coordination
+- [Storage Backends](../STORAGE.md): Persisting Omni state
+- [Sessions](../SESSION.md): Context and lifecycle for agents and state
+- [Banker and Economics](../BANKER.md): Economic state and auditability
+- [Policy System](../POLICY.md): Field-level and agent-level access control
+
+Omni is extensible—custom field types, validation, and hooks can be added for domain-specific needs.

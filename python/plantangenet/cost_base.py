@@ -156,6 +156,10 @@ class ApiNegotiator:
             # Special case for save_object - return multiple options
             return self._get_save_object_quote(params)
 
+        if action in ["transport.publish", "transport.subscribe"]:
+            # Special case for transport actions - return cost based on topic complexity
+            return self._get_transport_quote(action, params)
+
         if action not in self.api_costs:
             raise CostBaseError(f"Unknown action: {action}")
 
@@ -206,6 +210,29 @@ class ApiNegotiator:
             "action": "save_object",
             "params": params
         }
+
+    def _get_transport_quote(self, action: str, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Get quote for transport actions based on topic complexity."""
+        topic = params.get("topic", "")
+        complexity = self._estimate_topic_complexity(topic)
+
+        # Base cost for transport actions
+        base_cost = self.api_costs.get(action, 0)
+
+        # Adjust cost based on complexity
+        adjusted_cost = base_cost + complexity * 10  # Example adjustment
+
+        return {
+            "allowed": True,
+            "dust_cost": adjusted_cost,
+            "action": action,
+            "params": params
+        }
+
+    def _estimate_topic_complexity(self, topic: str) -> int:
+        """Estimate the complexity of a topic (placeholder implementation)."""
+        # Placeholder: complexity based on topic length
+        return len(topic) // 10  # Example: 1 complexity unit per 10 characters
 
     def commit_action(self, action: str, params: Dict[str, Any],
                       session: Any, accepted_cost: int) -> Dict[str, Any]:
