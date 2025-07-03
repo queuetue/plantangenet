@@ -13,3 +13,4 @@ pillow
 coolname
 pandas
 pytest-cov
+pyparsing
