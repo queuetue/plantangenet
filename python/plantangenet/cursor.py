@@ -3,9 +3,10 @@
 
 from typing import List, Tuple, Dict, Any, Optional, Callable
 import uuid
+from plantangenet.policy.storage_mixin import PolicyStorageMixin
 
 
-class Cursor:
+class Cursor(PolicyStorageMixin):
     """
     Represents a region of interest and participates in observation workflows.
     Can be static or dynamically updated by a peer/agent.
@@ -18,16 +19,18 @@ class Cursor:
         owner: Optional[str] = None,
         dynamic: bool = False,
         metadata: Optional[Dict[str, Any]] = None,
-        update_policy: Optional[Callable[['Cursor', Any], bool]] = None
+        update_policy: Optional[Callable[['Cursor', Any], bool]] = None,
+        id: Optional[str] = None,
+        last_observed_state: Optional[Any] = None,  # <-- add this
     ):
-        self.id = str(uuid.uuid4())
+        self.id = id or str(uuid.uuid4())
         self.axes = axes
         self.tick_range = tick_range
         self.owner = owner
         self.dynamic = dynamic
         self.metadata = metadata or {}
         self.update_policy = update_policy  # Function to decide if update is needed
-        self.last_observed_state: Optional[Any] = None
+        self.last_observed_state = last_observed_state
 
     def should_update(self, new_state: Any) -> bool:
         """

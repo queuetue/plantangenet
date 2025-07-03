@@ -6,26 +6,129 @@ import uuid
 from .cursor import Cursor
 from .agent import Agent
 from .policy.base import Policy
+from plantangenet.policy.identity import Identity
+from plantangenet.policy.vanilla import Vanilla
+from plantangenet.policy.storage_mixin import PolicyStorageMixin
+from .banker import Banker, NullBanker
 
 
-class Session:
+class Session(PolicyStorageMixin):
     """
     Represents a policy-bound lifecycle and trust boundary.
-    Manages Agents and Cursors, and interfaces with Compositors.
+    Manages Agents (including Banker agents), Cursors, and interfaces with Compositors.
+    Only session_id, metadata, identity_key, and policy_key are persisted.
     """
 
     def __init__(self,
                  session_id: Optional[str] = None,
                  metadata: Optional[Dict[str, Any]] = None,
-                 policy: Optional[Policy] = None):
+                 policy: Optional[Vanilla] = None,
+                 identity: Optional[Identity] = None,
+                 identity_key: Optional[str] = None,
+                 policy_key: Optional[str] = None,
+                 storage_backend: Any = None,
+                 banker: Optional[Banker] = None):
         self.session_id = session_id or str(uuid.uuid4())
         self.metadata = metadata or {}
-
+        self.identity_key = identity_key
+        self.policy_key = policy_key
+        self._identity = identity
+        self._policy = policy
         self.agents: List[Agent] = []
         self.cursors: List[Cursor] = []
-        self.policy = policy
-
         self.on_change_callbacks: List[Callable[['Session'], None]] = []
+
+        # Financial services - managed through banker agent
+        self._banker = banker or NullBanker()
+
+        # Set storage backend for all managed persistable types
+        if storage_backend:
+            self.set_storage_backend(storage_backend)
+
+    @classmethod
+    def set_storage_backend(cls, backend):
+        cls.storage_backend = backend
+        Identity.storage_backend = backend
+        Vanilla.storage_backend = backend
+        Cursor.storage_backend = backend
+
+    @property
+    def identity(self) -> Optional[Identity]:
+        if self._identity:
+            return self._identity
+        if self.identity_key and Identity.storage_backend:
+            # Async load not supported in property, so warn user
+            return None
+        return None
+
+    @property
+    def policy(self) -> Optional[Vanilla]:
+        if self._policy:
+            return self._policy
+        if self.policy_key and Vanilla.storage_backend:
+            # Async load not supported in property, so warn user
+            return None
+        return None
+
+    def persisted_state(self) -> dict:
+        return {
+            "session_id": self.session_id,
+            "metadata": self.metadata,
+            "identity_key": self.identity_key,
+            "policy_key": self.policy_key,
+            "cursor_keys": [c.id for c in self.cursors],
+        }
+
+    async def persist_cursors(self):
+        if not Cursor.storage_backend:
+            raise RuntimeError("No storage backend for Cursor.")
+        for cursor in self.cursors:
+            await cursor.store(cursor.id, cursor.__dict__)
+
+    @staticmethod
+    async def rehydrate_object_list(keys, cls):
+        objs = []
+        if not cls.storage_backend:
+            return objs
+        for k in keys:
+            data = await cls.storage_backend.load(k)
+            if data:
+                objs.append(cls(**data))
+        return objs
+
+    @classmethod
+    async def rehydrate(cls, session_key: str, backend=None, logger=None, namespace=None):
+        backend = backend or cls.storage_backend
+        if not backend:
+            raise RuntimeError(
+                "No storage backend configured for Session rehydration.")
+        state = await backend.load(session_key)
+        if not state:
+            raise ValueError(f"No session found for key {session_key}")
+        identity = None
+        policy = None
+        cursors = []
+        if state.get("identity_key") and Identity.storage_backend:
+            identity_data = await Identity.storage_backend.load(state["identity_key"])
+            if identity_data:
+                identity = Identity(**identity_data)
+        if state.get("policy_key") and Vanilla.storage_backend:
+            policy_data = await Vanilla.storage_backend.load(state["policy_key"])
+            if policy_data:
+                policy = Vanilla(logger=logger, namespace=namespace or policy_data.get(
+                    "namespace", "default"))
+        if state.get("cursor_keys") and Cursor.storage_backend:
+            cursors = await cls.rehydrate_object_list(state["cursor_keys"], Cursor)
+        session = cls(
+            session_id=state["session_id"],
+            metadata=state["metadata"],
+            identity=identity,
+            policy=policy,
+            identity_key=state.get("identity_key"),
+            policy_key=state.get("policy_key")
+        )
+        session.cursors = cursors
+        return session
 
     # Agent management
     def add_agent(self, agent: Agent):
@@ -97,3 +200,67 @@ class Session:
     def _notify_change(self):
         for callback in self.on_change_callbacks:
             callback(self)
+
+    # Banker management methods
+    @property
+    def banker(self) -> Banker:
+        """Get the session's banker."""
+        return self._banker
+
+    def set_banker(self, banker: Banker):
+        """Set the session's banker."""
+        self._banker = banker
+        self._notify_change()
+
+    def add_banker_agent(self, banker_agent: Agent):
+        """
+        Add a banker agent to the session and set it as the primary banker.
+
+        Args:
+            banker_agent: An agent that implements the Banker protocol
+        """
+        if not isinstance(banker_agent, Banker):
+            raise ValueError("Agent must implement Banker protocol")
+
+        self.add_agent(banker_agent)
+        self.set_banker(banker_agent)
+
+    def get_banker_agents(self) -> List[Agent]:
+        """Get all agents that implement the Banker protocol."""
+        return [agent for agent in self.agents if isinstance(agent, Banker)]
+
+    # Financial delegation methods (delegate to banker)
+    def get_dust_balance(self) -> int:
+        """Get current dust balance from banker."""
+        return self._banker.get_balance()
+
+    def can_afford(self, amount: int) -> bool:
+        """Check if session can afford an amount."""
+        return self._banker.can_afford(amount)
+
+    def get_cost_estimate(self, action: str, params: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """Get cost estimate for an action."""
+        return self._banker.get_cost_estimate(action, params)
+
+    def negotiate_transaction(self, action: str, params: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """Negotiate a transaction with cost options."""
+        return self._banker.negotiate_transaction(action, params)
+
+    def commit_transaction(self, action: str, params: Dict[str, Any],
+                           selected_cost: Optional[int] = None) -> Dict[str, Any]:
+        """Commit a transaction through the banker."""
+        result = self._banker.commit_transaction(action, params, selected_cost)
+
+        if result.success:
+            self._notify_change()
+
+        return {
+            "success": result.success,
+            "dust_charged": result.dust_charged,
+            "message": result.message,
+            "transaction_id": result.transaction_id
+        }
+
+    def get_transaction_history(self) -> List[Dict[str, Any]]:
+        """Get transaction history from banker."""
+        return self._banker.get_transaction_history()

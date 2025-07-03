@@ -3,9 +3,10 @@
 
 from typing import Any, Dict, List
 from pydantic import BaseModel, Field
+from plantangenet.policy.storage_mixin import PolicyStorageMixin
 
 
-class Identity(BaseModel):
+class Identity(PolicyStorageMixin, BaseModel):
     id: str = Field(..., description="Unique identifier for the identity.")
     nickname: str = Field(..., description="Nickname for the identity.")
     metadata: Dict[str, Any] = Field(

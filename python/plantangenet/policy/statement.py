@@ -3,9 +3,10 @@
 
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field
+from plantangenet.policy.storage_mixin import PolicyStorageMixin
 
 
-class Statement(BaseModel):
+class Statement(PolicyStorageMixin, BaseModel):
     id: str = Field(..., description="Unique identifier for the statement.")
     role_names: List[str] = []
     effect: str = Field(..., description="allow or deny")

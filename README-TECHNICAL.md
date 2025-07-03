@@ -134,6 +134,39 @@ A tick-based engine that can:
 
 ---
 
+## Example: Sessions and Banker Agent Integration
+
+Here's how you create a session and add a Banker agent to manage all economic operations:
+
+```python
+from plantangenet.session import Session
+from plantangenet.vanilla_banker import create_vanilla_banker_agent
+
+# Create a session
+session = Session(session_id="demo_session")
+
+# Add a Banker agent with an initial Dust balance and cost base
+banker = create_vanilla_banker_agent(initial_balance=100, cost_base_paths=["./effects.zip"])
+session.add_banker_agent(banker)
+
+# Get a quote for an action
+quote = session.get_cost_estimate("save_object", {"fields": ["name", "email"]})
+
+# Negotiate a transaction (get options, preview)
+negotiation = session.negotiate_transaction("save_object", {"fields": ["name", "email"]})
+
+# Commit a transaction (spend Dust)
+result = session.commit_transaction("save_object", {"fields": ["name", "email"]}, selected_cost=quote["dust_cost"])
+
+# Check balance and history
+balance = session.get_dust_balance()
+history = session.get_transaction_history()
+```
+
+All economic logic (pricing, negotiation, payment, refund) is now handled by the Banker agent. For more, see [Banker Agent Integration](docs/BANKER_AGENT_INTEGRATION.md).
+
+---
+
 ## The `on_topic` Decorator
 
 Registers message handlers with features like:

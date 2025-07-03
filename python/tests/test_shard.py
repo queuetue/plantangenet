@@ -64,7 +64,7 @@ class TestShardStatus:
         assert shard_status["namespace"] == shard.namespace
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 class TestShardLifecycle:
     """Test Shard lifecycle methods."""
 
@@ -141,7 +141,7 @@ class TestShardErrorHandling:
                     await shard.teardown()
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 class TestShardAsyncOperations:
     """Test Shard async operations and concurrency."""
 

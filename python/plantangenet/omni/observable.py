@@ -35,6 +35,9 @@ class Observable(PersistedBase):
         return True
 
     def __set__(self, obj, value):
+        # Per-field policy check for write access (sync version)
+        self._check_field_access(obj, "write", value)
+
         self.__observable_errors__.clear()
         old_value = getattr(obj, self.private_name, self.default)
 

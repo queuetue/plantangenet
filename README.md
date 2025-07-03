@@ -71,6 +71,16 @@ Plantangenet includes:
 
 ---
 
+## Economic Model: The Banker Agent
+
+Plantangenet now uses a dedicated **Banker agent** to manage all economic logic, including Dust pricing, negotiation, and transaction auditing. All resource costs, payments, and economic policy enforcement are handled by the Banker, ensuring a single, auditable source of truth for all economic activity.
+
+- All economic operations (pricing, negotiation, payment, refund) go through the Banker agent.
+- Sessions and storage no longer manage Dust directly.
+- For details, see [Banker Agent Integration](docs/BANKER_AGENT_INTEGRATION.md) and [Cost Base System](docs/COST_BASE.md).
+
+---
+
 ## Status
 
 Active, evolving, and open to collaboration.

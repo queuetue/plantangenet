@@ -2,7 +2,7 @@
 
 **Managing Boundaries, Identity, Policy, and Lifecycle for Connected Agents**
 
-A **Session** is the *boundary* around multiple connected **Agents** and their **Cursors** in Plantangenet. It acts as a **coordination context** for lifecycle management, preference tracking, and *policy enforcement*, providing the foundation for negotiated, privacy-aware, and economically-shaped data exchange.
+A **Session** is the *boundary* around multiple connected **Agents** and their **Cursors** in Plantangenet. It acts as a **coordination context** for lifecycle management, preference tracking, *policy enforcement*, and now, efficient and extensible persistence of session-managed objects.
 
 ---
 
@@ -14,6 +14,7 @@ A **Session** is the local **owner** of many independent **Agents** (clients, bo
 * A **trust and policy boundary** for enforcing access controls
 * An **introspection and configuration hub** for state and metadata
 * A **container** for connections, cursors, subscriptions, and economic signals
+* A **persistence coordinator** for session-managed objects (identity, policy, cursors, etc.)
 
 Sessions are the **natural place** to:
 
@@ -23,19 +24,7 @@ Sessions are the **natural place** to:
 * Coordinate *identity* and *roles*
 * Interface with *Compositors* for data generation
 * Observe *state* and *status* of participants
-
----
-
-## Why a Session?
-
-Real systems don't have just **one** participant per connection. Instead:
-
-* Agents may maintain multiple *cursors* or *subscriptions*.
-* Agents may spawn *transient* tasks or drifts.
-* Agents may hold *persistent* identities and roles.
-* Multiple Agents might share a *negotiated context*.
-
-A **Session** gives you a single object to manage this complexity with strong policy boundaries.
+* **Persist and rehydrate** session state and managed objects
 
 ---
 
@@ -62,32 +51,43 @@ A **Session** gives you a single object to manage this complexity with strong po
 * **Reactive Hooks**
   Sessions support on-change callbacks for integration into higher-level event systems.
 
----
-
-## Example Use Cases
-
-* A WebSocket connection is represented as a Session.
-* An authenticated user's workspace in the UI is backed by a Session.
-* A background worker spawns a Session for task batches.
-* A Session negotiates data disclosure policy for a guest user.
-* A Session tracks paid-for attention (Dust) by managing Cursors.
+* **Persistence and Storage**
+  Sessions and all session-managed objects (identity, policy, cursors, etc.) are persistable and rehydratable, supporting robust state management and recovery.
 
 ---
 
-## Example (Conceptual)
+## Persistence and Storage
+
+Plantangenet Sessions are designed for efficient, extensible, and testable persistence. The session itself persists only minimal state:
+
+- `session_id`
+- `metadata`
+- `identity_key`
+- `policy_key`
+- `cursor_keys` (list of keys for managed cursors)
+
+All session-managed objects (such as identity, policy, and cursors) implement a persist/rehydrate pattern, making them **persistable** and **rehydratable**. This is achieved via a common storage mixin and the omni/persistable/observable field system.
+
+**Centralized Storage Backend Management:**
+- The session is responsible for setting the storage backend for all managed persistable types. This ensures consistent configuration and simplifies testing and extension.
+- Storage backends (e.g., Redis) are pluggable and can be swapped or mocked for different environments.
+
+**Extensibility:**
+- The persist/rehydrate pattern is generic and can be extended to other session-managed objects (e.g., agents) as needed.
+
+**Example: Persisting and Rehydrating a Session**
 
 ```python
-session = Session(policy=my_policy)
+# Persist the session and all managed objects
+data = await session.persist()
+# ...store 'data' in your backend...
 
-# Add user metadata
-session.metadata["user_id"] = "alice"
-
-# Add an Agent
-session.add_agent(AliceAgent())
-
-# Add a Cursor on behalf of the agent
-session.add_cursor(AliceAgent(), Cursor(axes=["temperature"], tick_range=(100, 200)))
+# Later, rehydrate the session from persisted data
+rehydrated_session = await Session.rehydrate(data, storage_backend=redis_backend)
 ```
+
+**Omni/Persistable/Observable Pattern:**
+- All persistable session-managed objects declare their persistable fields inside an omni base class, enabling efficient dirty tracking, policy checks, and extensible storage logic.
 
 ---
 

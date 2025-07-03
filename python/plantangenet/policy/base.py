@@ -9,7 +9,7 @@ class Role:
     role_id: str
     name: str
     description: Optional[str] = None
-    members: List[str] = None
+    members: Optional[List[str]] = None
 
 
 @dataclass
@@ -68,7 +68,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def add_identity(self, identity: Identity, nickname=None, metadata=None) -> str:
+    def add_identity(self, identity: Identity, nickname=None, metadata=None) -> str:
         """Add an identity to the policy system.
 
         Gracefully handles:
@@ -78,7 +78,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def get_identity(self, identity_id: str) -> Optional[Identity]:
+    def get_identity(self, identity_id: str) -> Optional[Identity]:
         """Get an identity by ID.
 
         Gracefully handles:
@@ -88,7 +88,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def add_identity_to_role(self, identity: Identity, role: Role) -> None:
+    def add_identity_to_role(self, identity: Identity, role: Role) -> None:
         """Add an identity to a role.
 
         Gracefully handles:
@@ -99,7 +99,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def remove_identity_from_role(self, identity: Identity, role: Role) -> None:
+    def remove_identity_from_role(self, identity: Identity, role: Role) -> None:
         """Remove an identity from a role.
 
         Gracefully handles:
@@ -110,7 +110,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def delete_identity(self, identity: Identity) -> None:
+    def delete_identity(self, identity: Identity) -> None:
         """Delete an identity from the policy system.
 
         Gracefully handles:
@@ -120,7 +120,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def add_role(self, role: Role, description=None, members=None) -> str:
+    def add_role(self, role: Role, description=None, members=None) -> str:
         """Add a role to the policy system.
 
         Gracefully handles:
@@ -131,7 +131,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def delete_role(self, role: Role) -> None:
+    def delete_role(self, role: Role) -> None:
         """Delete a role from the policy system.
 
         Gracefully handles:
@@ -150,7 +150,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def add_statement(self, roles: List[Union[str, Role]], effect, action, resource, condition=None, delivery=None) -> str:
+    def add_statement(self, roles: List[Union[str, Role]], effect, action, resource, condition=None, delivery=None) -> str:
         """Add a policy statement.
 
         Gracefully handles:
@@ -174,7 +174,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def delete_statement(self, policy_statement: Statement) -> None:
+    def delete_statement(self, policy_statement: Statement) -> None:
         """Delete a policy statement.
 
         Gracefully handles:
@@ -184,7 +184,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def add_role_to_statement(self, policy_statement: Statement, role: Role) -> None:
+    def add_role_to_statement(self, policy_statement: Statement, role: Role) -> None:
         """Add a role to a policy statement.
 
         Gracefully handles:
@@ -195,7 +195,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def remove_role_from_statement(self, policy_statement: Statement, role: Role) -> None:
+    def remove_role_from_statement(self, policy_statement: Statement, role: Role) -> None:
         """Remove a role from a policy statement.
 
         Gracefully handles:
@@ -206,7 +206,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def _commit(self) -> None:
+    def _commit(self) -> None:
         """Commit any pending changes to the policy store.
 
         Gracefully handles:
@@ -215,7 +215,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def teardown(self) -> None:
+    def teardown(self) -> None:
         """Teardown the policy system.
 
         Gracefully handles:
@@ -225,7 +225,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    async def setup(self, *args, **kwargs) -> None:
+    def setup(self, *args, **kwargs) -> None:
         """Setup the policy system.
 
         Gracefully handles:

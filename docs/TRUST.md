@@ -146,5 +146,17 @@ Policies in Plantangenet do not only define permissions and access, but also sha
 
 ---
 
+## Persistence, Auditability, and Trust Boundaries
+
+Plantangenet’s trust boundaries are now reinforced by a robust persistence and rehydration system:
+
+- **Session, policy, and related objects are persistable and rehydratable**, supporting both ephemeral and durable trust boundaries as required by the frame’s declared policy.
+- **Auditability is enhanced**: Persisted state can be recovered, inspected, and cryptographically verified, supporting legal and contractual requirements for evidence and due process.
+- **Storage backends are pluggable**: Use in-memory storage for ephemeral frames, or durable backends (e.g., Redis) for long-lived, auditable contracts. The system’s flexibility allows you to match the durability and auditability of trust boundaries to your use case.
+
+This approach ensures that Plantangenet frames can be both ephemeral and legally sound, with trust boundaries that are as durable or as transient as your policy requires.
+
+---
+
 Copyright (c) 1998-2025 Scott Russell  
 SPDX-License-Identifier: MIT

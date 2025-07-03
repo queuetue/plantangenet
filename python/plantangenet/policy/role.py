@@ -3,9 +3,10 @@
 
 from typing import List
 from pydantic import BaseModel, Field
+from plantangenet.policy.storage_mixin import PolicyStorageMixin
 
 
-class Role(BaseModel):
+class Role(PolicyStorageMixin, BaseModel):
     id: str = Field(..., description="Unique identifier for the role.")
     name: str = Field(..., description="Name of the role.")
     description: str = Field(..., description="Description of the role.")

@@ -82,7 +82,7 @@ class TestNatsMixinProperties:
         assert nats_client.disposition == "test-disposition"
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 class TestNatsMixinConnection:
     """Test NATS connection establishment and management."""
 
@@ -151,7 +151,7 @@ class TestNatsMixinConnection:
         assert nats_client._ocean_nats__subscriptions == {}
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 class TestNatsMixinPublishing:
     """Test message publishing functionality."""
 
@@ -222,7 +222,7 @@ class TestNatsMixinPublishing:
         assert not nats_client._ocean_nats__connected
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 class TestNatsMixinSubscribing:
     """Test message subscription functionality."""
 
@@ -266,7 +266,7 @@ class TestNatsMixinSubscribing:
         assert result is None
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 class TestNatsMixinLifecycle:
     """Test full lifecycle operations."""
 

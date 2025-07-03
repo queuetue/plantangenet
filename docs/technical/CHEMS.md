@@ -6,11 +6,30 @@
 
 In Plantangenet, a *chem* is a structured, negotiable identity used to manage how an agent's private context is shared with the network. Chems enforce clear, auditable boundaries between local sessions and the federated environment. They allow agents to collaborate without losing control over their private data, using explicit policy to manage trust, roles, and permissions.
 
+**A chem is best understood as a bipolar molecule:**
+- On one end, it is anchored to an **agent** (the local, private, active participant).
+- On the other end, it is anchored to an **identity** (the network-facing, policy-governed persona).
+- In between, a chem is composed of **filtering, transformation, and interpretation layers** that mediate, mask, or transform data as it crosses the boundary from agent to identity (and vice versa).
+
+This model allows a chem to act as a bridge, enforcing privacy, policy, and negotiated context between the agent’s internal state and the external world.
+
 The system distinguishes *what* data is shared (handled by the Semantic Compositor) from *who* can access it and *how* it's transformed (governed by chems and policy). This separation ensures secure, intentional collaboration in distributed systems.
 
 *Chems* are Plantangenet's negotiable, context-sensitive identities. Let's explore their role in enforcing clear, auditable boundaries between private sessions and federated interactions, showing how chems integrate policy enforcement, roles, focus negotiation, and privacy-preserving sharing:
 
 ## Core Concepts
+
+### Bipolar Molecule Model
+
+A chem is a bridge with two poles:
+- **Agent Pole:** The local, private, active participant (session, agent, or process).
+- **Identity Pole:** The network-facing, policy-governed persona or role.
+- **Filtering/Interpretation Layer:** The chem mediates, filters, and transforms data and actions between these poles, enforcing policy, privacy, and negotiated context.
+
+This enables:
+- Compartmentalization and narrative control for agents.
+- Policy-driven, auditable, and context-sensitive sharing for identities.
+- Flexible, dynamic negotiation of what is revealed, to whom, and how.
 
 ### Contextual Identity
 
