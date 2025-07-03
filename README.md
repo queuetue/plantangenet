@@ -45,6 +45,7 @@ Modern systems often assume static permissions and all-or-nothing sharing.
 - Attention-priced data markets
 - Privacy-conscious simulations
 - Collaborative apps with time-bounded sharing
+- Distributed ML pipelines with native tensor support and GPU-accelerated data transformation
 
 ---
 
@@ -66,6 +67,9 @@ Plantangenet includes:
 - Cursors for fine-grained data focus
 - Compositors for partial views
 - Membry for attention-shaped, fading storage
+- GPU-accelerated "shaders" for distributed data transformation
+- Native tensor support for ML workloads
+- Seamless integration with popular Python data tools like **NumPy** and **pandas**
 - A pluggable Policy interface
 - Economic incentives via Dust
 
@@ -73,7 +77,7 @@ Plantangenet includes:
 
 ## Economic Model: The Banker Agent
 
-Plantangenet now uses a dedicated **Banker agent** to manage all economic logic, including Dust pricing, negotiation, and transaction auditing. All resource costs, payments, and economic policy enforcement are handled by the Banker, ensuring a single, auditable source of truth for all economic activity.
+Plantangenet now uses a dedicated **Banker agent** to manage all economic logic, including Dust pricing, negotiation, and transaction auditing. All resource costs, payments, and economic policy enforcement are handled by the Banker, ensuring a single, auditable source of truth for all internal "accounting" activity.
 
 - All economic operations (pricing, negotiation, payment, refund) go through the Banker agent.
 - Sessions and storage no longer manage Dust directly.
@@ -108,11 +112,11 @@ Your support and participation help keep Plantangenet independent, evolving, and
 
 ## About the Author
 
-Hi! I'm Scott Russell (Queuetue), a systems architect and lifelong generalist with over 25 years of experience designing, scaling, and leading technical teams.
+Hi! I'm Scott Russell (Queuetue), a systems architect and AI specialist with over 25 years of experience designing, scaling, and leading technical teams.
 
-I specialize in turning early-stage ideas into resilient, high-performing systems, drawing on deep experience with simulation, agent-based modeling, and complex, decentralized infrastructure.
+I specialize in turning early-stage ideas into resilient, high-performing systems. My expertise lies at the intersection of **AI/ML**, **distributed systems**, and **data-intensive applications**. I have deep experience with simulation, agent-based modeling, **GPU-accelerated computing**, and building infrastructure for complex, decentralized workloads.
 
-My work is informed by natural systems thinking: applying principles of feedback, resilience, and sustainable complexity to both software and organizations. Yes, for interested parties, I do consulting jobs on the side.
+My work is informed by natural systems thinking: applying principles of feedback, resilience, and sustainable complexity to both software and organizations. I am passionate about building the next generation of privacy-aware, distributed systems. Yes, for interested parties, I do consulting jobs on the side.
 
 ---
 
