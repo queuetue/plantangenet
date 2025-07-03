@@ -20,12 +20,12 @@ try:
         """Test Redis concepts for omni storage"""
         try:
             # Use different clients for binary vs text data
-            text_client = Redis.from_url(
+            client = Redis.from_url(
                 'redis://localhost:6379', decode_responses=True)
-            binary_client = Redis.from_url(
-                'redis://localhost:6379', decode_responses=False)
+            # binary_client = Redis.from_url(
+            #     'redis://localhost:6379', decode_responses=False)
 
-            await text_client.ping()
+            await client.ping()
             print("✅ Redis connection successful")
 
             # Test 1: Hash storage (structured fields)
@@ -38,15 +38,21 @@ try:
                 "_updated_at": str(time.time())
             }
 
-            result = await client.hset(omni_key, mapping=fields)
+            result = await client.hset(
+                omni_key, mapping=fields  # type: ignore[call-arg]
+            )
             print(f"✅ Hash storage: {result} fields set")
 
             # Load all fields
-            loaded = await client.hgetall(omni_key)
+            loaded = await client.hgetall(
+                omni_key  # type: ignore[call-arg]
+            )
             print(f"✅ Hash load: {len(loaded)} fields loaded")
 
             # Load specific fields
-            specific = await client.hmget(omni_key, ["value", "count"])
+            specific = await client.hmget(
+                omni_key, ["value", "count"]  # type: ignore[call-arg]
+            )
             print(f"✅ Specific fields: {specific}")
 
             # Test 2: Versioning with sorted sets
@@ -68,8 +74,13 @@ try:
             child_key = "test:omni:child"
             relationship_key = f"{parent_key}:children"
 
-            await client.sadd(relationship_key, child_key)
-            children = await client.smembers(relationship_key)
+            await client.sadd(
+                relationship_key,
+                child_key
+            )  # type: ignore[call-arg]
+            children = await client.smembers(
+                relationship_key  # type: ignore[call-arg]
+            )
             print(f"✅ Relationships: {len(children)} children")
 
             # Test 4: Policy caching
@@ -110,7 +121,10 @@ try:
                 "timestamp": str(time.time())
             }
 
-            entry_id = await client.xadd(stream_key, audit_data)
+            entry_id = await client.xadd(
+                stream_key,
+                audit_data  # type: ignore[call-arg]
+            )
             print(f"✅ Audit log: {entry_id}")
 
             # Read audit entries
@@ -170,7 +184,7 @@ async def test_omni_integration_concepts():
             self._original_values.clear()
 
     tracker = DirtyTracker()
-    tracker.value = 100
+    tracker.value = 100  # type: ignore[assignment]
     tracker.track_change("value", None, 100)
     tracker.track_change("value", 100, 200)
 
