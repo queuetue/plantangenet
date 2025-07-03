@@ -15,7 +15,7 @@ class MockSession:
         self.identity = identity
 
 
-class TestModel(Omni):
+class ModelTest(Omni):
     """Test model with both Observable and PersistedBase fields."""
 
     # Observable field with policy enforcement
@@ -88,7 +88,7 @@ class TestPerFieldPolicy:
     def test_observable_field_access_allowed(self, policy):
         """Test that Observable field access works when policy allows it."""
         admin_session = MockSession("admin")
-        model = TestModel(session=admin_session, policy=policy)
+        model = ModelTest(session=admin_session, policy=policy)
 
         # Admin should be able to read and write
         model.name = "test_name"  # Should not raise
@@ -98,7 +98,7 @@ class TestPerFieldPolicy:
         """Test that Observable field access is denied when policy denies it."""
         # Start with admin to set initial value
         admin_session = MockSession("admin")
-        model = TestModel(session=admin_session, policy=policy)
+        model = ModelTest(session=admin_session, policy=policy)
 
         # Admin sets initial value
         model.name = "initial"
@@ -117,7 +117,7 @@ class TestPerFieldPolicy:
     def test_persisted_field_access_allowed(self, policy):
         """Test that PersistedBase field access works when policy allows it."""
         admin_session = MockSession("admin")
-        model = TestModel(session=admin_session, policy=policy)
+        model = ModelTest(session=admin_session, policy=policy)
 
         # Admin should be able to read and write
         model.secret = "top_secret"  # Should not raise
@@ -127,7 +127,7 @@ class TestPerFieldPolicy:
         """Test that PersistedBase field access is denied when policy denies it."""
         # Start with admin to set initial value
         admin_session = MockSession("admin")
-        model = TestModel(session=admin_session, policy=policy)
+        model = ModelTest(session=admin_session, policy=policy)
 
         # Admin sets initial value
         model.secret = "initial_secret"
@@ -146,7 +146,7 @@ class TestPerFieldPolicy:
     def test_no_policy_no_enforcement(self):
         """Test that fields work normally when no policy is set."""
         session = MockSession("anyone")
-        model = TestModel(session=session, policy=None)  # No policy
+        model = ModelTest(session=session, policy=None)  # No policy
 
         # Should work without any policy checks
         model.name = "no_policy"
@@ -157,7 +157,7 @@ class TestPerFieldPolicy:
 
     def test_no_session_no_enforcement(self, policy):
         """Test that fields work normally when no session is set."""
-        model = TestModel(session=None, policy=policy)  # No session
+        model = ModelTest(session=None, policy=policy)  # No session
 
         # Should work without any policy checks
         model.name = "no_session"

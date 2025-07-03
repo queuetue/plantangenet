@@ -15,8 +15,8 @@ except Exception as e:
         import numpy as np
         cp = np  # type: ignore
         HAS_CUPY = False
-        warnings.warn(
-            f"CuPy not available, falling back to NumPy: {e}", UserWarning)
+        # warnings.warn(
+        #     f"CuPy not available, falling back to NumPy: {e}", UserWarning)
     except ImportError:
         raise ImportError(
             "Neither CuPy nor NumPy available for array operations")
@@ -42,8 +42,8 @@ class MomentumTransformer(Transformer):
         velocity = data.get("velocity")
 
         if mass is None or velocity is None:
-            warnings.warn(
-                "MomentumTransformer: 'mass' or 'velocity' missing; skipping.", UserWarning)
+            # warnings.warn(
+            #     "MomentumTransformer: 'mass' or 'velocity' missing; skipping.", UserWarning)
             return data
 
         # Accept lists, tuples, or arrays
