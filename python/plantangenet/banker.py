@@ -932,23 +932,6 @@ class BankerMixin(OceanMixinBase):
             }
         }
 
-        # Create access request
-        request = FinancialAccessRequest(
-            requestor=identity,
-            operation="get_transaction_history",
-            target_account=target_account,
-            filters=filters
-        )
-
-        # Check policy
-        if not self._financial_policy.can_access_transaction_history(request):
-            raise PermissionError(
-                f"Access denied: {identity.user_id} cannot access transaction history for account {target_account or identity.user_id}"
-            )
-
-        # Apply policy-based filtering
-        return self._financial_policy.filter_transaction_history(request, self._transaction_log)
-
     def charge_agent_for_api_usage(self, action: str, params: Dict[str, Any],
                                    agent_declared_cost: int) -> TransactionResult:
         """
