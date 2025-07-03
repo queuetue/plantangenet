@@ -515,6 +515,40 @@ class TestDistributionSystem:
 
         assert distributor is None  # Admin pays no fees
 
+    def test_dust_overflow_to_system_account(self):
+        """Test that overflow is redirected to system account when max_dust is exceeded."""
+        banker = BankerMixin()
+        banker._dust_balance = 0
+
+        # Distributor with max_dust=100, but we try to distribute 200
+        distributor = Distributor(
+            account_id="limited_account",
+            distribution_type="fixed",
+            amount=200,
+            reason="test overflow"
+        )
+        distributor.max_dust = 100  # Only allow up to 100
+
+        # System identity to receive overflow
+        system_identity = FinancialIdentity(
+            user_id="system_account", roles=["system"])
+
+        result = banker.distribute_amount(
+            200, [distributor], identity=None, include_banker_cut=False, system_identity=system_identity
+        )
+
+        # Should be two distributions: one to limited_account (100), one to system_account (100)
+        limited_dist = next(
+            d for d in result.distributions if d["account_id"] == "limited_account")
+        system_dist = next(
+            d for d in result.distributions if d["account_id"] == "system_account")
+
+        assert limited_dist["amount"] == 100
+        assert system_dist["amount"] == 100
+        assert result.remaining_amount == 0
+        assert "overflow" in system_dist["reason"].lower()
+        assert result.success is True
+
 
 class TestNullBankerDistribution:
     """Test NullBanker distribution functionality."""
