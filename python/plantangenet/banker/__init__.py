@@ -26,7 +26,7 @@ from .mixins import BankerMixin
 from .null_banker import NullBanker
 
 # Data types
-from .types import (
+from .econ_types import (
     TransactionResult,
     FinancialIdentity,
     FinancialAccessRequest,

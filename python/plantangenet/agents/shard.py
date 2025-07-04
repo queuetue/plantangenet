@@ -3,10 +3,10 @@
 
 __version__ = "0.1.0"
 from plantangenet.logger import Logger
-from plantangenet.agent import Agent
 from plantangenet.mixins.storage import StorageMixin
 from plantangenet.mixins.transport import TransportMixin
 from plantangenet.mixins.topics import TopicsMixin
+from .agent import Agent
 
 __all__ = ["Shard", "__version__"]
 

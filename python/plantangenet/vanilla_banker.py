@@ -5,8 +5,8 @@ This is an Agent that can be managed by Sessions.
 """
 
 from typing import Dict, Any, Optional, List
-from .agent import Agent
-from .banker import Banker, BankerMixin, TransactionResult, FinancialIdentity
+from .agents.agent import Agent
+from .banker import BankerMixin, TransactionResult, FinancialIdentity
 from .cost_base import ApiNegotiator, CostBaseError, load_and_verify_cost_base
 from .transaction_preview import TransactionBuilder
 

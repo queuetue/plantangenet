@@ -5,7 +5,7 @@ NullBanker implementation for testing and development.
 from typing import Dict, Any, Optional, List
 
 from .mixins import BankerMixin
-from .types import TransactionResult, FinancialIdentity, Distributor, DistributionResult
+from .econ_types import TransactionResult, FinancialIdentity, Distributor, DistributionResult
 from .policies import PermissiveFinancialPolicy
 
 

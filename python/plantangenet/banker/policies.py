@@ -3,7 +3,7 @@ Financial and fee policies for the banker module.
 """
 
 from typing import Dict, Any, Optional, List
-from .types import FinancialIdentity, FinancialAccessRequest, FeeStructure, Distributor
+from .econ_types import FinancialIdentity, FinancialAccessRequest, FeeStructure, Distributor
 
 
 class FinancialPolicy:

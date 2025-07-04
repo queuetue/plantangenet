@@ -6,7 +6,7 @@ import datetime
 from typing import Dict, Any, Optional, List
 
 from ..mixins.base import OceanMixinBase
-from .types import (
+from .econ_types import (
     TransactionResult, FinancialIdentity, FinancialAccessRequest,
     Distributor, DistributionResult
 )
@@ -273,63 +273,70 @@ class BankerMixin(Banker, OceanMixinBase):
             if remaining_amount <= 0:
                 break
 
-            # Calculate distribution amount
-            distribution_amount = distributor.calculate_distribution(
-                amount, remaining_amount)
-
-            # Only process distributors with positive amounts
-            if distribution_amount > 0:
-                # Simulate account max_dust enforcement
-                account_max = getattr(distributor, 'max_dust', None)
-                # For this example, assume all accounts have max_dust=1000 unless otherwise set
-                # Banker account gets higher limit to accommodate fees
-                if account_max is None:
-                    if distributor.account_id == "banker":
-                        account_max = 100000  # Much higher limit for banker
-                    else:
-                        account_max = 1000
-                # Simulate current balance (in real system, fetch from account)
-                current_balance = 0
-                # For banker, use self._dust_balance
+            # Calculate raw distribution amount (ignore maximum cap)
+            if distributor.distribution_type == "percentage":
+                raw_amount = int(amount * distributor.amount)
+            elif distributor.distribution_type == "fixed":
+                raw_amount = int(distributor.amount)
+            elif distributor.distribution_type == "remainder":
+                raw_amount = remaining_amount
+            else:
+                raise ValueError(
+                    f"Unknown distribution type: {distributor.distribution_type}")
+            # Apply minimum
+            raw_amount = max(raw_amount, getattr(distributor, 'minimum', 0))
+            # Now apply maximum cap (from maximum/max_dust/account_max logic)
+            max_dust = getattr(distributor, 'max_dust', None)
+            maximum = getattr(distributor, 'maximum', None)
+            if max_dust is not None and maximum is not None:
+                account_max = min(max_dust, maximum)
+            elif max_dust is not None:
+                account_max = max_dust
+            elif maximum is not None:
+                account_max = maximum
+            else:
                 if distributor.account_id == "banker":
-                    current_balance = self._dust_balance
-                # Enforce max_dust
-                allowed = min(distribution_amount, max(
-                    0, account_max - current_balance))
-                overflow = distribution_amount - allowed
+                    account_max = 100000  # Much higher limit for banker
+                else:
+                    account_max = 1000
+            current_balance = 0
+            if distributor.account_id == "banker":
+                current_balance = self._dust_balance
+            allowed = min(raw_amount, max(0, account_max -
+                          current_balance), remaining_amount)
+            overflow = raw_amount - allowed
 
-                if allowed > 0:
-                    if distributor.account_id == "banker":
-                        balance_before = self._dust_balance
-                        self._dust_balance += allowed
-                        transaction_id = self._log_transaction(
-                            "credit_fee", allowed, distributor.reason, True, balance_before)
-                    else:
-                        transaction_id = self._log_transaction(
-                            "distribution", allowed,
-                            f"Distribution to {distributor.account_id}: {distributor.reason}",
-                            True, self._dust_balance)
-                    distributions.append({
-                        "account_id": distributor.account_id,
-                        "amount": allowed,
-                        "reason": distributor.reason,
-                        "transaction_id": transaction_id
-                    })
-                    remaining_amount -= allowed
-                    total_distributed += allowed
-                if overflow > 0 and system_identity:
-                    # Redirect overflow to system account
-                    overflow_total += overflow
-                    overflow_txn = self._log_transaction(
-                        "overflow", overflow,
-                        f"Overflow from {distributor.account_id} to system", True, self._dust_balance)
-                    distributions.append({
-                        "account_id": system_identity.user_id,
-                        "amount": overflow,
-                        "reason": f"Overflow from {distributor.account_id}",
-                        "transaction_id": overflow_txn
-                    })
-                    remaining_amount -= overflow
+            if allowed > 0:
+                if distributor.account_id == "banker":
+                    balance_before = self._dust_balance
+                    self._dust_balance += allowed
+                    transaction_id = self._log_transaction(
+                        "credit_fee", allowed, distributor.reason, True, balance_before)
+                else:
+                    transaction_id = self._log_transaction(
+                        "distribution", allowed,
+                        f"Distribution to {distributor.account_id}: {distributor.reason}",
+                        True, self._dust_balance)
+                distributions.append({
+                    "account_id": distributor.account_id,
+                    "amount": allowed,
+                    "reason": distributor.reason,
+                    "transaction_id": transaction_id
+                })
+                remaining_amount -= allowed
+                total_distributed += allowed
+            if overflow > 0 and system_identity:
+                overflow_total += overflow
+                overflow_txn = self._log_transaction(
+                    "overflow", overflow,
+                    f"Overflow from {distributor.account_id} to system", True, self._dust_balance)
+                distributions.append({
+                    "account_id": system_identity.user_id,
+                    "amount": overflow,
+                    "reason": f"Overflow from {distributor.account_id}",
+                    "transaction_id": overflow_txn
+                })
+                remaining_amount -= overflow
 
         return DistributionResult(
             success=True,

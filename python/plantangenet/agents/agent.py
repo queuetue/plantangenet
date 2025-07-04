@@ -1,9 +1,9 @@
 # Copyright (c) 1998-2025 Scott Russell
 # SPDX-License-Identifier: MIT
 
+import random
 from abc import abstractmethod
 from collections import deque
-import random
 from typing import Any
 from ulid import ULID
 from coolname import generate_slug

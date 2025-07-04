@@ -5,7 +5,7 @@ Core Banker protocol and interface definition.
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional, List, Protocol, runtime_checkable
 
-from .types import (
+from .econ_types import (
     TransactionResult, FinancialIdentity, Distributor, DistributionResult
 )
 

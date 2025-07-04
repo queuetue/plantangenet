@@ -525,9 +525,9 @@ class TestDistributionSystem:
             account_id="limited_account",
             distribution_type="fixed",
             amount=200,
-            reason="test overflow"
+            reason="test overflow",
+            maximum=100  # Limit to 100 dust
         )
-        distributor.max_dust = 100  # Only allow up to 100
 
         # System identity to receive overflow
         system_identity = FinancialIdentity(

@@ -3,7 +3,7 @@ import pytest
 from unittest.mock import MagicMock
 from plantangenet.session import Session
 from plantangenet.session_app import SessionApp
-from plantangenet.agent import Agent
+from plantangenet.agents.agent import Agent
 
 
 class DummyAgent(Agent):

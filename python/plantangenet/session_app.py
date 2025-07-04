@@ -57,7 +57,7 @@ class SessionApp:
                         await agent.update()
                 # Update banker if it has an update method
                 if self.session.banker and hasattr(self.session.banker, 'update'):
-                    await self.session.banker.update()
+                    await self.session.banker.update()  # type: ignore
             except Exception as e:
                 print(f"Error updating agents: {e}")
 

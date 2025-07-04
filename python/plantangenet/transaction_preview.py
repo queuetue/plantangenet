@@ -38,7 +38,7 @@ class TransactionPreview:
     user_balance: int
     balance_after: int
     expires_at: Optional[str] = None  # Quote expiry
-    warnings: List[str] = None
+    warnings: Optional[List[str]] = None
 
     def __post_init__(self):
         if self.warnings is None:

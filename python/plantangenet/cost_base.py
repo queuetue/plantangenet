@@ -7,8 +7,7 @@ import json
 import zipfile
 import hashlib
 import base64
-from typing import Dict, Any, List, Optional
-from pathlib import Path
+from typing import Dict, Any, Optional
 
 
 class CostBaseError(Exception):

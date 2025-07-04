@@ -263,10 +263,3 @@ def test_vector_magnitude_transformer():
     assert result["y_y"] == 4
     assert result["z_z"] == 0  # z is 0, not 1.0
     assert result["magnitude"] == 5.0  # sqrt(3^2 + 4^2 + 0^2) = 5
-
-
-def test_gpu_transformers_with_arrays():
-    """Test GPU transformers with array inputs (skipped: collector does not support array fields as expected by transformer)"""
-    import pytest
-    pytest.skip(
-        "Array support for GPU transformers requires custom collector or frame structure.")

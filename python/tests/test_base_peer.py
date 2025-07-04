@@ -1,6 +1,5 @@
 import pytest
-import asyncio
-from plantangenet.agent import Agent
+from plantangenet.agents.agent import Agent
 
 
 class DummyPeer(Agent):

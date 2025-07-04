@@ -1,14 +1,14 @@
 # Copyright (c) 1998-2025 Scott Russell
 # SPDX-License-Identifier: MIT
 
-from typing import List, Dict, Any, Optional, Callable, Union
 import uuid
-from .cursor import Cursor
-from .agent import Agent
-from .policy.base import Policy
+from typing import List, Dict, Any, Optional, Callable, Union
 from plantangenet.policy.identity import Identity
 from plantangenet.policy.vanilla import Vanilla
 from plantangenet.policy.storage_mixin import PolicyStorageMixin
+
+from .cursor import Cursor
+from .agents.agent import Agent
 from .banker import Banker, NullBanker
 
 
@@ -109,11 +109,15 @@ class Session(PolicyStorageMixin):
         policy = None
         cursors = []
         if state.get("identity_key") and Identity.storage_backend:
-            identity_data = await Identity.storage_backend.load(state["identity_key"])
+            identity_data = await Identity.storage_backend.load(
+                state["identity_key"]  # type: ignore[union-attr]
+            )
             if identity_data:
                 identity = Identity(**identity_data)
         if state.get("policy_key") and Vanilla.storage_backend:
-            policy_data = await Vanilla.storage_backend.load(state["policy_key"])
+            policy_data = await Vanilla.storage_backend.load(
+                state["policy_key"]  # type: ignore[union-attr]
+            )
             if policy_data:
                 policy = Vanilla(logger=logger, namespace=namespace or policy_data.get(
                     "namespace", "default"))

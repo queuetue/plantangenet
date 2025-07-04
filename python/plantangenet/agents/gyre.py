@@ -1,10 +1,9 @@
 # Copyright (c) 1998-2025 Scott Russell
 # SPDX-License-Identifier: MIT
 
-from plantangenet import Buoy
 from typing import List
-
-from plantangenet.agent import Agent
+from .agent import Agent
+from .buoy import Buoy
 
 
 class Gyre(Buoy):

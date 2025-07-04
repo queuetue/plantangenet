@@ -2,10 +2,8 @@
 Data types and structures for the banker module.
 """
 
-from abc import ABC, abstractmethod
-from typing import Dict, Any, Optional, List, Protocol, runtime_checkable
+from typing import Dict, Any, Optional, List
 from dataclasses import dataclass
-import datetime
 
 
 @dataclass
@@ -98,7 +96,7 @@ class Distributor:
     minimum: int = 0  # Minimum amount to distribute
     maximum: Optional[int] = None  # Maximum amount to distribute
 
-    def calculate_distribution(self, total_amount: int, remaining_amount: int) -> int:
+    def calculate_distribution(self, total_amount: int, remaining_amount: int, maximum: int = 100) -> int:
         """
         Calculate the distribution amount.
 
@@ -109,6 +107,7 @@ class Distributor:
         Returns:
             Amount to distribute to this account
         """
+
         if self.distribution_type == "percentage":
             amount = int(total_amount * self.amount)
         elif self.distribution_type == "fixed":
