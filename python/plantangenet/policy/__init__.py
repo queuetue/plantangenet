@@ -1,11 +1,11 @@
-from .vanilla import Vanilla as Vanilla
-from .identity import Identity as Identity
-from .statement import Statement as Statement
-from .role import Role as Role
+from .identity import Identity
+from .statement import Statement
+from .role import Role
+from .policy import Policy
 
 __all__ = [
-    "Vanilla",
     "Identity",
     "Statement",
     "Role",
+    "Policy",
 ]

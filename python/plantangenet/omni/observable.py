@@ -25,7 +25,7 @@ class Observable(PersistedBase):
             owner._omni_observed_fields = {}
         owner._omni_observed_fields[name] = self
 
-    def validate(self, value):
+    def validate(self, obj, value):
         if self.validator:
             result, result_dict = self.validator.validate(
                 self.public_name, value)
@@ -57,7 +57,7 @@ class Observable(PersistedBase):
         if value == old_value:
             return
 
-        if not self.validate(value):
+        if not self.validate(obj, value):
             self.__observable_errors__.append(
                 f"Validation failed for {self.public_name} with value {value}")
             return

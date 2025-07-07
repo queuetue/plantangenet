@@ -4,7 +4,7 @@
 import random
 from abc import abstractmethod
 from collections import deque
-from typing import Any
+from typing import Any, List, Optional
 from ulid import ULID
 from coolname import generate_slug
 
@@ -64,6 +64,11 @@ class Agent():
         return self._ocean__namespace
 
     @property
+    def name(self) -> str:
+        """Return a short version of the peer's unique ID."""
+        return self._ocean__nickname
+
+    @property
     def id(self):
         """Return the unique identifier for the peer."""
         return self._ocean__id
@@ -72,11 +77,6 @@ class Agent():
     def short_id(self) -> str:
         """Return a short version of the peer's unique ID."""
         return self._ocean__id[-6:]
-
-    @property
-    def name(self) -> str:
-        """Return a short version of the peer's unique ID."""
-        return self._ocean__nickname
 
     @property
     def capabilities(self):
@@ -116,3 +116,11 @@ class Agent():
             "cost": cost,
             "committed": False
         })
+
+    def status(self):
+        """Default status for agents that do not use OmniMixin."""
+        return {"id": self.id, "namespace": self.namespace, "name": self.name}
+
+    def to_dict(self, include_sensitive=False):
+        """Default flat dict for agents that do not use OmniMixin."""
+        return {"id": self.id, "namespace": self.namespace, "name": self.name}

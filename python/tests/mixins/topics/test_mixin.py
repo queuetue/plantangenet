@@ -1,12 +1,20 @@
+# Copyright (c) 1998-2025 Scott Russell
+# SPDX-License-Identifier: MIT
+
 import pytest
-from plantangenet.mixins.topics import TopicsMixin
+from plantangenet.omni.mixins.rox import RoxMixin, WinLoseDraw, a_vs_b, CHOICES
+from ulid import ULID
+from coolname import generate_slug
+from plantangenet.omni.mixins.topic import TopicsMixin
 from plantangenet.topics import on_topic
-from plantangenet import GLOBAL_LOGGER
 
 
 class DummyBus(TopicsMixin):
     def __init__(self):
-        self._ocean__logger = GLOBAL_LOGGER
+        # Initialize required ocean attributes for mixin compatibility
+        self._ocean__id = str(ULID())
+        self._ocean__namespace = "test"
+        self._ocean__nickname = generate_slug(2)
         self.subscriptions = []
         super().__init__()
 

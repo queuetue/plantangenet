@@ -1,6 +1,6 @@
 from typing import Annotated
 from plantangenet import Gyre
-from plantangenet.mixins.status import watch, StatusMeta
+from plantangenet.omni.mixins.status import watch, StatusMeta
 from typing import Any, Callable, Coroutine, Optional, Union
 
 

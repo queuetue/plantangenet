@@ -3,10 +3,9 @@
 
 from typing import List, Tuple, Dict, Any, Optional, Callable
 import uuid
-from plantangenet.policy.storage_mixin import PolicyStorageMixin
 
 
-class Cursor(PolicyStorageMixin):
+class Cursor:
     """
     Represents a region of interest and participates in observation workflows.
     Can be static or dynamically updated by a peer/agent.

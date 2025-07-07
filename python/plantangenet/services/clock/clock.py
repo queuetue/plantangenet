@@ -5,10 +5,10 @@ import json
 from time import monotonic, perf_counter
 from typing import Optional, Any
 from .accumulator import Accumulator
-from plantangenet import OceanMixinBase
+from plantangenet import OmniMixin
 
 
-class Clock(OceanMixinBase):
+class Clock(OmniMixin):
 
     def __init__(self, logger: Any, namespace: str):
         self._stamp = 0.0

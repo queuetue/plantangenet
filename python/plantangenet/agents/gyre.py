@@ -3,10 +3,10 @@
 
 from typing import List
 from .agent import Agent
-from .buoy import Buoy
+from .float import Float
 
 
-class Gyre(Buoy):
+class Gyre(Float):
 
     def __init__(
         self,
@@ -36,13 +36,6 @@ class Gyre(Buoy):
     def agents(self) -> List[Agent]:
         return self._agents
 
-    @property
-    def name(self) -> str:
-        return self._name
-
-    # async def on_frame(self):
-    #     """Handle a frame update."""
-    #     await super().on_frame()
 
     async def update(self) -> bool:
         return await super().update()

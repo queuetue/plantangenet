@@ -9,11 +9,11 @@ This example showcases the new high-level APIs:
 - distribute_dust() - Policy-driven dust distribution
 """
 
-from plantangenet.mixins.base import OceanMixinBase
-from plantangenet.mixins.redis import RedisMixin
-from plantangenet.mixins.nats import NatsMixin
+from plantangenet.omni.mixins.mixin import OmniMixin
+from plantangenet.omni.mixins.redis import RedisMixin
+from plantangenet.omni.mixins.nats import NatsMixin
 from plantangenet.logger import Logger
-from plantangenet.banker import (
+from plantangenet.dust import (
     BankerMixin, TransactionResult, FinancialIdentity
 )
 import asyncio
@@ -28,7 +28,7 @@ import sys
 sys.path.append('/home/srussell/Development/groovebox/python')
 
 
-class EconAgent(BankerMixin, NatsMixin, RedisMixin, OceanMixinBase):
+class EconAgent(BankerMixin, NatsMixin, RedisMixin, OmniMixin):
     """Enhanced agent demonstrating new high-level economic APIs."""
 
     def __init__(self, agent_id: str):
@@ -44,11 +44,6 @@ class EconAgent(BankerMixin, NatsMixin, RedisMixin, OceanMixinBase):
     def logger(self):
         """Required by mixins."""
         return self._logger
-
-    @property
-    def namespace(self) -> str:
-        """Required by NatsMixin."""
-        return f"enhanced.{self.agent_id}"
 
     @property
     def disposition(self) -> str:

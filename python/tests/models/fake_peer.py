@@ -57,10 +57,6 @@ class FakePeer(GyrePeer):
         return GLOBAL_LOGGER
 
     @property
-    def name(self) -> str:
-        return "DummyPeer"
-
-    @property
     def connected(self) -> bool:
         return True
 

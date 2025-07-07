@@ -1,11 +1,13 @@
-from typing import Optional
+from typing import Optional, Callable
 from .meta import OmniMeta
 
 
 class PersistedBase:
-    def __init__(self, meta: Optional[OmniMeta] = None, default=None):
+    def __init__(self, meta: Optional[OmniMeta] = None, default=None, field_type: Optional[type] = None, validator: Optional[Callable] = None):
         self.meta = meta or OmniMeta()
         self.default = default
+        self.field_type = field_type
+        self.validator = validator
 
     def __set_name__(self, owner, name):
         self.public_name = name
@@ -28,6 +30,25 @@ class PersistedBase:
     def __set__(self, obj, value):
         # Per-field policy check for write access
         self._check_field_access(obj, "write", value)
+
+        # Type enforcement/coercion
+        if self.field_type and value is not None and not isinstance(value, self.field_type):
+            try:
+                value = self.field_type(value)
+            except Exception as e:
+                raise TypeError(
+                    f"Failed to coerce {self.public_name} to {self.field_type}: {e}")
+
+        # Custom validator
+        if self.validator:
+            try:
+                valid = self.validator(obj, self.public_name, value)
+                if not valid:
+                    raise ValueError(
+                        f"Validation failed for {self.public_name} with value {value}")
+            except Exception as e:
+                raise ValueError(
+                    f"Validation error for {self.public_name}: {e}")
 
         setattr(obj, self.private_name, value)
 

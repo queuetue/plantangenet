@@ -72,16 +72,18 @@ Plantangenet includes:
 - Seamless integration with popular Python data tools like **NumPy** and **pandas**
 - A pluggable Policy interface
 - Economic incentives via Dust
+- **Observables and Output:** Compositors and comdecs (loggers, dashboards, streamers) subscribe to session or agent state and update outputs in real time. This enables live dashboards, streaming, and pluggable output formats with minimal coupling.
 
 ---
 
-## Economic Model: The Banker Agent
+## Observables and Output
 
-Plantangenet now uses a dedicated **Banker agent** to manage all economic logic, including Dust pricing, negotiation, and transaction auditing. All resource costs, payments, and economic policy enforcement are handled by the Banker, ensuring a single, auditable source of truth for all internal "accounting" activity.
+Plantangenet uses an **observable pattern**: compositors and comdecs subscribe to session or agent state, and automatically update outputs (logs, dashboards, streams) when state changes. This enables real-time dashboards, live MJPEG streaming, and pluggable output formats with minimal coupling.
 
-- All economic operations (pricing, negotiation, payment, refund) go through the Banker agent.
-- Sessions and storage no longer manage Dust directly.
-- For details, see [Banker Agent Integration](docs/BANKER_AGENT_INTEGRATION.md) and [Cost Base System](docs/COST_BASE.md).
+- **Agents** expose state and rendering methods (e.g. `get_widget`, `__render__`).
+- **Compositors** (like dashboards) collect and arrange widgets from agents.
+- **Observables** (comdecs, loggers, streamers) subscribe to state and update outputs in real time.
+- **Session** coordinates all updates, policy checks, and output notifications.
 
 ---
 

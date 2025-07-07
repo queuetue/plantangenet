@@ -1,11 +1,21 @@
+# Copyright (c) 1998-2025 Scott Russell
+# SPDX-License-Identifier: MIT
+
 import pytest
 import asyncio
-from plantangenet.mixins.heartbeat import HeartbeatMixin
+from ulid import ULID
+from coolname import generate_slug
+from plantangenet.omni.mixins.heartbeat import HeartbeatMixin
 
 
 class DummyHeartbeat(HeartbeatMixin):
     def __init__(self):
-        # No super().__init__ needed unless mixin chain requires it
+        # Initialize required ocean attributes for mixin compatibility
+        self._ocean__id = str(ULID())
+        self._ocean__namespace = "test"
+        self._ocean__nickname = generate_slug(2)
+
+        # Initialize heartbeat-specific attributes
         self._heartbeat__tick = 0.0
         self._heartbeat__interval = 1.0
         self._heartbeat_healthy_interval = 5.0
@@ -53,7 +63,7 @@ async def test_healthy_property_false_when_old(monkeypatch):
 
     # monkeypatch monotonic to simulate time passage
     monkeypatch.setattr(
-        "plantangenet.mixins.heartbeat.monotonic", lambda: first_tick + 10)
+        "plantangenet.omni.mixins.heartbeat.monotonic", lambda: first_tick + 10)
 
     assert hb.healthy is False
 

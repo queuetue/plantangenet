@@ -2,12 +2,17 @@
 # SPDX-License-Identifier: MIT
 
 import pytest
-import asyncio
-from plantangenet.mixins.rox import RoxMixin, WinLoseDraw, a_vs_b, CHOICES
+from plantangenet.omni.mixins.rox import RoxMixin, WinLoseDraw, a_vs_b, CHOICES
+from ulid import ULID
+from coolname import generate_slug
 
 
 class DummyRox(RoxMixin):
     def __init__(self):
+        # Initialize required ocean attributes for mixin compatibility
+        self._ocean__id = str(ULID())
+        self._ocean__namespace = "test"
+        self._ocean__nickname = generate_slug(2)
         super().__init__()
         self.events = []
 
@@ -75,7 +80,7 @@ async def test_handle_clock_pulse_win(monkeypatch):
     r = DummyRox()
     r._rox__choice = CHOICES[0]
     msg = {"choice": CHOICES[1]}
-    monkeypatch.setattr("plantangenet.mixins.rox.a_vs_b",
+    monkeypatch.setattr("plantangenet.omni.mixins.rox.a_vs_b",
                         lambda a, b: WinLoseDraw.WIN)
     await r.handle_clock_pulse(msg)
     assert r.rox_winning == WinLoseDraw.WIN
@@ -87,7 +92,7 @@ async def test_handle_clock_pulse_lose(monkeypatch):
     r = DummyRox()
     r._rox__choice = CHOICES[0]
     msg = {"choice": CHOICES[1]}
-    monkeypatch.setattr("plantangenet.mixins.rox.a_vs_b",
+    monkeypatch.setattr("plantangenet.omni.mixins.rox.a_vs_b",
                         lambda a, b: WinLoseDraw.LOSE)
     await r.handle_clock_pulse(msg)
     assert r.rox_winning == WinLoseDraw.LOSE
@@ -99,7 +104,7 @@ async def test_handle_clock_pulse_draw(monkeypatch):
     r = DummyRox()
     r._rox__choice = CHOICES[0]
     msg = {"choice": CHOICES[1]}
-    monkeypatch.setattr("plantangenet.mixins.rox.a_vs_b",
+    monkeypatch.setattr("plantangenet.omni.mixins.rox.a_vs_b",
                         lambda a, b: WinLoseDraw.DRAW)
     await r.handle_clock_pulse(msg)
     assert r.rox_winning == WinLoseDraw.DRAW
@@ -107,9 +112,9 @@ async def test_handle_clock_pulse_draw(monkeypatch):
 
 
 def test_a_vs_b_function():
-    assert a_vs_b('🪨', '🪨') == WinLoseDraw.DRAW
-    assert a_vs_b('🪨', '✂️') == WinLoseDraw.WIN
-    assert a_vs_b('🧻', '🪨') == WinLoseDraw.WIN
-    assert a_vs_b('✂️', '🧻') == WinLoseDraw.WIN
-    assert a_vs_b('🦎', '🧻') == WinLoseDraw.WIN
-    assert a_vs_b('🖖', '✂️') == WinLoseDraw.WIN
+    assert a_vs_b('A', 'A') == WinLoseDraw.DRAW
+    assert a_vs_b('A', 'C') == WinLoseDraw.WIN
+    assert a_vs_b('B', 'A') == WinLoseDraw.WIN
+    assert a_vs_b('C', 'B') == WinLoseDraw.WIN
+    assert a_vs_b('E', 'B') == WinLoseDraw.WIN
+    assert a_vs_b('F', 'C') == WinLoseDraw.WIN

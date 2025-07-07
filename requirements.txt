@@ -14,3 +14,4 @@ coolname
 pandas
 pytest-cov
 pyparsing
+pyyaml

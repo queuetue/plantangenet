@@ -1,4 +1,4 @@
-# Plantangenet
+# Plantangenet Technical Overview
 
 ## Introduction
 
@@ -10,61 +10,78 @@ Plantangenet lets you model **privacy**, **trust**, **negotiation**, and **econo
 
 ## Core Concepts
 
-* **Sessions**: Bounded contexts managing identity, policy, lifecycles, and local state.
-* **Agents**: Policy-enforced actors that embody roles, preferences, and trust boundaries.
-* **Chems**: *Planned*: Negotiable, context-aware identity interfaces controlling disclosure.
+* **Sessions**: Bounded contexts managing identity, policy, lifecycles, and local state. Sessions are the central observable and coordinator for all agents and compositors.
+* **Agents**: Policy-enforced actors that embody roles, preferences, and trust boundaries. Agents expose observable state and rendering methods for compositors.
+* **Compositors**: Transformations that generate partial, policy-filtered views. Compositors (like dashboards) observe session/agent state and render or export it.
+* **Comdecs/Observables**: Output modules (loggers, snapshotters, streamers, dashboards) that subscribe to session or agent state and update outputs in real time.
+* **Policies**: Machine-enforced rules governing who can do what, when, and how. Policies are enforced at both the session and agent level.
 * **Cursors**: Focus declarations defining regions of interest, shaping memory and data access.
-* **Compositors**: Transformations that generate partial, policy-filtered views.
 * **Membry**: Attention-shaped, degraded, fading memory with TTL and Dust accounting.
-* **Policies**: Machine-enforced rules governing who can do what, when, and how.
 * **Dust**: Internal accounting system for contributions, value exchange, and attention prioritization.
 
 ---
 
-## Why Plantangenet?
+## Sessions and Observables
 
-* **Negotiated Disclosure**
+A **Session** is the central trust boundary and observable in Plantangenet. It manages all agents, compositors, and output modules. Observables (comdecs, dashboards, loggers) subscribe to session or agent state and update outputs automatically when state changes.
 
-> Define exactly what data you share, with whom, at what resolution.
+**Diagram:**
 
-* **Enforceable Policy Boundaries**
+```
++-------------------+
+|     Session       |
+|-------------------|
+|  Agents[]         |
+|  Compositors[]    |
+|  Policy           |
+|  Identity         |
++-------------------+
+        |      |         
+        v      v         
+   [Agent]  [Compositor]   
+      |         |         
+      v         v         
+   (State)   (Render)     
+        \     /           
+         [Observable]     
+         (Comdec, Logger, Dashboard, Streamer)
+```
 
-> Machine-enforced, auditable rules for all interactions.
+- **Agents** expose state and rendering methods (e.g. `get_widget`, `__render__`).
+- **Compositors** (like dashboards) collect and arrange widgets from agents.
+- **Observables** (comdecs, loggers, streamers) subscribe to state and update outputs in real time.
+- **Session** coordinates all updates, policy checks, and output notifications.
 
-* **Ephemeral Memory**
+### Example: Dashboard Observable
 
-> Memory that fades over time, shaped by attention and cost.
+The WidgetDashboard compositor observes all agents and session state. Each agent provides a `get_widget(asset=...)` method for rendering its widget. The dashboard arranges these widgets and outputs a live framebuffer, which can be streamed (MJPEG), logged, or snapshotted by comdecs.
 
-* **Economic Incentives**
+```python
+# Pseudocode
+session = Session(...)
+dashboard = WidgetDashboard(...)
+session.add_compositor("dashboard", dashboard)
 
-> Contributions and retention paid with Dust.
+# Each agent implements get_widget(asset=...)
+class TicTacToePlayer(Agent):
+    def get_widget(self, asset="status_widget", **kwargs):
+        ...
 
-* **Privacy by Design**
+# Dashboard collects widgets from all agents
+for agent in session.agents:
+    widget = agent.get_widget(asset="status_widget")
+    dashboard.add_widget(agent.id, widget)
 
-> Participant-controlled, role-based, asymmetric sharing.
+# Comdecs observe dashboard output
+mjpeg_comdec = MJPEGComdec(port=8080)
+dashboard.add_comdec(mjpeg_comdec)
+```
 
-*Example:* A collaborative writing app where users negotiate section visibility and sharing duration, with partial views for guest readers and full access for trusted collaborators.
+### Observables in Action
 
----
-
-## Features Overview
-
-* **Bounded Sessions**: Explicit lifecycle boundaries with enforced policy contexts.
-* **Multi-Axis Coordination**: Compositors generate views over multiple semantic axes. [compositing](docs/technical/COMPOSITORS_AND_AXES.md)
-* **Pluggable Policy Engine**: Supports custom evaluators. [vanilla](python/plantangenet/policy/vanilla.py)
-* **Integrated Storage & Transport**: Extensible backends for persistence and messaging. [storage](python/plantangenet/ocean/mixins/storage.py) [transport](python/plantangenet/ocean/mixins/transport.py)
-* **Attention-Shaped Memory**: Membry stores degraded, ephemeral data based on Dust budgeting.
-* **Identity & Policy Sync**: Ensures consistent, distributed permission enforcement.
-
----
-
-## Use Cases
-
-* Multiplayer games with negotiated secrecy and role-based views.
-* Privacy-conscious simulations with partial disclosure.
-* Federated services needing auditable, policy-driven data sharing.
-* Collaborative art projects with granular credit tracking and ephemeral sharing.
-* Data marketplaces with attention-priced memory and negotiated resolution.
+- **Comdecs**: Log, snapshot, or stream any observable state (agent, session, dashboard).
+- **Dashboards**: Render live visualizations of all agents and session state.
+- **Extensibility**: Add new observables by implementing the `consume` method and registering with the session or compositor.
 
 ---
 
@@ -73,119 +90,42 @@ Plantangenet lets you model **privacy**, **trust**, **negotiation**, and **econo
 ### Sessions
 
 * Trust boundary and lifecycle manager.
-* Manages agents, cursors, and metadata.
+* Manages agents, compositors, and metadata.
 * Enforces policies for attached participants.
+* Central observable for all state and output.
 
 ### Agents
 
 * Actors embodying roles and preferences.
+* Expose observable state and rendering methods.
 * Enforce policy context during interactions.
-* Track cursors and agents.
-
-### Chems *(Planned)*
-
-* Negotiable, partial-disclosure interfaces for agents.
-* Control what is revealed, to whom, and under what conditions.
-* Integrate with policy evaluation and Membry.
-
-### Cursors
-
-* Declare regions of interest in time/axis space.
-* Shape attention and memory allocation.
-* Used to prioritize storage and degrade detail selectively.
 
 ### Compositors
 
 * Generate **Views** of data tailored to policy.
-* Apply degradation rules for partial disclosure.
+* Collect widgets from agents and arrange them for output.
 * Support multiple consumer perspectives from shared semantic buffers.
 
-### Membry
+### Comdecs/Observables
 
-* Durable, lossy memory store with TTL.
-* Supports degraded, attention-priced storage.
-* Integrates Dust accounting to prioritize high-value regions.
+* Output modules that subscribe to state and update outputs in real time.
+* Examples: LoggerComdec, SnapshotterComdec, MJPEGComdec, WidgetDashboard.
 
-### Policy Engine
+### Policies
 
-* Evaluates permissions using roles and context.
-* Supports static and negotiated policies.
-* Enforces access for all operations.
+* Evaluate permissions using roles and context.
+* Support static and negotiated policies.
+* Enforce access for all operations.
 
-### Dust
+### Cursors, Membry, Dust
 
-* Internal currency for contribution and value exchange.
-* Used to allocate attention and control retention.
+* (See original documentation for advanced memory and economic features.)
 
 ---
 
-## Example: Musical Conductor
+## Example: TicTacToe Tournament with Observables
 
-> *“What if time was a beat that drove system state?”*
-
-A tick-based engine that can:
-
-* Synchronize multiplayer music sessions.
-* Drive timed art installations.
-* Control pacing in games.
-* Coordinate distributed systems.
-
-*(See [popcorn.py](examples/popcorn.py) for full code.)*
-
----
-
-## Example: Sessions and Banker Agent Integration
-
-Here's how you create a session and add a Banker agent to manage all economic operations:
-
-```python
-from plantangenet.session import Session
-from plantangenet.vanilla_banker import create_vanilla_banker_agent
-
-# Create a session
-session = Session(session_id="demo_session")
-
-# Add a Banker agent with an initial Dust balance and cost base
-banker = create_vanilla_banker_agent(initial_balance=100, cost_base_paths=["./effects.zip"])
-session.add_banker_agent(banker)
-
-# Get a quote for an action
-quote = session.get_cost_estimate("save_object", {"fields": ["name", "email"]})
-
-# Negotiate a transaction (get options, preview)
-negotiation = session.negotiate_transaction("save_object", {"fields": ["name", "email"]})
-
-# Commit a transaction (spend Dust)
-result = session.commit_transaction("save_object", {"fields": ["name", "email"]}, selected_cost=quote["dust_cost"])
-
-# Check balance and history
-balance = session.get_dust_balance()
-history = session.get_transaction_history()
-```
-
-All economic logic (pricing, negotiation, payment, refund) is now handled by the Banker agent. For more, see [Banker Agent Integration](docs/BANKER_AGENT_INTEGRATION.md).
-
----
-
-## The `on_topic` Decorator
-
-Registers message handlers with features like:
-
-* `mod`, `cooldown`, `jitter`, `predicate`
-* `debounce`, `once`, `distinct_until_changed`, `rate_limit`
-
-*(Detailed examples in /examples/.)*
-
----
-
-## Principles
-
-* **Boundaries are explicit**: Sessions define clear scopes.
-* **Trust is negotiated**: Chems and policies mediate disclosure.
-* **Memory is shaped by attention**: Membry fades unused regions.
-* **Privacy is by design**: Policy-enforced, participant-controlled sharing.
-* **Fairness is accounted**: Dust tracks contributions and costs.
-* **Transparency is enforced**: Auditable policies and logs.
+See `examples/tictactoe/README.md` and `main.py` for a full working example of sessions, agents, compositors, and observables in action.
 
 ---
 

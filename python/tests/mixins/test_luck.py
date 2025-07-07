@@ -1,5 +1,5 @@
 import pytest
-from plantangenet.mixins.luck import LuckMixin, runs, SYMBOLS
+from plantangenet.omni.mixins.luck import LuckMixin, runs, SYMBOLS
 
 
 class DummyLucky(LuckMixin):
@@ -45,7 +45,7 @@ async def test_lucky_value_calculation_runs(monkeypatch):
     dummy = DummyLucky()
 
     monkeypatch.setattr(
-        "plantangenet.mixins.luck.randint", lambda a, b: 0)
+        "plantangenet.omni.mixins.luck.randint", lambda a, b: 0)
     dummy._lucky_symbols = "🦄🦄🦄🦄🦄🦄🦄🦄🦄"
 
     before = dummy._lucky_value

@@ -1,4 +1,4 @@
-from plantangenet.mixins.omni import OmniMixin
+from plantangenet.omni.mixins.omni import OmniMixin
 from plantangenet.omni.helpers import watch, persist
 
 

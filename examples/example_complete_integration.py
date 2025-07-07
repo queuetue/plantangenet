@@ -11,7 +11,7 @@ from plantangenet.session import Session
 from plantangenet.vanilla_banker import create_vanilla_banker_agent, VanillaBankerAgent
 from plantangenet.storage_operations import StorageOperationsManager
 from plantangenet.cost_base import CostBaseVerifier
-from plantangenet.banker import Banker
+from plantangenet.dust import Banker
 from typing import Any
 
 

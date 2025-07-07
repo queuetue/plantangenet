@@ -130,7 +130,7 @@ The TransportOperationsManager works with any transport client that implements t
 
 ```python
 # Example with NATS
-from plantangenet.mixins.nats import NATSMixin
+from plantangenet.omni.mixins.nats import NATSMixin
 
 class MyTransportClient(NATSMixin):
     # ... NATS implementation

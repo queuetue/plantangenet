@@ -6,7 +6,7 @@ This example shows how policy-based access control works for financial
 information (balance and transaction history) in the banker system.
 """
 
-from plantangenet.banker import (
+from plantangenet.dust import (
     FinancialIdentity, FinancialAccessRequest, FinancialPolicy,
     PermissiveFinancialPolicy, BankerMixin
 )

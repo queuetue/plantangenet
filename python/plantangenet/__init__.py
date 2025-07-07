@@ -2,10 +2,8 @@ __version__ = "0.1.0"
 import os
 import re
 from plantangenet.agents.agent import Agent
-from plantangenet.agents.buoy import Buoy
-from plantangenet.agents.drift import Drift
 from plantangenet.agents.gyre import Gyre
-from plantangenet.agents.shard import Shard
+from plantangenet.agents.float import Float
 from .cursor import Cursor
 from .logger import Logger
 from .message import Message
@@ -18,30 +16,13 @@ from .helpers.time import (
     beat_count_from_stamp,
     conductor_time_from_stamp
 )
-from .mixins import (
-    TimebaseMixin,
-    HeartbeatMixin,
-    TopicsMixin,
-    OceanMixinBase,
-    FramesMixin,
-    HeartbeatMixin,
-    LuckMixin,
-    NatsMixin,
-    PolicyMixin,
-    RedisMixin,
-    RoxMixin,
-    StorageMixin,
-    TimebaseMixin,
-    TransportMixin,
-    OmniMixin,
-)
 from .collector import (
     TimeSeriesCollector,
     AxisFrame,
     MultiAxisFrame
 )
 from .policy import (
-    Vanilla,
+    Policy,
     Identity,
     Statement,
     Role
@@ -59,6 +40,23 @@ from .omni import (
     Omni,
     persist,
     watch
+)
+from .omni.mixins import (
+    TimebaseMixin,
+    HeartbeatMixin,
+    TopicsMixin,
+    OmniMixin,
+    FramesMixin,
+    HeartbeatMixin,
+    LuckMixin,
+    NatsMixin,
+    PolicyMixin,
+    RedisMixin,
+    RoxMixin,
+    StorageMixin,
+    TimebaseMixin,
+    TransportMixin,
+    OmniMixin,
 )
 from .topics import (
     TopicsWrapper,
@@ -83,14 +81,12 @@ def get_logger() -> Logger:
 __all__ = [
     "__version__",
     "Agent",
-    "Buoy",
     "Cursor",
-    "Drift",
     "Gyre",
     "Logger",
     "Message",
     "Session",
-    "Shard",
+    "Float",
     "smtpe_from_stamp",
     "midi_time_from_stamp",
     "samples_from_stamp",
@@ -100,7 +96,7 @@ __all__ = [
     "TimebaseMixin",
     "HeartbeatMixin",
     "TopicsMixin",
-    "OceanMixinBase",
+    "OmniMixin",
     "FramesMixin",
     "LuckMixin",
     "NatsMixin",
@@ -114,7 +110,7 @@ __all__ = [
     "TimeSeriesCollector",
     "AxisFrame",
     "MultiAxisFrame",
-    "Vanilla",
+    "Policy",
     "Identity",
     "Statement",
     "Role",

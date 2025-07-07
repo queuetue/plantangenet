@@ -5,11 +5,11 @@ from abc import abstractmethod
 import asyncio
 from time import monotonic, perf_counter
 from typing import Optional
-from plantangenet import on_topic, OceanMixinBase
+from plantangenet import on_topic, OmniMixin
 from .accumulator import Accumulator
 
 
-class ClockMixin(OceanMixinBase):
+class ClockMixin(OmniMixin):
 
     def __init__(self):
         self._stamp = 0.0

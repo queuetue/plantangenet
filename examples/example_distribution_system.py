@@ -4,7 +4,7 @@ Example script demonstrating the generalized distribution mechanism.
 Shows how the banker's cut integrates with other distributions.
 """
 
-from plantangenet.banker import (
+from plantangenet.dust import (
     FinancialIdentity, Distributor, BankerMixin, NullBanker
 )
 from plantangenet.vanilla_banker import VanillaBankerAgent

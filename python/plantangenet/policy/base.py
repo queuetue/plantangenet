@@ -1,36 +1,13 @@
-from dataclasses import dataclass
-from typing import List, Optional, Protocol, Union
-from pyparsing import abstractmethod
-from plantangenet.policy.evaluator import EvaluationResult
+from typing import List, Optional, Union
+from pyparsing import Any, abstractmethod
+from .evaluator import EvaluationResult
+from plantangenet.policy.identity import Identity
+from plantangenet.policy.role import Role
+from plantangenet.policy.statement import Statement
+from pydantic import BaseModel
 
 
-@dataclass
-class Role:
-    role_id: str
-    name: str
-    description: Optional[str] = None
-    members: Optional[List[str]] = None
-
-
-@dataclass
-class Statement:
-    statement_id: str
-    roles: List[str]
-    effect: str
-    actions: List[str]
-    resources: List[str]
-    condition: Optional[dict] = None
-    delivery: Optional[dict] = None
-
-
-@dataclass
-class Identity:
-    identity_id: str
-    name: Optional[str] = None
-    metadata: Optional[dict] = None
-
-
-class Policy(Protocol):
+class BasePolicy(BaseModel):
 
     @abstractmethod
     def evaluate(self, identity: Union[Identity, str], action, resource, context: Optional[dict] = None) -> EvaluationResult:
@@ -47,7 +24,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    def has_role(self, identity_id: str, role_name: str) -> bool:
+    def has_role(self, id: str, role_name: str) -> bool:
         """Check if an identity has a specific role.
 
         Gracefully handles:
@@ -58,7 +35,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    def get_role(self, role_name: str) -> Role:
+    def get_role(self, role_name: str) -> Optional[Role]:
         """Get a role by name.
 
         Gracefully handles:
@@ -78,7 +55,7 @@ class Policy(Protocol):
         """
 
     @abstractmethod
-    def get_identity(self, identity_id: str) -> Optional[Identity]:
+    def get_identity(self, id: str) -> Optional[Identity]:
         """Get an identity by ID.
 
         Gracefully handles:
