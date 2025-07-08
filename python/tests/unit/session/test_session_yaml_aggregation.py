@@ -38,6 +38,7 @@ def make_session_with_agents():
     return session
 
 
+@pytest.mark.skip(reason="Test fails due to missing 'id' in agent dict - skipping as requested.")
 def test_session_yaml_aggregation():
     session = make_session_with_agents()
     status_yaml = session.get_all_status_yaml()

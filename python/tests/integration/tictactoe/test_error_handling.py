@@ -9,6 +9,7 @@ from plantangenet.session.session import Session
 from examples.tictactoe.game import TicTacToeGame
 from examples.tictactoe.local_policy import LocalPolicy
 
+
 class TestErrorHandling:
     def test_invalid_move_handling(self, policy_with_players):
         game = TicTacToeGame("test_game", "alice", "bob")

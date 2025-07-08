@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
+from plantangenet.core import RegistrableComponent
 
 
-class BaseComdec(ABC):
+class BaseComdec(RegistrableComponent, ABC):
     """Base class for all comdecs (compositor/decoder codecs)."""
 
     def __init__(self, name: str, **config):
-        self.name = name
+        super().__init__(name)
         self.config = config
         self.frame_count = 0
         self.last_consume_time = None

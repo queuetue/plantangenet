@@ -9,6 +9,7 @@ from examples.tictactoe.stats import TicTacToeStats
 from examples.tictactoe.game import TicTacToeGame
 from examples.tictactoe.local_policy import LocalPolicy
 
+
 class TestSessionArchitecture:
     def test_session_creation(self, policy_with_players, session_with_policy):
         policy, _, _, _ = policy_with_players

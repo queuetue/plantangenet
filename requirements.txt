@@ -15,3 +15,7 @@ pandas
 pytest-cov
 pyparsing
 pyyaml
+jinja2
+fastapi
+uvicorn
+websockets

@@ -6,6 +6,7 @@ from examples.tictactoe.game import TicTacToeGame
 from examples.tictactoe.local_policy import LocalPolicy
 from examples.tictactoe.tictactoe_types import GameState, PlayerSymbol
 
+
 class TestActivityIntegration:
     def test_game_inherits_from_activity(self, policy_with_players):
         game = TicTacToeGame("test_game", "alice", "bob")

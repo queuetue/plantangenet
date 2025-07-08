@@ -28,7 +28,8 @@ class GameBoard:
     def __init__(self, game_id: str = "", player_x: str = "", player_o: str = ""):
         self.board = [[" " for _ in range(3)] for _ in range(3)]
         self.current_player = PlayerSymbol.X.value
-        self.state = GameState.WAITING
+        # Start the game in progress if we have players
+        self.state = GameState.IN_PROGRESS if player_x and player_o else GameState.WAITING
         self.winner = None
         self.game_id = game_id
         self.player_x = player_x

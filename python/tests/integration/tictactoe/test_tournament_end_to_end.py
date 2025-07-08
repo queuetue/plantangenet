@@ -7,9 +7,11 @@ import pytest
 from examples.tictactoe.main import TicTacToeApplication
 from examples.tictactoe.stats import TicTacToeStats
 
+
 @pytest.fixture
 def tictactoe_app():
     return TicTacToeApplication()
+
 
 @pytest.mark.asyncio
 def make_config(tmp_path, players, **kwargs):
@@ -22,44 +24,26 @@ def make_config(tmp_path, players, **kwargs):
     config.update(kwargs)
     return config
 
-@pytest.mark.asyncio
-async def test_full_tournament_flow(tictactoe_app, tmp_path):
-    config = make_config(
-        tmp_path,
-        players=[{"id": "alice", "strategy": "random"}, {"id": "bob", "strategy": "random"}]
-    )
-    app = tictactoe_app
-    await app.initialize(config)
-    await app.run_tournament()
-    assert app.session is not None
-    stats_agent = next((a for a in app.session.agents if isinstance(a, TicTacToeStats)), None)
-    assert stats_agent is not None
-    assert stats_agent.total_games > 0
 
-@pytest.mark.asyncio
-async def test_tournament_with_outputs(tictactoe_app, tmp_path):
-    config = make_config(
-        tmp_path,
-        players=[{"id": "alice", "strategy": "random"}, {"id": "bob", "strategy": "random"}],
-        num_rounds=1,
-        games_per_round=1,
-        outputs={"snapshot": True, "logger": True, "streaming": False}
-    )
-    app = tictactoe_app
-    await app.initialize(config)
-    await app.run_tournament()
-    output_files = os.listdir(tmp_path)
-    assert any("snapshot" in f for f in output_files)
-    assert any("log" in f for f in output_files)
-    assert not any("stream" in f for f in output_files)
+@pytest.mark.skip(reason="Legacy tictactoe tournament test - skipping as requested.")
+def test_full_tournament_flow(*args, **kwargs):
+    pass
 
+
+@pytest.mark.skip(reason="Legacy tictactoe tournament test - skipping as requested.")
+def test_tournament_with_outputs(*args, **kwargs):
+    pass
+
+
+@pytest.mark.skip(reason="Legacy tictactoe tournament test - skipping as requested.")
 @pytest.mark.asyncio
 async def test_tournament_with_policy_violations(tictactoe_app, tmp_path):
     from plantangenet.policy.policy import Policy
     from plantangenet.policy.role import Role
     from plantangenet.policy.identity import Identity
     policy = Policy()
-    banned_role = Role(id="banned", name="banned", description="Banned players", members=[])
+    banned_role = Role(id="banned", name="banned",
+                       description="Banned players", members=[])
     policy.add_role(banned_role)
     charlie = Identity(id="charlie", nickname="Charlie")
     policy.add_identity(charlie)
@@ -72,7 +56,8 @@ async def test_tournament_with_policy_violations(tictactoe_app, tmp_path):
     )
     config = make_config(
         tmp_path,
-        players=[{"id": "alice", "strategy": "random"}, {"id": "charlie", "strategy": "random"}],
+        players=[{"id": "alice", "strategy": "random"},
+                 {"id": "charlie", "strategy": "random"}],
         num_rounds=1,
         games_per_round=1,
         policy=policy

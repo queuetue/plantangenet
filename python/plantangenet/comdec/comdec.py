@@ -7,28 +7,36 @@ various formats or destinations (files, streams, displays, etc).
 """
 
 from typing import Any, Dict, Optional, List
+from plantangenet.core import ComponentRegistryMixin
 from .base import BaseComdec
 from .snapshotter import SnapshotterComdec
 from .logger import LoggerComdec
 from .streaming import StreamingComdec
 
 
-class ComdecManager:
+class ComdecManager(ComponentRegistryMixin):
     """Manager for multiple comdecs attached to a compositor."""
 
     def __init__(self):
-        self.comdecs: List[BaseComdec] = []
+        super().__init__()
         self.active = True
 
     def add_comdec(self, comdec: BaseComdec):
-        self.comdecs.append(comdec)
+        """Add a comdec to this manager."""
+        self.add_component(comdec)
 
     def remove_comdec(self, comdec_name: str) -> bool:
-        for i, comdec in enumerate(self.comdecs):
-            if comdec.name == comdec_name:
-                del self.comdecs[i]
-                return True
+        """Remove a comdec by name."""
+        comdec = self.get_component(comdec_name)
+        if comdec:
+            self.remove_component(comdec)
+            return True
         return False
+
+    @property
+    def comdecs(self) -> List[BaseComdec]:
+        """Get all comdecs as a list for backward compatibility."""
+        return [c for c in self.get_components_by_type(BaseComdec) if isinstance(c, BaseComdec)]
 
     async def broadcast_frame(self, frame: Any, metadata: Optional[Dict[str, Any]] = None):
         if not self.active:
@@ -37,6 +45,7 @@ class ComdecManager:
             try:
                 await comdec.consume(frame, metadata)
             except Exception as e:
+                comdec.add_error(f"Error consuming frame: {e}")
                 print(f"Error in comdec {comdec.name}: {e}")
 
     async def initialize_all(self):

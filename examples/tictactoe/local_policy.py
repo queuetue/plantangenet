@@ -1,5 +1,6 @@
-from typing import Optional, Any, Tuple
-from plantangenet.policy.policy import Policy, EvaluationResult
+from typing import Optional,  Tuple
+from plantangenet.policy import Policy
+from plantangenet.policy.policy import EvaluationResult
 
 
 class LocalPolicy:

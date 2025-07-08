@@ -1,112 +1,163 @@
+"""
+Statistics tracking for TicTacToe tournaments.
+"""
+from typing import Any, Dict
+from collections import defaultdict
+
 from plantangenet.agents.agent import Agent
+from plantangenet.game import StatsAgentMixin
+from plantangenet import GLOBAL_LOGGER
 
 
-class TicTacToeStats(Agent):
-    def __init__(self, namespace: str = "tictactoe", logger=None):
-        super().__init__(namespace, logger)
-        self.total_moves = 0
-        self.total_games = 0
-        self.comdecs = []
-        self.player_wins = {}  # player_id -> win count
+class TicTacToeStats(Agent, StatsAgentMixin):
+    """Agent for tracking TicTacToe tournament statistics."""
+
+    def __init__(self, logger=None):
+        Agent.__init__(self, namespace="tictactoe",
+                       logger=logger or GLOBAL_LOGGER)
+        StatsAgentMixin.__init__(self)
+        self.player_wins = defaultdict(int)
         self.ties = 0
+        self.total_moves = 0
 
-    def add_comdec(self, comdec):
-        self.comdecs.append(comdec)
+    async def update(self) -> bool:
+        """Periodic update - collect stats from other agents."""
+        return True
 
-    def record_game_result(self, player_x, player_o, winner):
-        self.total_games += 1
+    def record_game_result(self, player_x: str, player_o: str, winner: str):
+        """Record the result of a completed game."""
+        # Call parent method
+        super().record_game_result()
+
         if winner == "DRAW" or winner == "tie":
             self.ties += 1
         else:
-            self.player_wins[winner] = self.player_wins.get(winner, 0) + 1
+            self.player_wins[winner] += 1
 
-    @property
-    def logger(self):
-        return self._ocean__logger
+        # Update stats data
+        self.stats_data.update({
+            "ties": self.ties,
+            "total_moves": self.total_moves
+        })
 
-    async def update(self) -> bool:
-        # Collect stats from other agents (in real implementation, would query Redis)
-        return True
-
-    async def output_all(self, *args, **kwargs):
-        """Call consume on all registered comdecs with stats data."""
-        stats_data = {
-            "stats": {
-                "total_games": self.total_games,
-                "player_wins": dict(self.player_wins),
-                "ties": self.ties,
-                "total_moves": self.total_moves,
-            }
+    def get_player_stats(self, player_id: str) -> Dict[str, Any]:
+        """Get statistics for a specific player."""
+        games_played = sum(1 for x, o in [(x, o) for x in [player_id] for o in self.player_wins.keys() if x != o]) + \
+            sum(1 for x, o in [(x, o) for x in self.player_wins.keys()
+                for o in [player_id] if x != o])
+        return {
+            "games_played": games_played,
+            "wins": self.player_wins[player_id],
+            "win_rate": self.player_wins[player_id] / max(1, games_played) if games_played > 0 else 0.0
         }
-        for comdec in self.comdecs:
-            if hasattr(comdec, 'consume'):
-                await comdec.consume(stats_data, *args, **kwargs)
 
-    @property
-    def player_wins(self):
-        return self._player_wins
+    def get_leaderboard(self) -> list:
+        """Get a leaderboard sorted by wins."""
+        players = set(self.player_wins.keys())
+        leaderboard = []
 
-    @player_wins.setter
-    def player_wins(self, value):
-        self._player_wins = value
+        for player in players:
+            stats = self.get_player_stats(player)
+            leaderboard.append({
+                "player": player,
+                **stats
+            })
 
-    @property
-    def ties(self):
-        return self._ties
+        # Sort by wins (descending), then by win rate (descending)
+        leaderboard.sort(key=lambda x: (
+            x["wins"], x["win_rate"]), reverse=True)
+        return leaderboard
 
-    @ties.setter
-    def ties(self, value):
-        self._ties = value
+    def get_widget(self, asset: str = "default", **kwargs) -> str:
+        """Get a text widget representation of current stats."""
+        if self.total_games == 0:
+            return "TicTacToe Stats: No games played yet"
 
-    def get_default(self, **kwargs):
-        """Default widget rendering (used if asset is unknown)."""
-        return self.__render__(asset="default", **kwargs)
+        leaderboard = self.get_leaderboard()
+        top_player = leaderboard[0] if leaderboard else None
 
-    def get_widget(self, asset="status_widget", **kwargs):
-        """Return the widget image for the given asset type (default: status_widget)."""
-        if asset == "status_widget":
-            return self.__render__(asset=asset, **kwargs)
-        # Placeholder for future asset types
-        return self.get_default(**kwargs)
-
-    def __render__(self, width=300, height=80, asset="default", style="default", font=None, color=None, text_color=None):
-        """
-        Render a widget representing stats for the dashboard.
-        Returns a Pillow Image object.
-        """
-        if asset == "status_widget":
-            # Render the status widget (main stats summary)
-            from PIL import Image, ImageDraw, ImageFont
-            img = Image.new("RGB", (width, height), color or (80, 80, 80))
-            draw = ImageDraw.Draw(img)
-            # Use provided font or default
-            if font is None:
-                try:
-                    font = ImageFont.truetype("DejaVuSans-Bold.ttf", 16)
-                except Exception:
-                    font = ImageFont.load_default()
-            # Draw border
-            border_color = (180, 180, 0)
-            draw.rectangle([0, 0, width-1, height-1],
-                           outline=border_color, width=2)
-            # Draw stats summary
-            text = (
-                f"Stats\nGames: {self.total_games}\nTies: {self.ties}\nMoves: {self.total_moves}\n"
-                f"Top: {max(self.player_wins, key=self.player_wins.get) if self.player_wins else '-'}"
-            )
-            # Helper for text size
-
-            def get_text_size(text, font):
-                bbox = draw.textbbox((0, 0), text, font=font)
-                return bbox[2] - bbox[0], bbox[3] - bbox[1]
-            lines = text.split("\n")
-            y = 10
-            for line in lines:
-                w, h = get_text_size(line, font)
-                draw.text((10, y), line, font=font,
-                          fill=text_color or (255, 255, 255))
-                y += h
-            return img
+        if top_player:
+            return (f"TicTacToe Stats: {self.total_games} games, "
+                    f"Leader: {top_player['player']} ({top_player['wins']} wins, "
+                    f"rate: {top_player['win_rate']:.1%})")
         else:
-            # Fallback to get_default for unknown asset types
-            return self.get_default(width=width, height=height, style=style, font=font, color=color, text_color=text_color)
+            return f"TicTacToe Stats: {self.total_games} games played"
+
+    def get_render_data(self) -> Dict[str, Any]:
+        """Get stats data for rendering."""
+        return {
+            "stats": self.get_stats_summary(),
+            "players": {player: self.get_player_stats(player) for player in self.player_wins.keys()},
+            "leaderboard": self.get_leaderboard()
+        }
+
+    def __render__(self, width=300, height=80, asset="default", style="default", font=None, color=None, text_color=None, **kwargs):
+        """Unified render method for dashboard/compositor use."""
+        from PIL import Image, ImageDraw, ImageFont
+
+        if asset == "widget":
+            img = Image.new('RGB', (width, height), color=(80, 40, 120))
+            draw = ImageDraw.Draw(img)
+            text = "TicTacToe Stats"
+            try:
+                font = ImageFont.truetype("DejaVuSans-Bold.ttf", 20)
+            except Exception:
+                font = None
+            if font:
+                bbox = draw.textbbox((0, 0), text, font=font)
+                w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+                draw.text(((width-w)//2, (height-h)//2), text,
+                          fill=(255, 255, 255), font=font)
+            else:
+                draw.text((10, 10), text, fill=(255, 255, 255))
+            return img
+        elif asset == "default":
+            # Default: detailed stats display
+            return self.get_default_asset(width=width, height=height)
+        else:
+            raise NotImplementedError(
+                f"__render__ asset '{asset}' not implemented for {self.__class__.__name__}")
+
+    def get_default_asset(self, width=300, height=200):
+        """Render detailed stats display."""
+        from PIL import Image, ImageDraw, ImageFont
+        img = Image.new('RGB', (width, height), color=(80, 40, 120))
+        draw = ImageDraw.Draw(img)
+
+        try:
+            title_font = ImageFont.truetype("DejaVuSans-Bold.ttf", 16)
+            text_font = ImageFont.truetype("DejaVuSans.ttf", 12)
+        except Exception:
+            title_font = text_font = None
+
+        # Title
+        y = 10
+        draw.text((10, y), "TicTacToe Tournament Stats",
+                  font=title_font, fill=(255, 255, 0))
+        y += 25
+
+        # Overall stats
+        draw.text((10, y), f"Total Games: {self.total_games}", font=text_font, fill=(
+            255, 255, 255))
+        y += 15
+        draw.text((10, y), f"Ties: {self.ties}",
+                  font=text_font, fill=(255, 255, 255))
+        y += 15
+        draw.text((10, y), f"Total Moves: {self.total_moves}", font=text_font, fill=(
+            255, 255, 255))
+        y += 25
+
+        # Leaderboard
+        draw.text((10, y), "Leaderboard:", font=title_font, fill=(255, 255, 0))
+        y += 20
+
+        leaderboard = self.get_leaderboard()[:5]  # Top 5
+        for i, player_stats in enumerate(leaderboard):
+            player = player_stats['player']
+            wins = player_stats['wins']
+            win_rate = player_stats['win_rate']
+            text = f"{i+1}. {player}: {wins} wins ({win_rate:.1%})"
+            draw.text((15, y), text, font=text_font, fill=(200, 200, 200))
+            y += 15
+
+        return img

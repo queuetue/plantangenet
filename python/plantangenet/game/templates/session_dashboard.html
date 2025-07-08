@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plantangenet Session Dashboard</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background: #1a1a2e; color: #eee; margin: 0; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .session-id { color: #16213e; font-size: 1.2em; margin-bottom: 20px; }
+        .panel { background: #16213e; border-radius: 8px; padding: 20px; margin-bottom: 20px; border: 1px solid #0e3460; }
+        .panel h2 { margin-top: 0; color: #eee; border-bottom: 1px solid #0e3460; padding-bottom: 10px; }
+        .agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 15px; }
+        .agent-card-outer { display: flex; flex-direction: column; max-width: 100%; overflow: auto; margin-bottom: 8px; }
+        .agent-card { background: #0e3460; border-radius: 6px; padding: 15px; border: 1px solid #533483; }
+        .agent-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .agent-icon { font-size: 1.5em; }
+        .agent-name { font-weight: bold; color: #fff; }
+        .agent-type { color: #bbb; font-size: 0.9em; }
+        .agent-status { font-size: 0.8em; color: #ccc; }
+        .disposition { color: #f39c12; margin-bottom: 5px; }
+        .compositor-grid { display: flex; gap: 15px; flex-wrap: wrap; }
+        .compositor-card { background: #0e3460; border-radius: 6px; padding: 10px; display: flex; gap: 10px; align-items: center; }
+        .compositor-card.active { border: 2px solid #27ae60; }
+        .compositor-card.inactive { border: 2px solid #e74c3c; }
+        .game-panel { background: #533483; border-radius: 6px; padding: 15px; }
+    </style>
+    <script>
+        async function refreshData() {
+            try {
+                const response = await fetch('/api/session');
+                if (response.ok) {
+                    const contentType = response.headers.get('content-type') || '';
+                    if (contentType.includes('application/json')) {
+                        const data = await response.json();
+                        // Data error: dashboard_objects must be an array
+                        if (!Array.isArray(data.dashboard_objects)) {
+                            document.querySelector('.refresh-status').textContent = '🟠 Data error (dashboard_objects not array)';
+                            return;
+                        }
+                        document.querySelector('.refresh-status').textContent = '\ud83d\udfe2 Live';
+                        // Update Objects (dashboard_objects)
+                        const objectsPanel = document.querySelector('.agent-grid');
+                        if (objectsPanel && data.dashboard_objects) {
+                            const objectsArr = data.dashboard_objects;
+                            objectsPanel.innerHTML = objectsArr.map(obj => `
+                                <div class='agent-card-outer'><div class='agent-card' data-object-id='${obj.id}'>
+                                    <div class='agent-header'>
+                                        <span class='agent-icon'>${obj.icon || ''}</span>
+                                        <span class='agent-type'>${obj.type}</span>
+                                    </div>
+                                    <div class='agent-status'>
+                                        <div class='agent-id'>${obj.id}</div>
+                                        <div class='agent-asset-link'>
+                                            <a href='/asset/${obj.id}?asset=default' target='_blank'>View Default Asset</a> 
+                                            <a href='/asset/${obj.id}?asset=widget' target='_blank'>View Widget Asset</a><br>
+                                            <a href='/stream/${obj.id}?asset=default' target='_blank'>🎥 Live Default Stream</a> 
+                                            <a href='/stream/${obj.id}?asset=widget' target='_blank'>🎥 Live Widget Stream</a>
+                                        </div>
+                                    </div>
+                                    ${obj.fields ? `<div class='agent-fields'><ul>${Object.entries(obj.fields).map(([key, value]) => `<li><b>${key}</b>: ${value}</li>`).join('')}</ul></div>` : ''}
+                                    ${obj.render_data ? `<div class='agent-render-data'><pre>${JSON.stringify(obj.render_data, null, 2)}</pre></div>` : ''}
+                                </div></div>
+                            `).join('');
+                            // Update object count in header
+                            const objCount = document.querySelector('h2');
+                            if (objCount) objCount.innerHTML = `\ud83e\udde9 Objects (${objectsArr.length})`;
+                        }
+                        // Update Compositors (object to array)
+                        const compPanel = document.querySelector('.compositor-grid');
+                        if (compPanel && data.compositors) {
+                            const compsArr = Object.values(data.compositors);
+                            compPanel.innerHTML = compsArr.map(comp => `
+                                <div class='compositor-card ${comp.active ? 'active' : 'inactive'}'>
+                                    <span class='compositor-name'>${comp.id}</span>
+                                    <span class='compositor-type'>${comp.type}</span>
+                                    <span class='compositor-status'>${comp.active ? '🟢' : '🔴'}</span>
+                                </div>
+                            `).join('');
+                            // Update compositor count in header
+                            const compCount = document.querySelectorAll('h2')[1];
+                            if (compCount) compCount.innerHTML = `🎥 Compositors (${compsArr.length})`;
+                        }
+                        // Update Activity (current_activity)
+                        const activityPanel = document.querySelector('.game-panel');
+                        if (activityPanel && data.current_activity) {
+                            const act = data.current_activity;
+                            activityPanel.innerHTML = `
+                                <h3>Current Activity: ${act.game_id || 'Unknown'}</h3>
+                                <div class='game-info'>
+                                    <div>State: ${act.state || 'Unknown'}</div>
+                                    <div>Turn: ${act.current_turn || 'None'}</div>
+                                    <div>Frames: ${act.frames_elapsed || 0}</div>
+                                    <div>Score: ${(act.board && act.board.score) || 0}</div>
+                                    <div>Lives: ${(act.board && act.board.lives) || 0}</div>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        document.querySelector('.refresh-status').textContent = '🔴 Backend error (not JSON)';
+                    }
+                } else {
+                    document.querySelector('.refresh-status').textContent = '🔴 Backend error (' + response.status + ')';
+                }
+            } catch (error) {
+                document.querySelector('.refresh-status').textContent = '🔴 Network error';
+            }
+        }
+        setInterval(refreshData, 2000);
+        document.addEventListener('DOMContentLoaded', refreshData);
+    </script>
+</head>
+<body>
+    <div class='refresh-status'>🟡 Loading...</div>
+    <div class='header'>
+        <h1>🌿 Plantangenet Session Dashboard</h1>
+        <div class='session-id'>Session: {{ session_id }}</div>
+    </div>
+    <div class='panel'>
+        <h2>🧩 Objects ({{ dashboard_objects|length }})</h2>
+        <div class='agent-grid'>
+            {% for obj in dashboard_objects %}
+            <div class='agent-card-outer'><div class='agent-card' data-object-id='{{ obj.id }}'>
+                <div class='agent-header'>
+                    <span class='agent-icon'>{{ obj.icon if obj.icon is defined else '' }}</span>
+                    <span class='agent-type'>{{ obj.type }}</span>
+                </div>
+                <div class='agent-status'>
+                    <div class='agent-id'>{{ obj.id }}</div>
+                    <div class='agent-asset-link'>
+                        <a href='/asset/{{ obj.id }}?asset=default' target='_blank'>View Default Asset</a>
+                        <a href='/asset/{{ obj.id }}?asset=widget' target='_blank'>View Widget Asset</a>
+                    </div>
+                </div>
+                {% if obj.fields %}
+                <div class='agent-fields'>
+                    <ul>
+                    {% for key, value in obj.fields.items() %}
+                        <li><b>{{ key }}</b>: {{ value }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% if obj.render_data %}
+                <div class='agent-render-data'>
+                    <pre>{{ obj.render_data | tojson(indent=2) }}</pre>
+                </div>
+                {% endif %}
+            </div></div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class='panel'>
+        <h2>🎥 Compositors ({{ compositors|length }})</h2>
+        <div class='compositor-grid'>
+            {% for comp in compositors %}
+            <div class='compositor-card {{ 'active' if comp.active else 'inactive' }}'>
+                <span class='compositor-name'>{{ comp.id }}</span>
+                <span class='compositor-type'>{{ comp.type }}</span>
+                <span class='compositor-status'>{{ '🟢' if comp.active else '🔴' }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if activity %}
+    <div class="panel">
+        <h2>🎮 Current Activity</h2>
+        <div class='game-panel'>
+            <h3>Current Activity: {{ activity.game_id or 'Unknown' }}</h3>
+            <div class='game-info'>
+                <div>State: {{ activity.state or 'Unknown' }}</div>
+                <div>Turn: {{ activity.current_turn or 'None' }}</div>
+                <div>Frames: {{ activity.frames_elapsed or 0 }}</div>
+                <div>Score: {{ activity.board.score if activity.board else 0 }}</div>
+                <div>Lives: {{ activity.board.lives if activity.board else 0 }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>

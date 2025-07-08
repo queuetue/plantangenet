@@ -2,11 +2,11 @@ import random
 import time
 from typing import Dict, List
 from plantangenet.agents.agent import Agent
-from .player import TicTacToePlayer
-from .tictactoe_types import GameState, PlayerSymbol
-from .game import TicTacToeGame
-from .local_policy import LocalPolicy
-from .stats import TicTacToeStats
+from examples.tictactoe.player import TicTacToePlayer
+from examples.tictactoe.tictactoe_types import GameState, PlayerSymbol
+from examples.tictactoe.game import TicTacToeGame
+from examples.tictactoe.local_policy import LocalPolicy
+from examples.tictactoe.stats import TicTacToeStats
 
 
 class TicTacToeReferee(Agent):

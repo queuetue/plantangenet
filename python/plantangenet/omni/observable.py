@@ -1,14 +1,16 @@
 from collections import deque
 from typing import Optional
+from plantangenet.core import RegistrableComponent
 from .persisted import PersistedBase
 from .meta import OmniMeta
 from time import monotonic
 
 
-class Observable(PersistedBase):
+class Observable(PersistedBase, RegistrableComponent):
     def __init__(self, meta: Optional[OmniMeta] = None, field_type: Optional[type] = None,
                  default=None, namespace="", validator=None):
-        super().__init__(meta=meta, default=default)
+        PersistedBase.__init__(self, meta=meta, default=default)
+        RegistrableComponent.__init__(self, name=f"observable_{namespace}")
         self.field_type = field_type
         self.namespace = namespace
         self.validator = validator

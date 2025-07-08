@@ -4,9 +4,10 @@
 import random
 from abc import abstractmethod
 from collections import deque
-from typing import Any, List, Optional
+from typing import Any
 from ulid import ULID
 from coolname import generate_slug
+from plantangenet.core import ComponentRegistryMixin
 
 INITIAL_DISPOSITION = [
     "AESTHETICA IN VIVO",
@@ -16,7 +17,7 @@ INITIAL_DISPOSITION = [
 ]
 
 
-class Agent():
+class Agent(ComponentRegistryMixin):
     """
     This class serves as a base for peers in the Plantangenet Ocean ecosystem,
     providing a unique identifier, namespace management, and basic logging capabilities.
@@ -33,6 +34,7 @@ class Agent():
     def __init__(self,
                  namespace: str = "plantangenet",
                  logger: Any = None):
+        # Do NOT call super().__init__() here due to multiple inheritance with mixins that require different arguments
         self._ocean__logger = logger
         self._ocean__id: str = self.fresh_id()
         self._ocean__namespace: str = namespace

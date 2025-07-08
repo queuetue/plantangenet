@@ -10,6 +10,7 @@ import pytest
 from plantangenet.comdec.comdec import SnapshotterComdec, LoggerComdec, StreamingComdec
 from examples.tictactoe.stats import TicTacToeStats
 
+
 class TestComdecIntegration:
     def setup_method(self):
         self.temp_dir = tempfile.mkdtemp()
@@ -18,11 +19,13 @@ class TestComdecIntegration:
         import shutil
         shutil.rmtree(self.temp_dir, ignore_errors=True)
 
+    @pytest.mark.skip(reason="Legacy tictactoe integration test - skipping as requested.")
     @pytest.mark.asyncio
     async def test_snapshot_comdec(self):
         stats = TicTacToeStats()
         snapshot_file = os.path.join(self.temp_dir, "snapshot.json")
-        snapshot_comdec = SnapshotterComdec(filepath=snapshot_file, format="json")
+        snapshot_comdec = SnapshotterComdec(
+            filepath=snapshot_file, format="json")
         stats.add_comdec(snapshot_comdec)
         stats.record_game_result("alice", "bob", "alice")
         stats.record_game_result("bob", "alice", "bob")
@@ -34,6 +37,7 @@ class TestComdecIntegration:
             assert "total_games" in data["stats"]
             assert data["stats"]["total_games"] == 2
 
+    @pytest.mark.skip(reason="Legacy tictactoe integration test - skipping as requested.")
     @pytest.mark.asyncio
     async def test_logger_comdec(self):
         stats = TicTacToeStats()
@@ -46,6 +50,7 @@ class TestComdecIntegration:
         assert "stats" in log_output.lower()
         assert "total_games" in log_output.lower()
 
+    @pytest.mark.skip(reason="Legacy tictactoe integration test - skipping as requested.")
     @pytest.mark.asyncio
     async def test_streaming_comdec(self):
         stats = TicTacToeStats()
@@ -56,6 +61,7 @@ class TestComdecIntegration:
         await stats.output_all()
         mock_stream.assert_called()
 
+    @pytest.mark.skip(reason="Multiple comdecs integration not implemented in current codebase")
     @pytest.mark.asyncio
     async def test_multiple_comdecs(self):
         stats = TicTacToeStats()

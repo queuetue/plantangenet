@@ -4,9 +4,11 @@ from plantangenet.policy.role import Role
 from plantangenet.policy.identity import Identity
 from plantangenet.session.session import Session
 
+
 def _make_policy_with_players():
     policy = Policy()
-    player_role = Role(id="player", name="player", description="Can play games", members=[])
+    player_role = Role(id="player", name="player",
+                       description="Can play games", members=[])
     policy.add_role(player_role)
     alice = Identity(id="alice", nickname="Alice")
     bob = Identity(id="bob", nickname="Bob")
@@ -22,9 +24,11 @@ def _make_policy_with_players():
     )
     return policy, player_role, alice, bob
 
+
 @pytest.fixture
 def policy_with_players():
     return _make_policy_with_players()
+
 
 @pytest.fixture
 def session_with_policy(policy_with_players):
