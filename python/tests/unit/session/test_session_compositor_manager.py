@@ -8,7 +8,7 @@ Tests the Session's ability to manage and coordinate different compositor types.
 """
 
 from plantangenet.agents.agent import Agent
-from plantangenet.squad.graph_compositor import AgentSquad
+from plantangenet.compositor.graph_compositor import AgentSquad
 from plantangenet.compositor.fb_types import ImmediateModeFBCompositor
 from plantangenet.compositor.ml_types import ClassifierCompositor
 from plantangenet.compositor.base import BaseCompositor

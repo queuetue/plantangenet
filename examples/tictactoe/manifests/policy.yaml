@@ -1,0 +1,72 @@
+
+apiVersion: plantangenet.policy/v1
+kind: Role
+id: *role_id
+metadata:
+  phase: setup
+  name: tictactoe-owner-role
+  nickname: Game Administrator
+  description: Owner of the TTT game
+---
+apiVersion: plantangenet.policy/v1
+kind: Identity
+id: *identity_id
+roles:
+ - owner
+metadata:
+  description: Identity for the TTT session
+  nickname: Session Identity
+  name: tictactoe_identity
+  phase: setup
+---
+apiVersion: plantangenet.policy/v1
+kind: Statement
+policy_id: *policy_id
+action: tictactoe.play
+effect: allow
+condition: 
+  - [roles contains 'owner']
+  - [metadata.game_id == resource.id]
+metadata:
+  name: tictactoe-play-statement
+  description: Statement allowing play action for the TTT game
+  phase: setup
+  labels:
+    policy: ttt-policy
+---
+apiVersion: plantangenet.policy/v1
+kind: Statement
+policy_id: *policy_id
+action: tictactoe.create
+effect: allow
+condition:
+  - [roles contains 'owner']
+metadata:
+  name: tictactoe-create-statement
+  phase: setup
+  labels:
+    policy: ttt-policy
+---
+apiVersion: plantangenet.policy/v1
+kind: Statement
+action: tictactoe.delete
+effect: allow
+condition: 
+  - [roles contains 'owner']
+  - [resource.status == 'inactive']
+metadata:
+  name: tictactoe-delete-statement
+  phase: setup
+  labels:
+    policy: ttt-policy
+---
+apiVersion: plantangenet.policy/v1
+kind: Policy
+id: *policy_id
+metadata:
+  phase: setup
+  name: tictactoe-policy
+  description: Policy for the TTT game
+  nickname: TTT Policy
+  labels:
+    policy: ttt-policy

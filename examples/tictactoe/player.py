@@ -3,14 +3,14 @@ TicTacToe player agent with AI strategies.
 """
 import asyncio
 import random
-from typing import Any, Dict, Optional
+from typing import Optional
 from plantangenet.agents.agent import Agent
-from examples.tictactoe.tictactoe_types import PlayerSymbol
 from plantangenet.game import GamePlayerMixin
 from plantangenet import GLOBAL_LOGGER
 from plantangenet.omni.base import OmniBase
 from plantangenet.omni.observable import Observable
 from plantangenet.omni.persisted import PersistedBase
+from .tictactoe_types import PlayerSymbol
 
 
 class TicTacToePlayer(OmniBase, Agent, GamePlayerMixin):

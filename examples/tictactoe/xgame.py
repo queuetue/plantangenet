@@ -19,14 +19,14 @@ class TicTacToeGame(TurnBasedGameActivity):
     Inherits from TurnBasedGameActivity for turn management, policy enforcement, and widget support.
     """
 
-    def __init__(self, game_id: str, player_x: str, player_o: str, agent_registry: Optional[dict] = None):
+    def __init__(self, game_id: str, player_x: str, player_o: str):
         super().__init__(game_id, player_x, player_o, max_players=2)
         self.board = GameBoard(game_id, player_x, player_o)
         self.player_x = player_x
         self.player_o = player_o
         self.referee = TicTacToeReferee()  # Instantiate the referee
+        # Ensure current_turn is settable and initialized
         self.current_turn = player_x  # X always goes first
-        self.agent_registry = agent_registry or {}
 
     @property
     def current_turn(self):
@@ -78,14 +78,8 @@ class TicTacToeGame(TurnBasedGameActivity):
         self.board.board = [list(r) for r in result.state["board"]]
         # Check for win/game over using referee
         winner = self.referee.check_winner()
-        # Ensure winner is always a player ID
         if winner:
-            if winner == PlayerSymbol.X.value:
-                self.board.winner = self.player_x
-            elif winner == PlayerSymbol.O.value:
-                self.board.winner = self.player_o
-            else:
-                self.board.winner = winner  # Already a player ID
+            self.board.winner = winner
             self._set_game_over()
         elif self.referee.is_board_full():
             self._set_game_over()
@@ -101,33 +95,6 @@ class TicTacToeGame(TurnBasedGameActivity):
             self.current_turn = self.player_o
         else:
             self.current_turn = self.player_x
-
-    def is_in_progress(self):
-        return self.game_state == GameState.IN_PROGRESS
-
-    @property
-    def winner(self):
-        return self.board.winner
-
-    def step(self):
-        """Step the game by making a move for the current player (uses agent_registry if available, else random)."""
-        import random
-        current_player_id = self.current_turn
-        if not current_player_id or self.game_state != GameState.IN_PROGRESS:
-            return
-        player_agent = self.agent_registry.get(
-            current_player_id) if hasattr(self, 'agent_registry') else None
-        if not player_agent:
-            moves = [(r, c) for r in range(3)
-                     for c in range(3) if self.board.board[r][c] == " "]
-            if not moves:
-                return
-            row, col = random.choice(moves)
-        else:
-            board_state = [list(r) for r in self.board.board]
-            my_symbol = "X" if current_player_id == self.player_x else "O"
-            row, col = player_agent.choose_action(board_state, my_symbol)
-        self.make_game_move(current_player_id, row, col)
 
     # Required abstract methods from TurnBasedGameActivity
     def _check_winner(self) -> Optional[str]:

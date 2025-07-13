@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Plantangenet Planfile Schema",
+  "type": "object",
+  "required": ["plan"],
+  "properties": {
+    "plan": {
+      "type": "object",
+      "properties": {
+        "targetPhase": {
+          "type": "string",
+          "description": "The target phase to deploy up to."
+        },
+        "defaultInstanceMode": {
+          "type": "string",
+          "enum": ["immediate", "onUse"],
+          "description": "Default instance mode for phases."
+        }
+      },
+      "patternProperties": {
+        "^(?!targetPhase$|defaultInstanceMode$)[a-zA-Z0-9_-]+$": {
+          "$ref": "#/definitions/phase"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "phase": {
+      "type": "object",
+      "required": ["description", "selector"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A human-friendly description of this phase."
+        },
+        "selector": {
+          "$ref": "#/definitions/selector"
+        },
+        "instanceMode": {
+          "type": "string",
+          "enum": ["immediate", "onUse"],
+          "description": "Overrides the default instance mode."
+        },
+        "waitFor": {
+          "$ref": "#/definitions/waitFor"
+        },
+        "retry": {
+          "$ref": "#/definitions/retry"
+        },
+        "onFailure": {
+          "$ref": "#/definitions/handler"
+        },
+        "onSuccess": {
+          "$ref": "#/definitions/handler"
+        }
+      },
+      "additionalProperties": false
+    },
+    "selector": {
+      "type": "object",
+      "required": ["matchLabels"],
+      "properties": {
+        "matchLabels": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_.-]+$": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Labels to match resources in this phase."
+        }
+      },
+      "additionalProperties": false
+    },
+    "waitFor": {
+      "type": "object",
+      "required": ["phases"],
+      "properties": {
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Names of phases this phase depends on."
+        },
+        "timeout": {
+          "type": "string",
+          "pattern": "^[0-9]+(ms|s|m|h)?$",
+          "description": "Timeout duration (e.g. '300ms', '5s')."
+        }
+      },
+      "additionalProperties": false
+    },
+    "retry": {
+      "type": "object",
+      "required": ["maxAttempts"],
+      "properties": {
+        "maxAttempts": {
+          "type": ["integer", "string"],
+          "pattern": "^\\$\\{[A-Z0-9_]+(:[0-9]+)?\\}$|^[0-9]+$",
+          "description": "Number of retry attempts (integer or variable substitution)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "handler": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["raise", "continue"],
+          "description": "How to handle errors or success."
+        },
+        "spec": {
+          "$ref": "#/definitions/handlerSpec"
+        }
+      },
+      "required": ["spec"],
+      "additionalProperties": false
+    },
+    "handlerSpec": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Messages to log or notify on failure/success."
+        },
+        "notify": {
+          "$ref": "#/definitions/notify"
+        },
+        "labels": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_.-]+$": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Labels to add on failure or success."
+        }
+      },
+      "additionalProperties": false
+    },
+    "notify": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
+          "description": "Email address to notify."
+        },
+        "slack": {
+          "type": "string",
+          "description": "Slack channel to notify."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

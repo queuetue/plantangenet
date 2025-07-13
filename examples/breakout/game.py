@@ -1,11 +1,12 @@
 """
 Breakout game implementation using Plantangenet activities and tournament system.
 """
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Any
 from dataclasses import dataclass
 import json
 
 from plantangenet.game import TurnBasedGameActivity, GameState
+from plantangenet.session.referee import Judgement
 from plantangenet import GLOBAL_LOGGER
 
 from .objects import Ball, Paddle, Block, BreakoutBoard
@@ -142,8 +143,12 @@ class BreakoutGame(TurnBasedGameActivity):
         """Get a text-based widget representation of the game, including player strategies iconographically."""
         return BreakoutWidget(self).render()
 
-    def __render__(self, width=120, height=80, asset="default", style="default", font=None, color=None, text_color=None, **kwargs):
-        """Unified render method for dashboard/compositor use."""
+    def __render__(self, width=300, height=80, asset="default", style="default", font=None, color=None, text_color=None, **kwargs) -> Any:
+        """
+        Unified render method for dashboard/compositor use.
+        Returns a flexible type (e.g., PIL.Image.Image, str, ML model output, etc.) depending on the asset and context.
+        This endpoint is intentionally polymorphic to support a wide range of renderable outputs.
+        """
         from PIL import Image, ImageDraw, ImageFont
 
         def get_text_size(draw, text, font=None, multiline=False):
@@ -174,7 +179,7 @@ class BreakoutGame(TurnBasedGameActivity):
             return img
         elif asset == "default":
             # Default: show the full game state as before
-            return self.get_default_asset(width=300, height=200)
+            return self.get_default_asset(width=width, height=height)
         else:
             raise NotImplementedError(
                 f"__render__ asset '{asset}' not implemented for {self.__class__.__name__}")

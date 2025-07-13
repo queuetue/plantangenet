@@ -1,11 +1,8 @@
 from typing import List, Dict, Optional
-from ulid import ULID
-
-from plantangenet.agents.agent import Agent
 from plantangenet.session.referee import BaseReferee, AdjudicationResult, Judgement
 
 
-class TicTacToeReferee(Agent):
+class TicTacToeReferee:
     """
     TicTacToe referee: adjudicates proposed board states from players.
 
@@ -16,15 +13,12 @@ class TicTacToeReferee(Agent):
     """
 
     def __init__(self, current_board: Optional[List[List[str]]] = None):
-        self._ocean__id = str(ULID())
         self.current_board = current_board or [
             [" ", " ", " "],
             [" ", " ", " "],
             [" ", " ", " "]
         ]
         self.current_player = "X"  # X goes first
-        # Players waiting to be assigned to a game
-        self.waiting_players: List[str] = []
 
     def adjudicate(self, states: List[dict]) -> AdjudicationResult:
         """
@@ -215,18 +209,3 @@ class TicTacToeReferee(Agent):
     def is_game_over(self) -> bool:
         """Check if the game is over."""
         return self.check_winner() is not None or self.is_board_full()
-
-    def add_player_to_queue(self, player_id: str):
-        """Add a player to the waiting queue if not already present."""
-        if player_id not in self.waiting_players:
-            self.waiting_players.append(player_id)
-
-    def return_all_players_to_queue(self) -> List[str]:
-        """Return all waiting players to the queue (for restart coordination)."""
-        players = list(self.waiting_players)
-        self.waiting_players.clear()
-        return players
-
-    def is_idle(self) -> bool:
-        """Return True if this referee has no waiting players (and, if needed, no active games)."""
-        return len(self.waiting_players) < 2

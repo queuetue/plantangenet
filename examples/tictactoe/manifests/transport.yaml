@@ -1,0 +1,23 @@
+---
+apiVersion: plantangenet.storage/v1
+kind: Redis
+metadata:
+  name: tictactoe-redis
+  labels:
+    session: tictactoe
+spec:
+  host: redis://localhost:6379
+  database: 0
+  password: ""
+  phase: preflight
+---
+apiVersion: plantangenet.messaging/v1
+kind: NATS
+metadata:
+  name: tictactoe-nats
+  labels:
+    session: tictactoe
+spec:
+  url: nats://localhost:4222
+  cluster_id: tictactoe
+  phase: preflight

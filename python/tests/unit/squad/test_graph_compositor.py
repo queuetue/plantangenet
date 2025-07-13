@@ -9,7 +9,7 @@ Test suite for the unified Compositor/Squad architecture.
 from plantangenet.logger import Logger
 from plantangenet.policy.identity import Identity
 from plantangenet.agents.agent import Agent
-from plantangenet.squad.graph_compositor import (
+from plantangenet.compositor.graph_compositor import (
     AgentSquad,
     AgentFilterRule,
     CommunicationFlowRule,

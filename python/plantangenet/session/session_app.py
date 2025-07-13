@@ -3,7 +3,7 @@ import signal
 from typing import Callable, List, Optional, Any
 from .session import Session
 from .schedule import PeriodicTask
-from ..core.group_manager import BaseGroupManager, Squad
+from ..squad import Squad
 
 
 class App:
@@ -49,7 +49,7 @@ class SessionApp(App):
     def __init__(self, session: Session, max_runtime: Optional[float] = None, sport: Optional[Squad] = None):
         super().__init__(max_runtime)
         self.session = session
-        self._manager = sport or BaseGroupManager(name="session_manager")
+        self._manager = sport or Squad(name="session_manager")
 
     @property
     def manager(self):
@@ -103,37 +103,3 @@ class SessionApp(App):
             await self._shutdown_event.wait()
         finally:
             await self.shutdown(agent_update_task, max_runtime_task)
-
-
-class BankingSessionApp(SessionApp):
-    def add_banker_agent(self, banker: Any):
-        self.session.add_banker_agent(banker)
-        self._manager.add('bankers', banker)
-        # Also add to the session's own group if it exists
-        if hasattr(self.session, 'manager'):
-            self.session.manager.add('bankers', banker)
-
-    def add(self, obj: Any, group: Optional[str] = None):
-        # Prefer explicit group, else banker/agent detection
-        if group:
-            self._manager.add(group, obj)
-        elif hasattr(obj, 'is_banker') and getattr(obj, 'is_banker'):
-            self._manager.add('bankers', obj)
-        else:
-            self._manager.add('agents', obj)
-        if hasattr(self.session, 'add'):
-            self.session.add(obj, group=group)
-
-    async def _update_banker(self):
-        for banker in self._manager.get('bankers'):
-            if hasattr(banker, 'update'):
-                await banker.update()  # type: ignore
-
-    async def _update_agents(self):
-        while not self._shutdown_event.is_set():
-            try:
-                await self._update_all_agents()
-                await self._update_banker()
-            except Exception as e:
-                print(f"Error updating agents: {e}")
-            await asyncio.sleep(self.agent_update_interval)

@@ -1,0 +1,69 @@
+apiVersion: plantangenet.session/v1
+kind: Session
+id: *session_id
+identity: *identity_id
+policy: *policy_id
+description: 
+metadata:
+  phase: setup
+  name: tictactoe
+  nickname: *session_name
+  labels:
+    session: tictactoe
+spec:
+  arenas:
+    selector:
+      matchLabels:
+        session: tictactoe
+        squad: arena
+  referees:
+    selector:
+      matchLabels:
+        session: tictactoe
+        squad: referee
+  players:
+    selector:
+      matchLabels:
+        session: tictactoe
+        squad: player
+---
+apiVersion: plantangenet.session/v1
+kind: Squad
+metadata:
+  name: arena-squad
+  phase: lazy
+  labels:
+    squad: arena
+    session: tictactoe
+  annotations:
+    createdBy: scott@queuetue.com
+spec:
+  session_id: *session_id
+  class: example.tictactoe.Arena/v0.0.331
+  max_members: *concurrent_games
+---
+apiVersion: plantangenet.session/v1
+kind: Squad
+metadata:
+  name: referee-squad
+  phase: lazy
+  labels:
+    session: tictactoe
+    squad: referee
+spec:
+  session_id: *session_id
+  class: example.tictactoe.Referee/v0.22
+  max_members: *concurrent_games
+---
+apiVersion: plantangenet.session/v1
+kind: Squad
+metadata:
+  name: players-squad
+  phase: lazy
+  labels:
+    session: tictactoe
+    squad: player
+spec:
+  session_id: *session_id
+  class: example.tictactoe.Player/v0.0.1
+  max_members: *concurrent_players

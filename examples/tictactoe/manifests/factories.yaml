@@ -1,0 +1,50 @@
+---
+apiVersion: plantangenet.factories/v1
+kind: RandomSlug
+references:
+  session_name: 
+    define: &session_name
+    chunks: 2
+    separator: '-'
+    shellVar: TICTACTOE_SESSION_NAME
+metadata:
+  phase: initialization
+  name: random-slug-session-name
+---
+apiVersion: plantangenet.factories/v1
+kind: ArgParse
+references:
+  concurrent_games: 
+    define: &concurrent_games
+    default: 100
+    shellVar: TICTACTOE_CONCURRENT_GAMES
+  concurrent_players: 
+    define: &concurrent_players
+    default: 1800
+    shellVar: TICTACTOE_CONCURRENT_PLAYERS
+metadata:
+  phase: initialization
+  name: arg-parse-tictactoe
+---
+apiVersion: plantangenet.factories/v1
+kind: FreshId
+references:
+  identity_id: 
+    define: &identity_id
+    prefix: "I-"
+    shellVar: TICTACTOE_IDENTITY_ID
+  role_id: 
+    define: &role_id
+    prefix: "R-"
+    shellVar: TICTACTOE_ROLE_ID
+  policy_id: 
+    define: &policy_id
+    prefix: "POL-"
+    shellVar: TICTACTOE_POLICY_ID
+  session_id: 
+    define: &session_id
+    prefix: "SES-"
+    shellVar: TICTACTOE_SESSION_ID
+metadata:
+  phase: initialization
+  name: fresh-id-tictactoe
