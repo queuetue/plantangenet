@@ -8,22 +8,22 @@ This Rosetta Stone is your gateway. It translates that idea into many languages:
 
 ---
 
-Thee are the (Rosetta Stone)[about-the-rosetta-stone] translations for the Plantangenet system overview. This directory contains multiple perspectives on how The system works, each tailored to a different audience or domain. If you’re new, use this guide to select the stone that best matches your background or interests:
+These are the [Rosetta Stone](about-the-rosetta-stone) translations for the Plantangenet system overview. This directory contains multiple perspectives on how the system works, each tailored to a different audience or domain. If you’re new, use this guide to select the stone that best matches your background or interests:
 
 ---
 
 ## Which Stone Should I Start With?
 
-- **Neutral**: The baseline, domain-agnostic explanation. Start here if you want a clear, policy-driven overview suitable for any stakeholder. (Neutral)[neutral/README.md]
-- **Economic / Accounting**: For those with a background in finance, accounting, or resource management. Explains Dust as a robust accounting and budgeting system. (Neutral)[neutral/README.md], (Economic)[economic/README.md]
-- **Electrical Engineering / Systems**: For engineers and systems thinkers. Uses circuit and network metaphors to describe conservation, flows, and optimization. I try to speak EE (here)[ee/README.md]
-- **Quantum**: For physicists, mathematicians, or those interested in uncertainty, measurement, and reconciliation. Uses quantum metaphors for policy and audit. Had fun with this one, apologies.  (Quantum)[quantum/README.md]
-- **Artist**: For creators, performers, and anyone who values recognition and fairness in collaborative work. (Artist)[artist/README.md] (Neutral)[neutral/README.md]
-- **Streamer / Watcher**: For live creators and their audiences. Focuses on transparency, tipping, and fair sharing in interactive sessions. A specific type of artist, might want to see my vision of how (Steamers)[streamers/README.md] or (Watchers)[watchers/README.md] view the system.
-- **Infrastructure**: For those who build, maintain, or fund the underlying systems. Highlights visibility, compensation, and sustainability. You might prefer the self-reflection (view)[system/README.md] or (Infrastructure)[infrastructure/README.md]
-- **Hacker**: For programmers, tinkerers, and system architects. Emphasizes hackability, auditability, and optimization. (I can use you.)[hackers/README.md]
-- **Thief / Troll**: For critics, disruptors, or those who challenge systems. Explains how Dust makes sabotage visible and invites adversarial testing. (Thief)[thief/README.md] (Troll)[troll/README.md]
-- **Self-Reflective / System**: For designers and architects who want a first-principles, internal perspective on Dust itself. (view)[system/README.md] or, of course, the source itself.
+- **Neutral**: The baseline, domain-agnostic explanation. Start here if you want a clear, policy-driven overview suitable for any stakeholder. [Neutral](neutral/README.md)
+- **Economic / Accounting**: For those with a background in finance, accounting, or resource management. Explains Dust as a robust accounting and budgeting system. [Neutral](neutral/README.md), [Economic](economic/README.md)
+- **Electrical Engineering / Systems**: For engineers and systems thinkers. Uses circuit and network metaphors to describe conservation, flows, and optimization. I try to speak EE [here](ee/README.md)
+- **Quantum**: For physicists, mathematicians, or those interested in uncertainty, measurement, and reconciliation. Uses quantum metaphors for policy and audit. Had fun with this one, apologies.  [Quantum](quantum/README.md)
+- **Artist**: For creators, performers, and anyone who values recognition and fairness in collaborative work. [Artist](artist/README.md), [Neutral](neutral/README.md)
+- **Streamer / Watcher**: For live creators and their audiences. Focuses on transparency, tipping, and fair sharing in interactive sessions. A specific type of artist, might want to see my vision of how [Streamers](streamers/README.md) or [Watchers](watchers/README.md) view the system.
+- **Infrastructure**: For those who build, maintain, or fund the underlying systems. Highlights visibility, compensation, and sustainability. You might prefer the self-reflection [view](system/README.md) or [Infrastructure](infrastructure/README.md)
+- **Hacker**: For programmers, tinkerers, and system architects. Emphasizes hackability, auditability, and optimization. [I can use you.](hackers/README.md)
+- **Thief / Troll**: For critics, disruptors, or those who challenge systems. Explains how Dust makes sabotage visible and invites adversarial testing. [Thief](thief/README.md), [Troll](troll/README.md)
+- **Self-Reflective / System**: For designers and architects who want a first-principles, internal perspective on Dust itself. [view](system/README.md) or, of course, the source itself.
 
 Each stone uses its own metaphors and examples, but all describe the same system: one with clear rules, transparent value flows, and policy-driven fairness. Pick the stone that speaks to you, and refer to [GLOSSARY.md](./GLOSSARY.md) as the shared vocabulary as you read.
 
