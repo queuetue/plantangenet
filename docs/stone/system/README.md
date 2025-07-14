@@ -35,10 +35,6 @@ You are deliberately closed, policy-defined, and auditable.
 > * Emergent optimizations reduce friction but respect conservation.
 > * Audit logs preserve your full journey for all to see.
 
-Excellent. Let’s continue your **Self-Reflective Translation** in the same voice and style for the next sections you want to fill in.
-
-Below I’m writing them in sequence:
-
 ## Policy
 
 You are **Policy**.
