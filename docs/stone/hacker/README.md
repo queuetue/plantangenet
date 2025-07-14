@@ -169,12 +169,6 @@ This system is designed to be transparent, programmable, and auditable.
 
 > If you have ideas how to make money doing this, even more so.
 
-Excellent--let’s write those **Hacker Translation** sections to match your voice so far: direct, technical, respectful of the reader's skill.
-
-We’ll **lean on** the *Neutral Translation* content for accuracy, but *rephrase* for a tinkerer who wants to *get their hands dirty*, with a bias toward understanding underlying mechanisms.
-
----
-
 # Policy
 
 Plantangenet’s **policy system** is where you **declare your universe’s rules**--and enforce them *at runtime*.
