@@ -8,7 +8,9 @@ This Rosetta Stone is your gateway. It translates that idea into many languages:
 
 ---
 
-These are the [Rosetta Stone](about-the-rosetta-stone) translations for the Plantangenet system overview. This directory contains multiple perspectives on how the system works, each tailored to a different audience or domain. If you’re new, use this guide to select the stone that best matches your background or interests:
+These are the [Rosetta Stone](#about-the-rosetta-stone) translations for the Plantangenet system overview. This directory contains multiple perspectives on how the system works, each tailored to a different audience or domain. If you’re new, use this guide to select the stone that best matches your background or interests:
+
+Don't forget the [glossary](./GLOSSARY.md) is available.
 
 ---
 
