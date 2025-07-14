@@ -1,6 +1,6 @@
 # Plantangenet Rosetta Stone Glossary
 
-Welcome to the Rosetta Stone Glossary for Plantangenet. This is your guide to the functional vocabulary used in the Rosetta Stone translations. Each translation explains the Dust system from a different perspective, using metaphors and language tailored to a specific audience. If you’re new, start by choosing the stone that best matches your background or interests:
+Welcome to the Rosetta Stone Glossary for Plantangenet. This is your guide to the functional vocabulary used in the Rosetta Stone translations. Each translation explains the Dust system from a different perspective, using metaphors and language tailored to a specific audience, but they should share a common language when possible.  These are the words i thought would be helpful to people crossing fields.
 
 ---
 
