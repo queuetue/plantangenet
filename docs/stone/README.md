@@ -24,7 +24,7 @@ Don't forget the [glossary](./GLOSSARY.md) is available.
 - **Streamer / Watcher**: For live creators and their audiences. Focuses on transparency, tipping, and fair sharing in interactive sessions. A specific type of artist, might want to see my vision of how [Streamers](streamers/README.md) or [Watchers](watchers/README.md) view the system.
 - **Infrastructure**: For those who build, maintain, or fund the underlying systems. Highlights visibility, compensation, and sustainability. You might prefer the self-reflection [view](system/README.md) or [Infrastructure](infrastructure/README.md)
 - **Hacker**: For programmers, tinkerers, and system architects. Emphasizes hackability, auditability, and optimization. [Please contact me.](hackers/README.md)
-- **Thief / Troll**: For critics, disruptors, or those who challenge systems. Explains how Dust makes sabotage visible and invites adversarial testing. [Thief](thief/README.md), [Troll](troll/README.md)
+- **Thief / Troll**: For critics, disruptors, or those who challenge systems. Explains how Dust makes sabotage visible and invites adversarial testing. [Thief](thief/README.md), [Troll](trolls/README.md)
 - **Self-Reflective / System**: For designers and architects who want a first-principles, internal perspective on Dust itself. [view](system/README.md) or, of course, the source itself.
 
 Each stone uses its own metaphors and examples, but all describe the same system: one with clear rules, transparent value flows, and policy-driven fairness. Pick the stone that speaks to you, and refer to [GLOSSARY.md](./GLOSSARY.md) as the shared vocabulary as you read.
