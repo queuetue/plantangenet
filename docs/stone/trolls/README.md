@@ -10,15 +10,15 @@ It’s not here to stop you from **being hostile, sarcastic, competitive, or sub
 
 Dust is **pre-funded**. Every cycle begins with a fixed budget everyone sees. You can’t promise what you don’t have. You can’t extract on credit. You can’t demand more than what was put in.
 
-When you want to act--shout, joke, insult, demand changes, rewrite policy, even *tear down the current leaders*--you **spend** Dust. The system doesn’t ban that. It simply **accounts** for it.
+When you want to act - shout, joke, insult, demand changes, rewrite policy, even *tear down the current leaders* - you **spend** Dust. The system doesn’t ban that. It simply **accounts** for it.
 
 Because Dust is **bounded**, there’s no way to mint more by shouting louder. Your share is all you get to spend. If you burn it on nonsense, that’s your call. But everyone will see you did.
 
 At the end of each cycle, **all Dust is reconciled**. Nothing can hide in backchannels. Everyone knows **who paid**, **who got paid**, **what was said**, and **what was changed**.
 
----
+ - -
 
-## Overthrow Is Easy--Rule Is Hard
+## Overthrow Is Easy - Rule Is Hard
 
 Plantangenet is designed so **overthrow is cheap**. You can eject any ruling group.
 
@@ -53,12 +53,12 @@ Spend your share. Make your case, Get people to agree, or please walk away.
 **Note:**
 This system is designed to be resilient, clear, and honest.
 
-> * The total Dust supply is pre-funded and fixed--so your attacks cost you.
+> * The total Dust supply is pre-funded and fixed - so your attacks cost you.
 > * All transactions are recorded and visible.
 > * Overthrow is easy, but ruling requires being seen.
 > * You can halt the system, but you can’t hijack it without playing the same game.
 > * We don’t stop trolls. We account for them.
-> * If you want to help make it better, even as a critic--you can.
+> * If you want to help make it better, even as a critic - you can.
 
 ## What's a Rosetta Stone?
 

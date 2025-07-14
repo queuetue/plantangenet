@@ -3,9 +3,9 @@ This document is part of a Rosetta Stone for understanding the Plantangenet syst
 
 # Dust
 
-Plantangenet’s Dust system can be understood as a **closed, policy-defined reaction environment** where value behaves like a conserved substance moving through well-specified transformations. Each operational cycle is analogous to a controlled reaction run with a **fixed, pre-measured quantity of reactant**--Dust--which is injected at the start through pre-funding. This sets a strict, known budget for the system, ensuring **mass balance** throughout.
+Plantangenet’s Dust system can be understood as a **closed, policy-defined reaction environment** where value behaves like a conserved substance moving through well-specified transformations. Each operational cycle is analogous to a controlled reaction run with a **fixed, pre-measured quantity of reactant** - Dust - which is injected at the start through pre-funding. This sets a strict, known budget for the system, ensuring **mass balance** throughout.
 
-Participants act as **catalysts** or **reactants** within policy-defined **reaction pathways**. Every action or transaction has a **defined reaction mechanism** with specified costs representing *activation energy* or *enthalpy changes*--including coordination, validation, and audit overhead. These costs ensure that reactions cannot proceed uncontrolled, enforcing integrity and security in system interactions.
+Participants act as **catalysts** or **reactants** within policy-defined **reaction pathways**. Every action or transaction has a **defined reaction mechanism** with specified costs representing *activation energy* or *enthalpy changes* - including coordination, validation, and audit overhead. These costs ensure that reactions cannot proceed uncontrolled, enforcing integrity and security in system interactions.
 
 At the end of the cycle, **all Dust must be accounted for**. Conservation is mandatory: every unit of Dust must be traceable to products (work performed), byproducts (fees and overhead), reserves, or participant holdings. There is no room for unplanned reactions or spontaneous, untracked transformations. Even tips, forfeitures, and drift are **planned reaction products** defined by policy, returning Dust to reserves or shared system resources.
 
@@ -30,4 +30,4 @@ This document is part of a Rosetta Stone for understanding the Plantangenet syst
 
 The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. [wikipedia](https://en.wikipedia.org/wiki/Rosetta_Stone)
 
-It shows the same system explained in different ways so that different kinds of people can understand it. Each version uses its own words and examples, but they all describe the same system: one with clear rules that makes sure nothing is lost or hidden. By reading these sections, everyone--designers, engineers, players, and organizers--can see how Dust works, how the rules are set, and how all the money or value is tracked and shared fairly.
+It shows the same system explained in different ways so that different kinds of people can understand it. Each version uses its own words and examples, but they all describe the same system: one with clear rules that makes sure nothing is lost or hidden. By reading these sections, everyone - designers, engineers, players, and organizers - can see how Dust works, how the rules are set, and how all the money or value is tracked and shared fairly.

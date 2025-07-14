@@ -6,11 +6,11 @@ This document is part of a Rosetta Stone for understanding the Plantangenet syst
 
 Plantangenet’s Dust system defines a **closed, deterministic accounting universe** in which all value flows must be explicitly measured and conserved across each operational cycle. Though individual agents may model uncertainty, negotiation, or probabilistic strategies internally, the system itself acts as the measurement framework that resolves these uncertainties into **discrete, auditable ledger entries** by cycle end.
 
-Dust is **pre-funded** at the start of each cycle, setting an absolute, known quantity of value that circulates among participants. This enforces a strict conservation law: no Dust is spontaneously created or destroyed mid-cycle. All transfers--whether for work execution, validation, coordination overhead, or policy-defined redistributions like tips or drift--are governed by **explicit policy rules**.
+Dust is **pre-funded** at the start of each cycle, setting an absolute, known quantity of value that circulates among participants. This enforces a strict conservation law: no Dust is spontaneously created or destroyed mid-cycle. All transfers - whether for work execution, validation, coordination overhead, or policy-defined redistributions like tips or drift - are governed by **explicit policy rules**.
 
 Agents can locally maintain **probabilistic or superpositional models** to forecast strategies or outcomes within **reference frames**. However, these models must reconcile to consistent, shared accounting when measured. The system guarantees that every unit of Dust is tracked and accounted for, ensuring transparency and auditability across diverse agent behaviors.
 
-Policy defines **all permitted operations and costs**, including friction introduced by audit and coordination. It also governs redistribution mechanisms--planned behaviors like tipping, voluntary forfeitures, or timed expirations--that maintain system-wide conservation while encouraging strategic, emergent interactions.
+Policy defines **all permitted operations and costs**, including friction introduced by audit and coordination. It also governs redistribution mechanisms - planned behaviors like tipping, voluntary forfeitures, or timed expirations - that maintain system-wide conservation while encouraging strategic, emergent interactions.
 
 Critically, the system’s design enforces that **all local uncertainty collapses** to a deterministic, auditable state on measurement. This supports creative agent diversity while maintaining a consistent, shared accounting reality.
 
@@ -29,9 +29,9 @@ Critically, the system’s design enforces that **all local uncertainty collapse
 
 **Policy** in Plantangenet is the **Lagrangian** of the system.
 
-It defines the **allowed paths** through the state space--specifying **who** may perform **what** operations **under what conditions**.
+It defines the **allowed paths** through the state space - specifying **who** may perform **what** operations **under what conditions**.
 
-Just as the Lagrangian encodes the *physics* of a system--its symmetries, conservation laws, and constraints--**policy** encodes the *rules of interaction*. It ensures:
+Just as the Lagrangian encodes the *physics* of a system - its symmetries, conservation laws, and constraints - **policy** encodes the *rules of interaction*. It ensures:
 
 * All **permitted operations** are declared.
 * Costs for actions (including coordination friction) are **explicit**.
@@ -43,7 +43,7 @@ Agents can propose **any** move in their local frame of reference, even modeling
 * Costs must match declared pricing.
 * Identity, role, and context are always checked.
 
-Policy is **modular** and **pluggable**--like swapping potential energy terms in your Hamiltonian. It can define:
+Policy is **modular** and **pluggable** - like swapping potential energy terms in your Hamiltonian. It can define:
 
 * Simple, symmetric rules (RBAC).
 * Context-aware, negotiated conditions (ABAC).
@@ -55,7 +55,7 @@ And importantly, **policy evaluation** is enforced at runtime, ensuring that eve
 
 > Policy is the *physics engine* of Plantangenet. It governs the **causal structure** of all allowed interactions, ensuring conservation and accountability across the system.
 
----
+ - -
 
 ## Compositors
 
@@ -63,7 +63,7 @@ And importantly, **policy evaluation** is enforced at runtime, ensuring that eve
 
 They map **raw, high-dimensional system states** onto **policy-compliant, observer-specific outputs**.
 
-Think of a **wavefunction**: the system's full state might encode everything--agent identities, actions, secrets, histories. But no observer is allowed to see *all* of it. Instead:
+Think of a **wavefunction**: the system's full state might encode everything - agent identities, actions, secrets, histories. But no observer is allowed to see *all* of it. Instead:
 
 * **Compositors** define **which observables** are measured.
 * They apply **policy-defined filters**: degradation, masking, summarization.
@@ -78,17 +78,17 @@ Examples:
 
 Compositors **decouple** generation from presentation. They ensure **ephemeral snapshots** respect policy and **asynchronous updates** are efficient.
 
-Their transformations are **declared and auditable**--just like measurement operators in physics must respect the theory’s symmetries and conservation laws.
+Their transformations are **declared and auditable** - just like measurement operators in physics must respect the theory’s symmetries and conservation laws.
 
 **Note:**
 
 > Compositors are the *measurement devices* of Plantangenet. They ensure that all shared views are **policy-shaped**, preserving trust and enforcing **causal consistency** in what is revealed.
 
----
+ - -
 
 ## Squads
 
-**Squads** are **localized systems** of interacting agents--like **bounded subsystems** in physics with their own **Hamiltonians**.
+**Squads** are **localized systems** of interacting agents - like **bounded subsystems** in physics with their own **Hamiltonians**.
 
 They are defined within **frames** that set:
 
@@ -108,13 +108,13 @@ Use cases include:
 
 Squads explicitly negotiate **coordination costs** and **budget constraints**. Their audit logs track **all causal interactions**, ensuring that no entangled dependency goes unmeasured.
 
-Because they are **policy-defined**, Squads can be designed with **fine-grained causal models**--tracking which agent decisions influence which outputs, enforcing transparent attribution of cost and responsibility.
+Because they are **policy-defined**, Squads can be designed with **fine-grained causal models** - tracking which agent decisions influence which outputs, enforcing transparent attribution of cost and responsibility.
 
 **Note:**
 
 > Squads are **bounded causal systems** in Plantangenet. They let agents **coordinate, compete, or cooperate** while obeying the universal conservation laws of Dust.
 
----
+ - -
 
 ## Membry
 
@@ -134,7 +134,7 @@ You can think of Membry as enforcing **entropy accounting**. Nothing is free:
 * Higher resolution = higher cost.
 * Secrecy (encryption) = higher cost.
 
-Vaulted storage lets secrets be retained *with accountability*: even if content is hidden, the system tracks **commitments**--like publicly logging the hash of an encrypted message.
+Vaulted storage lets secrets be retained *with accountability*: even if content is hidden, the system tracks **commitments** - like publicly logging the hash of an encrypted message.
 
 In effect, Membry ensures **all causal history** is preserved in a **policy-defined, costed way**, preventing hidden liabilities or uncontrolled information bloat.
 
@@ -142,13 +142,13 @@ In effect, Membry ensures **all causal history** is preserved in a **policy-defi
 
 > Membry is **auditable decoherence**. It turns ephemeral agent interactions into **persistent, policy-compliant records**, respecting conservation and privacy while ensuring accountability.
 
----
+ - -
 
 ## Privacy & Delivery
 
-**Privacy** in Plantangenet isn’t **absolute secrecy**. It’s **controlled, policy-defined information collapse**--just like measurement in quantum systems.
+**Privacy** in Plantangenet isn’t **absolute secrecy**. It’s **controlled, policy-defined information collapse** - just like measurement in quantum systems.
 
-Agents may maintain **superpositional internal states**--plans, strategies, secrets. But when they communicate, they must **collapse those states** into **policy-compliant messages**.
+Agents may maintain **superpositional internal states** - plans, strategies, secrets. But when they communicate, they must **collapse those states** into **policy-compliant messages**.
 
 Delivery channels enforce:
 
@@ -176,4 +176,4 @@ Together, these ensure **causality is preserved**: no message can reveal informa
 
 The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. [wikipedia](https://en.wikipedia.org/wiki/Rosetta_Stone)
 
-It shows the same system explained in different ways so that different kinds of people can understand it. Each version uses its own words and examples, but they all describe the same system: one with clear rules that makes sure nothing is lost or hidden. By reading these sections, everyone--designers, engineers, players, and organizers--can see how Dust works, how the rules are set, and how all the money or value is tracked and shared fairly.
+It shows the same system explained in different ways so that different kinds of people can understand it. Each version uses its own words and examples, but they all describe the same system: one with clear rules that makes sure nothing is lost or hidden. By reading these sections, everyone - designers, engineers, players, and organizers - can see how Dust works, how the rules are set, and how all the money or value is tracked and shared fairly.

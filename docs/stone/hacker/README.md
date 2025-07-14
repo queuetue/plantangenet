@@ -14,11 +14,11 @@ If you are where you should be then, please read the Neutral stone first.  This 
 
 Plantangenet’s Dust system is **a fully accounted, programmable transaction layer** for distributed work.
 
-It’s there to make *every* operation--no matter how asynchronous, parallel, or weird--**explicitly metered** and **auditable**.
+It’s there to make *every* operation - no matter how asynchronous, parallel, or weird - **explicitly metered** and **auditable**.
 
 This isn’t Kubernetes pretending to be “cloud-native.” It’s closer to **bare-metal economics for coordination itself**.
 
----
+ - -
 
 ## Designed for People Who Want to Know How It Works
 
@@ -34,15 +34,15 @@ You can think of it like a **bounded gas tank** for your entire distributed work
 * Every audit, every validator step, every consensus round burns fuel.
 * All of it is tracked.
 
----
+ - -
 
 ## Compositors and Squads Actually Produce Output
 
-Plantangenet doesn’t just log transactions--it **orchestrates work**:
+Plantangenet doesn’t just log transactions - it **orchestrates work**:
 
 * **Compositors** are pluggable, programmable pipelines for transforming structured state into shareable outputs. Think rendering pipelines, ETL flows, live dashboards.
 * They can degrade, mask, summarize, or encrypt on the fly based on **policy**.
-* Compositors are how the system takes raw agent actions and produces *pixels*, *JSON*, *binaries*, *archives*--anything.
+* Compositors are how the system takes raw agent actions and produces *pixels*, *JSON*, *binaries*, *archives* - anything.
 
 **Squads** are like dynamic worker pools or service graphs:
 
@@ -53,7 +53,7 @@ Plantangenet doesn’t just log transactions--it **orchestrates work**:
 
 You're not just deploying YAML at Kubernetes. You're composing **live, auditable economic contracts** for cooperative workloads.
 
----
+ - -
 
 ## Hackable, Auditable, and Fully Scriptable
 
@@ -76,11 +76,11 @@ We built **Meatball** to handle macro-expansion safely. We built **Janet** to ma
 
 If you want to deploy a plan to stand up 10K simulations with ephemeral Redis and NATS, with precise budgeted coordination, that’s what this system is for.
 
----
+ - -
 
 ## Optimizations Are Legit Work
 
-Dust isn’t there to *stop* you hacking--it’s there to make **hacks count**.
+Dust isn’t there to *stop* you hacking - it’s there to make **hacks count**.
 
 * Reduce coordination overhead? You save Dust for real work.
 * Batch operations? You get more done per cycle.
@@ -89,7 +89,7 @@ Dust isn’t there to *stop* you hacking--it’s there to make **hacks count**.
 
 Plantangenet is designed for **emergent optimizations** that show up in the ledger. If you’re the person who makes the system cheaper to run, you *actually* get the credit.
 
----
+ - -
 
 ## Local Experiments, Global Accounting
 
@@ -107,9 +107,9 @@ But **at the end of the cycle**:
 
 Your local uncertainty collapses into a **deterministic global ledger**.
 
-It’s like running Monte Carlo on your own time--but paying for actual compute and coordination as it happens.
+It’s like running Monte Carlo on your own time - but paying for actual compute and coordination as it happens.
 
----
+ - -
 
 ## Bring Your Own Language
 
@@ -127,9 +127,9 @@ We’ve designed for:
 * Minimal JSON schemas for policy.
 * Low-level access to audit logs.
 
-If you want to get closer to the metal than Kubernetes will let you--**here’s your playground**.
+If you want to get closer to the metal than Kubernetes will let you - **here’s your playground**.
 
----
+ - -
 
 ## Invitation to Hack
 
@@ -146,22 +146,22 @@ But you can’t do it **for free** or **in secret**. You have to pay the coordin
 
 That’s not a punishment. It’s the **terms of service for actual collaboration**.
 
-If you want a system where your cleverness matters and gets paid--welcome.
+If you want a system where your cleverness matters and gets paid - welcome.
 
----
+ - -
 
 **Note:**
 This system is designed to be transparent, programmable, and auditable.
 
 > * The Dust supply is pre-funded and fixed per cycle.
 > * All costs are declared in policy.
-> * Conservation is enforced--no hidden inflation or loss.
+> * Conservation is enforced - no hidden inflation or loss.
 > * Macro expansion and plan execution are scriptable and safe.
 > * Compositors and Squads are policy-defined, auditable workers.
 > * Optimization, batching, and simplification are rewarded with real margin.
-> * Audit logs mean everyone can see who did what--and why.
+> * Audit logs mean everyone can see who did what - and why.
 
----
+ - -
 
 > A personal note from Queuetue:  If this "stone" speaks to you, please, I can use your help! Being able to discuss this with other people is VERY difficult, because first you need to teach them how to build a self-contained universe, and I might veer into ... caching debates, or aircraft statistics, or old stories. :)  
 
@@ -171,9 +171,9 @@ This system is designed to be transparent, programmable, and auditable.
 
 # Policy
 
-Plantangenet’s **policy system** is where you **declare your universe’s rules**--and enforce them *at runtime*.
+Plantangenet’s **policy system** is where you **declare your universe’s rules** - and enforce them *at runtime*.
 
-Policies aren’t just documentation. They’re **executed logic** that controls **who** can do **what**, **under which conditions**--all enforced *field by field*, *action by action*, *agent by agent*.
+Policies aren’t just documentation. They’re **executed logic** that controls **who** can do **what**, **under which conditions** - all enforced *field by field*, *action by action*, *agent by agent*.
 
 Think of policy as the **bytecode of trust**:
 
@@ -181,7 +181,7 @@ Think of policy as the **bytecode of trust**:
 * Need context-aware permissions (time of day, budget, request origin)? Done.
 * Need per-field masking, write barriers, read degradation? That’s built-in.
 
-Policies are **modular and pluggable**. You can define rules in JSON or render them from templates. The system lets you write condition checks in **Python** or **JavaScript**--so you can actually express complex logic, not just "role X can read Y".
+Policies are **modular and pluggable**. You can define rules in JSON or render them from templates. The system lets you write condition checks in **Python** or **JavaScript** - so you can actually express complex logic, not just "role X can read Y".
 
 All of this is **auditable**. Every action gets evaluated, logged, and validated against the policy in real time. That means you can *prove*:
 
@@ -189,21 +189,21 @@ All of this is **auditable**. Every action gets evaluated, logged, and validated
 * What data they saw.
 * Which rule let them do it.
 
-This isn’t Kubernetes RBAC. This is **programmable guardrails for trust**, designed to let you model **negotiated, federated, cross-org systems**--where agents might be *competitive*, *adversarial*, or *just misconfigured*.
+This isn’t Kubernetes RBAC. This is **programmable guardrails for trust**, designed to let you model **negotiated, federated, cross-org systems** - where agents might be *competitive*, *adversarial*, or *just misconfigured*.
 
 You get to decide **how much** trust to allow, **where** to enforce it, and **how** to make it explicit in logs.
 
----
+ - -
 
 # Compositors
 
-Compositors are Plantangenet’s **view engines**--but think bigger.
+Compositors are Plantangenet’s **view engines** - but think bigger.
 
 They’re programmable **pipelines** that take messy, high-dimensional, time-indexed data and turn it into **policy-compliant output**.
 
 You want to generate a **SQL query result**, a **graph traversal**, a **framebuffer image**, or a **structured ML batch**? You define a **compositor** for that.
 
-Compositors work with **axes**--essentially dimensions you want to slice by. For example:
+Compositors work with **axes** - essentially dimensions you want to slice by. For example:
 
 * Time windows
 * User IDs
@@ -221,11 +221,11 @@ They can support **graphs** for social networks, **SQL workloads** for ad hoc qu
 
 All transformations are **declared**. All costs are **metered**. All outputs are **audited**.
 
-For a hacker, that means **you can prototype and deploy ETL pipelines**, **data serving layers**, **live dashboards**, or **ML workloads**--without sacrificing **auditability** or **privacy compliance**.
+For a hacker, that means **you can prototype and deploy ETL pipelines**, **data serving layers**, **live dashboards**, or **ML workloads** - without sacrificing **auditability** or **privacy compliance**.
 
 No hand-waving about trust. Just code, policy, and Dust flows you can inspect.
 
----
+ - -
 
 # Squads
 
@@ -237,14 +237,14 @@ Think of a Squad as a **policy-bound actor system** that actually meters Dust co
 * It knows what they’re allowed to do.
 * It knows the budget for coordination overhead.
 
-You don’t just "run jobs"--you *negotiate coordination*.
+You don’t just "run jobs" - you *negotiate coordination*.
 
 Example use cases:
 
 * **Tournaments**: Have players submit states, adjudicate moves, and pay for refereeing.
 * **GAN Training**: Have generator and discriminator squads negotiate updates, pay for coordination, log outcomes.
 * **Systems Modeling**: Have agents simulate different parts of a physical or economic system, synchronizing states with explicit budgeted communication.
-* **System Status**: Aggregate microservice health, logs, and metrics into live dashboards--again, paying for coordination.
+* **System Status**: Aggregate microservice health, logs, and metrics into live dashboards - again, paying for coordination.
 * **RPGs**: Multiplayer state machines with rule-bound adjudication, agent turns, persistence.
 
 You define Squads in **policy**. They can be **ephemeral** (for a quick batch job) or **persistent** (long-running simulation). They enforce declared **coordination costs**:
@@ -257,7 +257,7 @@ Squads are how you *pay for* and *trace* distributed coordination, turning spagh
 
 # Membry
 
-**Membry** is Plantangenet’s **memory layer**--but it’s designed for people who understand storage isn’t free.
+**Membry** is Plantangenet’s **memory layer** - but it’s designed for people who understand storage isn’t free.
 
 In many systems, persistence is just "write and forget." Hidden costs, unbounded growth, accidental leaks.
 

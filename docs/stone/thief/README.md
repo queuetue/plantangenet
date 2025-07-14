@@ -10,7 +10,7 @@ We know you’re smart. We know you see angles most people miss. You see overhea
 
 Dust is here to make those angles **not worth it**.
 
----
+ - -
 
 ## The Honest Game of Dishonesty
 
@@ -30,7 +30,7 @@ You can still be clever here.
 
 But you can’t **steal from it in secret**.
 
----
+ - -
 
 ## Theft Is Too Much Work Here
 
@@ -44,7 +44,7 @@ All costs are **declared**. All payments are **tracked**. All spending is **audi
 
 To steal here means you’d have to do it in plain sight. It’s not impossible. It’s just too expensive to be fun.
 
----
+ - -
 
 ## The Invitation: Join the Game
 
@@ -57,7 +57,7 @@ You know how to spot people lying about costs.
 
 We want you **here**, doing that work **for real**.
 
----
+ - -
 
 ## It’s Better to Help Than Exploit
 
@@ -67,9 +67,9 @@ In Dust, **optimization is rewarded**.
 * When you reduce coordination costs, you make more Dust available.
 * When you improve workflows, you earn the credit.
 
-The thing you’re so good at--making systems work better by pushing on them--is **paid work** here.
+The thing you’re so good at - making systems work better by pushing on them - is **paid work** here.
 
----
+ - -
 
 ## For the Born Hustler
 
@@ -87,7 +87,7 @@ But you have to show your work.
 
 Why not try reentering from the [infrastructure](../infrastructure/README.md) route?
 
----
+ - -
 
 ## For the Reluctant Thief
 
@@ -110,7 +110,7 @@ No apology required.
 
 Why not try reentering from the [hacker](../hacker/README.md) route?
 
----
+ - -
 
 **Note:**
 This system is designed to make theft unappealing, not impossible.
@@ -118,12 +118,12 @@ This system is designed to make theft unappealing, not impossible.
 > * All Dust is pre-funded and accounted for.
 > * There’s no way to mint value in secret.
 > * All spending and giving is tracked.
-> * You can hustle--but you’ll do it in the open.
+> * You can hustle - but you’ll do it in the open.
 > * Optimization, negotiation, and cleverness are rewarded.
 > * Everyone can see if you deliver value or just cost others.
-> * If you want to help us break, fix, or improve the system--you’re welcome here.
+> * If you want to help us break, fix, or improve the system - you’re welcome here.
 
----
+ - -
 
 ## What's a Rosetta Stone?
 
@@ -134,6 +134,6 @@ This translation is for **you**. It says:
 
 You’re welcome to test it.
 To stress it.
-To break it--and get paid to help fix it.
+To break it - and get paid to help fix it.
 
 Because here, we believe **everyone’s work should be seen and valued. Even yours.**
