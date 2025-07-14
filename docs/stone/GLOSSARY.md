@@ -4,23 +4,6 @@ Welcome to the Rosetta Stone Glossary for Plantangenet. This is your guide to th
 
 ---
 
-## Which Stone Should I Start With?
-
-- **Neutral**: The baseline, domain-agnostic explanation. Start here if you want a clear, policy-driven overview suitable for any stakeholder.
-- **Economic / Accounting**: For those with a background in finance, accounting, or resource management. Explains Dust as a robust accounting and budgeting system.
-- **Electrical Engineering / Systems**: For engineers and systems thinkers. Uses circuit and network metaphors to describe conservation, flows, and optimization.
-- **Quantum**: For physicists, mathematicians, or those interested in uncertainty, measurement, and reconciliation. Uses quantum metaphors for policy and audit.
-- **Artist**: For creators, performers, and anyone who values recognition and fairness in collaborative work.
-- **Streamer / Watcher**: For live creators and their audiences. Focuses on transparency, tipping, and fair sharing in interactive sessions.
-- **Infrastructure**: For those who build, maintain, or fund the underlying systems. Highlights visibility, compensation, and sustainability.
-- **Hacker**: For programmers, tinkerers, and system architects. Emphasizes hackability, auditability, and optimization.
-- **Thief / Troll**: For critics, disruptors, or those who challenge systems. Explains how Dust makes sabotage visible and invites adversarial testing.
-- **Self-Reflective / System**: For designers and architects who want a first-principles, internal perspective on Dust itself.
-
-Each stone uses its own metaphors and examples, but all describe the same system: one with clear rules, transparent value flows, and policy-driven fairness. Pick the stone that speaks to you, and use this glossary to decode the vocabulary as you read.
-
----
-
 ## Index
 
 [A](#a) | [B](#b) | [C](#c) | [D](#d) | [E](#e) | [F](#f) | [M](#m) | [N](#n) | [O](#o) | [P](#p) | [R](#r) | [S](#s)
