@@ -2,7 +2,7 @@
 
 This document is part of a Rosetta Stone for understanding the Plantangenet system.
 
-These are descriptions written from the perspective of the system object itself.  if you want a more straightforward description, please check the (Neutral)[../neutral/README.md] stone.
+These are descriptions written from the perspective of the system object itself.  if you want a more straightforward description, please check the [Neutral](../neutral/README.md) stone.
 
 ## Dust
 
