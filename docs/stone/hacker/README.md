@@ -283,7 +283,7 @@ For hackers, this means you get **storage with economic contracts baked in**.
 You can script policies that decide:
 
 * Who can read/write.
-* How data expires or fades.
+* How data expires or Fdes.
 * How much detail is retained.
 
 It’s not a DBMS. It’s the **control plane** for *making any DB behave like a cooperative, policy-bound store*.
@@ -336,7 +336,7 @@ Hackers can script, test, and optimize these pipelines, ensuring **users only se
 
 ## What's a Rosetta Stone?
 
-The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. (Wikipedia)
+The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. [wikipedia](https://en.wikipedia.org/wiki/Rosetta_Stone)
 
 This is **your** translation:
 

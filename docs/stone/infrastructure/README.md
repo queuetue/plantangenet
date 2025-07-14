@@ -31,6 +31,6 @@ Ultimately, Dust is a **framework** for defining and enforcing fair, auditable p
 
 ## What's a Rosetta Stone?
 
-The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. (Wikipedia)
+The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. [wikipedia](https://en.wikipedia.org/wiki/Rosetta_Stone)
 
 It shows the same system explained in different ways so that different kinds of people can understand it. Each version uses its own words and examples, but they all describe the same system: one with clear rules that makes sure nothing is lost or hidden. By reading these sections, everyone--designers, engineers, players, and organizers--can see how Dust works, how the rules are set, and how all the money or value is tracked and shared fairly.

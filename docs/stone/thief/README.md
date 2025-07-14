@@ -127,7 +127,7 @@ This system is designed to make theft unappealing, not impossible.
 
 ## What's a Rosetta Stone?
 
-The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. (Wikipedia)
+The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. [wikipedia](https://en.wikipedia.org/wiki/Rosetta_Stone)
 
 This translation is for **you**. It says:
 *We see you. We respect you. We built this with you in mind.*
