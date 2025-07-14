@@ -17,7 +17,7 @@ Don't forget the [glossary](./GLOSSARY.md) is available.
 ## Which Stone Should I Start With?
 
 - **Neutral**: The baseline, domain-agnostic explanation. Start here if you want a clear, policy-driven overview suitable for any stakeholder. [Neutral](neutral/README.md)
-- **Economic / Accounting**: For those with a background in finance, accounting, or resource management. Explains Dust as a robust accounting and budgeting system. [Neutral](neutral/README.md), [Economic](economic/README.md)
+- **Economic / Accounting**: For those with a background in finance, accounting, or resource management. Explains Dust as a robust accounting and budgeting system. [Neutral](neutral/README.md), [Economic](economics/README.md)
 - **Electrical Engineering / Systems**: For engineers and systems thinkers. Uses circuit and network metaphors to describe conservation, flows, and optimization. I try to speak EE [here](ee/README.md)
 - **Quantum**: For physicists, mathematicians, or those interested in uncertainty, measurement, and reconciliation. Uses quantum metaphors for policy and audit. Had fun with this one, apologies.  [Quantum](quantum/README.md)
 - **Artist**: For creators, performers, and anyone who values recognition and fairness in collaborative work. [Artist](artist/README.md), [Neutral](neutral/README.md)
