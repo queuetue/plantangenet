@@ -19,6 +19,7 @@ Don't forget the [glossary](./GLOSSARY.md) is available.
 - **Artist**: For creators, performers, and anyone who values recognition and fairness in collaborative work. [Artist](artist/README.md), [Neutral](neutral/README.md) * SUPPORT LOCAL ARTISTS *
 - **Neutral**: The baseline, domain-agnostic explanation. Start here if you want a clear, policy-driven overview suitable for any stakeholder. [Neutral](neutral/README.md) Long and Dry.
 - **Economic / Accounting**: For those with a background in finance, accounting, or resource management. Explains Dust as a robust accounting and budgeting system. [Neutral](neutral/README.md), [Economic](economics/README.md)
+- **Contractor / Handy Person**: If you're good at plumbing or electrical work, this might resonate with you. [Contractor](contractor/README.md) 
 - **Electrical Engineering / Systems**: For engineers and systems thinkers. Uses circuit and network metaphors to describe conservation, flows, and optimization. I try to speak EE [here](ee/README.md)
 - **Quantum**: For physicists, mathematicians, or those interested in uncertainty, measurement, and reconciliation. Uses quantum metaphors for policy and audit. Had fun with this one, apologies.  [Quantum](quantum/README.md)
 - **Streamer / Watcher**: For live creators and their audiences. Focuses on transparency, tipping, and fair sharing in interactive sessions. A specific type of artist might want to see my vision of how [Streamers](streamer/README.md) or [Watchers](watcher/README.md) view the system.
