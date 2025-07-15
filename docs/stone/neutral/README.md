@@ -187,8 +187,6 @@ This approach enables **competitive and cooperative dynamics** to emerge without
 > * Redistribution mechanisms ensure **fairness** and **community sustainability**.
 > * Optimization is **rewarded** but must respect **conservation** and **auditability**.
 
-Excellent guide. Let’s fit **Membry** into that structure - short, clear paragraphs, a single bullet list, and a concluding **Note** box in the same style:
-
 ## Membry
 
 **Membry** is Plantangenet’s **policy-aware memory layer**, designed to ensure that **all storage is intentional, bounded, and accountable**. It doesn’t ban keeping data forever - you can still export a JPEG or save receipts - but it ensures that *within the system*, persistence is always **declared, priced, and auditable**.
@@ -279,7 +277,6 @@ Compositors also support advanced models like **GraphCompositors** and **FBCompo
 * **Separation of Concerns:** Compositors decouple raw production from policy-shaped, focus-aware consumption.
 * **Negotiated Views:** They enforce filtering, degradation, and transformation rules for privacy, trust, and economic fairness.
 
-
 **Note:**
 
 > * Compositors ensure **everyone sees only what they’re allowed**, in the form they need.
@@ -350,7 +347,6 @@ A **comdec** is the **delivery layer** that distributes these composed, policy-s
 > * Chems negotiate **who sees what** under policy-defined rules.
 > * Comdecs manage **how** these approved views are delivered.
 > * All sharing is **explicit, bounded, and auditable**.
-
 
 ## What's a Rosetta Stone?
 
