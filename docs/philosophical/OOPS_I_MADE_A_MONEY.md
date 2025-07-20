@@ -2,6 +2,8 @@
 
 *A Beat Poem Confession to Those Who Will Hold My Tribunal.*
 
+⚠️ This document contains a Cognitohazard. This is not a threat, this is a courtesy.
+
 ---
 
 ## I. Exposition: The Reluctant Mint
