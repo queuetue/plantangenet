@@ -161,14 +161,6 @@ This system is designed to be transparent, programmable, and auditable.
 > * Optimization, batching, and simplification are rewarded with real margin.
 > * Audit logs mean everyone can see who did what - and why.
 
- - -
-
-> A personal note from Queuetue:  If this "stone" speaks to you, please, I can use your help! Being able to discuss this with other people is VERY difficult, because first you need to teach them how to build a self-contained universe, and I might veer into ... caching debates, or aircraft statistics, or old stories. :)  
-
-> Having people around who think about dna from the inside out, get why a packet would be able to decrypt itself, or question whether the planck constant indicates a *heck* of a lot more than we let on ... I'd like to chat on the reg, as difficult as that is for me and you.
-
-> If you have ideas how to make money doing this, even more so.
-
 # Policy
 
 Plantangenet’s **policy system** is where you **declare your universe’s rules** - and enforce them *at runtime*.
@@ -344,3 +336,10 @@ This is **your** translation:
 
 Because here, **the ledger is the code**. And you get to write your part of it.
 
+===
+
+> A personal note from Queuetue:  If this "stone" speaks to you, please, I can use your help! Being able to discuss this with other people is VERY difficult, because first you need to teach them how to build a self-contained universe, and I might veer into ... caching debates, or aircraft statistics, or old stories. :)  
+
+> Having people around who think about dna from the inside out, get why a packet would be able to decrypt itself, or question whether the planck constant indicates a *heck* of a lot more than we let on ... I'd like to chat on the reg, as difficult as that is for me and you.
+
+> If you have ideas how to make money doing this, even more so.
