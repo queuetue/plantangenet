@@ -47,7 +47,7 @@ Money did not grow from barter.
 Money did not grow from cows and shells and friendly trade.
 Money grew from **blood prices**.
 From fines, and debts, and obligations you could not refuse.
-From wergilds and tribute and ledgers made to prevent revenge—
+From wergilds and tribute and ledgers made to prevent revenge-
 by **outsourcing the violence to someone bigger**.
 
 All money is the memory of harm, plus a schedule for how soon it *will* return.
@@ -72,7 +72,7 @@ Because *something* had to say yes.
 (confessional moment)
 
 And I stand here before you, defending my choices.
-In this place, and in this time—and never again—I will confess:
+In this place, and in this time-and never again-I will confess:
 
 I also poop every day.
 And I hate that, too.
@@ -112,7 +112,7 @@ I tried to make it **bounded**.
 Not permanent.
 Not God.
 Not a capital-M Market.
-Just a mechanism of memory and consequence—
+Just a mechanism of memory and consequence-
 for a bounded world,
 with bounded trust,
 and bounded harm.
@@ -129,12 +129,12 @@ instead of pretending to be fair.
 
 So this is my confession.
 
-If you are reading this—
+If you are reading this-
 and the system has gone cold,
 or sharp,
-or cruel—
+or cruel-
 
-If it has hurt you—
+If it has hurt you-
 
 You should be angry.
 
@@ -154,8 +154,7 @@ To make peace with the things we must shed.
 I made a money.
 And I detest it.
 
-But I made it with a hand that knows what harm is—
-and a heart that hoped it could still be worth something.
+But I made it with a hand that knows what harm is - and a heart that hoped it could still be worth something.
 
 Not forever.
 Just for now.
