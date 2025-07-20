@@ -35,6 +35,7 @@ You want to outsmart it? Ok, if you have to.  Please try to be polite.
 * Break the accounting.
 * Show the policy is bad.
 * Make people laugh at us.
+* [Here's some ammo.](../../philosophical/THREE_CHEATS.md)
 
 That's ok.
 

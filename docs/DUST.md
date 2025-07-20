@@ -75,6 +75,16 @@ Dispositions are **inheritable**, **auditable**, and **modular**. They express *
 
 ---
 
+# All Money is Theft and Violence
+
+Like all systems of monetary exchange, Dust carries with it the potential for consequence. It is not merely a tool of measurement or participation—it is also the structured memory of obligation. Any medium that assigns value, even transparently, must contain a means of enforcement: a way to say no, to reject, to withhold, or in rare cases, to remove.
+
+In conventional systems, this mechanism is hidden—somewhere, eventually, _a police officer may appear at your door and do violence to you._
+
+In Plantangenet, this is acknowledged plainly. Dust does not erase coercion; it ritualizes it, bounds it, and subjects it to declared policy. This doesn't necessarily make the system soft—it makes it legible. It ensures that all participants know not just what is possible, but what is permitted, and what happened, and how much it was appreciated.
+
+---
+
 ## Profit Motive, Fees, and Distribution
 
 Recent updates to Plantangenet's economic system introduce a flexible, auditable distribution mechanism for Dust. This enables:

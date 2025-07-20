@@ -106,7 +106,77 @@ Compositors are *pluggable*: you can design custom pipelines for dashboards, rep
 
 > Compositors ensure that all views of Dust spending and allocation are **accurate, policy-shaped, and appropriately scoped** - just like solid financial reporting.
 
- - -
+
+## Expansion
+
+**Expansion** in Plantangenet is the system’s mechanism for issuing **temporary purchasing power or elevated budget authority**, based on **policy-defined commitments** and performance.
+
+It functions much like **credit issuance**, **advance payments**, or **project-specific budget overruns**, but is **explicitly scoped**, **non-inflationary**, and **fully auditable**.
+
+Expansion is governed by:
+
+* **Policy**: Specifies who is eligible, under what conditions, and with what collateral or performance guarantees.
+* **Mechanisms**:
+
+  * **Credit** – A bounded Dust allowance to be reconciled or earned back.
+  * **Advance** – Front-loaded allocation tied to a future deliverable or role.
+  * **Multiplier** – Temporary rate increases for throughput under qualifying conditions (e.g. squad-wide acceleration).
+  * **Bias** – Structural preference expressed through pricing shifts or cost offsets.
+
+These mechanisms are **declared at time of grant**, with clear **expiration**, **scope**, and **resolution rules**. All expansion activity is **booked separately**, like a temporary sub-budget or forward liability.
+
+Expansion relies on **expansion primitives**: provable actions such as:
+
+* Completing coursework (preconditions)
+* Achieving performance benchmarks (measurable outcomes)
+* Receiving delegation from qualified agents or roles (policy-based trust)
+
+At the end of a cycle, all expansion must be **reconciled**:
+
+* Either worked off through action
+* Reclaimed as unearned advance
+* Converted into permanent allocation (if explicitly permitted)
+
+This ensures that **expanded Dust is never created ex nihilo**, but always offset against system-defined value and backed by **performance or policy trust**.
+
+> **Note:**
+>
+> * Expansion is modeled as **conditional pre-spending** or **temporary credit**.
+> * All grants are **bounded, scoped, and revocable**.
+> * Policy defines **terms, ceilings, and resolution logic**.
+> * Reconciliation ensures conservation, preventing inflation.
+> * Enables productivity **without sacrificing accountability**.
+
+## Responsibilities
+
+**Responsibilities** in Plantangenet function like **role-based authorizations tied to budget impact and fiduciary duties**.
+
+They resemble **signatory privileges**, **budget-holder roles**, or **audit-sensitive operator classes** in conventional accounting systems.
+
+Responsibilities are:
+
+* **Policy-defined**: Only eligible agents may assume them, often through vetting (e.g. training, past performance, nomination).
+* **Scoped**: Each Responsibility comes with explicit permissions, spending power, and oversight requirements.
+* **Tracked**: Actions taken under Responsibility are logged separately, enabling **audit segmentation**.
+* **Revocable**: Non-performance, disuse, or violations trigger policy-defined termination or reallocation.
+
+Examples:
+
+* **Adjudicator**: Authorized to resolve disputes, impacting Dust flows and retroactive judgments.
+* **Frame Coordinator**: Manages budget ceilings, allocations, and reconciliation within a frame.
+* **Vault Steward**: Oversees long-lived or sensitive records, managing cost exposure of durable storage.
+* **Policy Author**: Holds rights to propose or ratify changes to economic and operational logic.
+
+Taking on a Responsibility may **increase agent utility**, **unlock Expansion**, or confer **cost control capabilities**—but comes with **explicit risk**, **audit exposure**, and **operational burden**.
+
+Think of Responsibilities as **roles with budgetary impact**, governance power, and **reputational consequence**.
+
+> **Note:**
+>
+> * Responsibilities = **budget-impacting permissions** gated by policy.
+> * They carry **operational and fiduciary risk**.
+> * All actions under a role are **logged for financial and governance audit**.
+> * Responsibilities may unlock **expansion or higher authority**, but are **never permanent or unchecked**.
 
 ## Squads
 

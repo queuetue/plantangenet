@@ -1,4 +1,4 @@
-# Contractor Translation
+# Translation For Bob
 
 This document is part of a Rosetta Stone for understanding the Plantangenet system.
 
@@ -104,3 +104,12 @@ When you store data in Membry, it’s like **charging a capacitor** - you must d
 > * Membry is like a **state capacitor**, storing data in a controlled, **policy-defined** way.
 > * Storage has **costs** and **duration limits**, ensuring that nothing stays hidden without accountability.
 > * All storage actions are **tracked** and **audited**, ensuring fair use of resources.
+
+**Robert Morley** Was one of my dearest friends, and I lost him far too young.  Through Bob, his father, [Dick Morley](https://en.wikipedia.org/wiki/Dick_Morley) and his sister Pat, I formed the lens on the world that helped me *see* Plantangenet, the rigor to make it real, and the desire to share it.
+
+## What's a Rosetta Stone?
+
+The Rosetta Stone was an ancient artifact inscribed with the same text in multiple scripts, which enabled scholars to decode Egyptian hieroglyphs by comparing translations. [wikipedia](https://en.wikipedia.org/wiki/Rosetta_Stone)
+
+It shows the same system explained in different ways so that different kinds of people can understand it. Each version uses its own words and examples, but they all describe the same system: one with clear rules that makes sure nothing is lost or hidden. By reading these sections, everyone - designers, engineers, players, and organizers - can see how Dust works, how the rules are set, and how all the money or value is tracked and shared fairly.
+

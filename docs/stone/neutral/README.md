@@ -97,6 +97,67 @@ Squads can **compose** outputs from many agents, applying declared **transformat
 > * Outputs are **policy-defined and auditable**.
 > * Support structured cooperation while preserving **bounded, visible Dust flows**.
 
+## Responsibilities or Positions
+
+Plantangenet introduces the concept of **Responsibilities**: structured, policy-defined privileges that agents may take on by meeting specific requirements. A Responsibility is not just a permission—it’s a **commitment** to additional context, duties, or performance that affects how an agent interacts with Dust, Frames, and other agents.
+
+Responsibilities may include:
+
+* **Adjudicator** – Authorized to render judgments on contested frames.
+* **Compositor Operator** – Allowed to define or modify view pipelines.
+* **Frame Coordinator** – Responsible for budget enforcement and session lifecycle.
+* **Vault Steward** – Trusted to manage long-lived or secret Membry entries.
+* **Policy Author** – Granted rights to propose, negotiate, or publish new policy.
+
+These roles are governed entirely by **frame or system policy**:
+
+* **Eligibility**: Who can apply, qualify, or be delegated a Responsibility.
+* **Scope**: What permissions or obligations come with the role.
+* **Revocation**: How Responsibilities can be withdrawn due to policy breach, disuse, or reassignment.
+* **Visibility**: Whether others can observe, trust, or challenge a Responsibility holder’s status.
+
+Responsibilities are **auditable**. They may involve formal vetting (e.g., coursework, contribution logs, or peer delegation), and their impacts on Dust flows, adjudication, and view construction are **logged and explainable**.
+
+> **Note:**
+>
+> * Responsibilities are **opt-in privileges** gated by policy.
+> * They **augment agent capability**, not redefine base rules.
+> * All responsibilities are **auditable, scoped, and revocable**.
+> * Any agent may pursue responsibilities, if permitted by policy and prepared to accept their commitments.
+
+## Expansion
+
+Expansion allows agents or squads to **temporarily increase their Dust capacity or permissions**, based on **policy-defined commitments**, such as taking on added responsibilities, demonstrating reliability, or completing structured coursework.
+
+This is not spontaneous inflation. Expansion is always:
+
+* **Deliberate** – Requested or initiated by the agent, not automatic.
+* **Bounded** – Limited in scope, duration, or use.
+* **Conditional** – Requires justification, often in the form of added effort, proof-of-work, or contribution.
+* **Auditable** – Fully tracked, with outcomes observable and reversible under policy.
+
+Expansion may take forms like:
+
+* **Credit** – Temporary Dust granted against future work or forfeiture.
+* **Bias** – A policy shift that favors certain agents or strategies within a frame.
+* **Advance** – An early allocation of value based on structured need or role.
+* **Multiplier** – A shared factor granted to qualifying groups to accelerate coordination or throughput.
+
+Expansion relies on **Expansion Primitives**—defined mechanisms for requesting, validating, and reconciling expansion grants. These may include:
+
+* Completion of **coursework** (defined policy challenges or system contributions).
+* Performance under **prior frames** (logged, auditable efficiency or impact).
+* **Delegation** by existing Responsibility holders or system policy.
+
+Expansion is often paired with Responsibilities: agents who take on more structural load may receive expanded capacity to carry it.
+
+> **Note:**
+>
+> * Expansion is **bounded, declared, and revocable**.
+> * All expansion must be **resolved or reconciled** by end-of-cycle accounting.
+> * Policy defines **who may expand, under what terms**, and **how resolution is enforced**.
+> * Expansion **supports utility and equity**, not unlimited growth.
+
 ## Dust
 
 Plantangenet’s Dust system implements a **closed, policy-defined unit-of-account model** to allocate and track value within a cooperative or competitive environment. It is designed to ensure **strict conservation of value** per operational cycle, with complete auditability of all flows.

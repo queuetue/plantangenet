@@ -20,7 +20,6 @@ Plantangenet’s design **welcomes craft**. When you find ways to work together 
 
 Ultimately, Dust is **not your master, but your steward**. It is the canvas, the stage, the ledger, the promise that what you do here is **visible, valued, shared, and safe**. It is the shared agreement that if we are going to build together, we will do so **honestly, fairly, and with the integrity worthy of the work itself**.
 
-
 **Note:**
 This system is designed to be deliberate, honest, and clear.
 

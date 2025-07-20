@@ -16,7 +16,7 @@ Plantangenet’s Dust system is **a fully accounted, programmable transaction la
 
 It’s there to make *every* operation - no matter how asynchronous, parallel, or weird - **explicitly metered** and **auditable**.
 
-This isn’t Kubernetes pretending to be “cloud-native.” It’s closer to **bare-metal economics for coordination itself**.
+Inspired by Kubernetes “cloud-nativity,” it’s closer to **bare-metal economics for coordination itself**.
 
  - -
 

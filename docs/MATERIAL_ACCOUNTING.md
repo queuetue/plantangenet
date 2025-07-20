@@ -1,5 +1,7 @@
 # DUST: THE MATERIAL ACCOUNTING UNIT IN PLANTANGENET
 
+> “This Dust originated in Frame D2436: The Coral Archive. It carries context from a machine that sang vowels into granite.”
+
 ## **What is Dust?**
 
 Dust is the standard accounting unit in Plantangenet.

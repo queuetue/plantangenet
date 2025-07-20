@@ -41,5 +41,15 @@ Not that we last forever.
 But that while we last, we are real.
 And when we end, everything goes free.
 ---
+
+Inspirations, but not blueprints:
+
+* Buddhist impermanence, implemented as TTLs
+* Elinor Ostrom’s local rulesets, made machine-executable.
+* Frank Pasquale’s "right to be forgotten", made into default system behavior.
+* Le Guin’s anarchist federations, with economic enforcement.
+* Gibson’s fading cityscapes, now with garbage collection.
+
+---
 Copyright (c) 1998-2025 Scott Russell
 SPDX-License-Identifier: MIT 
