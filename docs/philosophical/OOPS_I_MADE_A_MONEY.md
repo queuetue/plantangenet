@@ -168,4 +168,4 @@ And not without consequence.
 
 (getting down to business)
 
-Now, let’s discuss [deposit expansion](../stone/economics/README.md).
+Now, let’s discuss [deposit expansion](../stone/economics/README.md#Expansion).
