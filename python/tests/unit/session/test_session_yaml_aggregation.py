@@ -4,9 +4,6 @@ from plantangenet.session.session import Session
 from plantangenet.policy.policy import Policy
 from plantangenet.policy.identity import Identity
 from plantangenet.policy.role import Role
-from examples.tictactoe.referee import TicTacToeReferee
-from examples.tictactoe.player import TicTacToePlayer
-from examples.tictactoe.stats import TicTacToeStats
 
 
 def make_session_with_agents():
